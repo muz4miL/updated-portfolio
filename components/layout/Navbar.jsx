@@ -1,4 +1,3 @@
-// Updated Navbar with explicit styles
 "use client";
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
@@ -32,43 +31,25 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-navy/95 backdrop-blur-md py-4 shadow-xl border-b border-teal/10"
+          ? "bg-navy/95 backdrop-blur-lg py-4 shadow-xl border-b border-teal/10"
           : "bg-transparent py-6"
       }`}
-      style={{
-        background: scrolled ? "rgba(11, 17, 32, 0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none", // Safari support
-      }}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        {/* Logo - Explicit styling */}
         <div className="text-2xl font-bold tracking-tighter flex items-center gap-1">
-          <span className="text-teal" style={{ color: "#64ffda" }}>
-            Muzamil
-          </span>
-          <span className="text-white" style={{ color: "#e6f1ff" }}>
-            ._
-          </span>
+          <span className="text-teal">Muzamil</span>
+          <span className="text-white">._</span>
         </div>
 
-        {/* Desktop Nav - Explicit styling */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 font-mono text-sm">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleNavClick(link.href)}
-              className="group flex items-center gap-2 transition-colors duration-300"
-              style={{
-                color: "#a8b2d1",
-                fontFamily: "var(--font-mono)",
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
-              onMouseLeave={(e) => (e.target.style.color = "#a8b2d1")}
+              className="group flex items-center gap-2 text-lightSlate hover:text-teal transition-colors duration-300"
             >
-              <span className="text-xs" style={{ color: "#64ffda" }}>
-                {link.id}.
-              </span>
+              <span className="text-teal text-xs">{link.id}.</span>
               <span className="relative capitalize">{link.name}</span>
             </button>
           ))}
@@ -76,41 +57,23 @@ const Navbar = () => {
 
         {/* Mobile Nav Toggle */}
         <button
-          className="md:hidden"
+          className="md:hidden text-teal hover:text-teal/80 transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          style={{ color: "#64ffda" }}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu - Explicit styling */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div
-          className="md:hidden absolute top-full left-0 w-full py-6 flex flex-col items-center gap-6"
-          style={{
-            background: "rgba(11, 17, 32, 0.98)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            borderBottom: "1px solid rgba(100, 255, 218, 0.1)",
-          }}
-        >
+        <div className="md:hidden absolute top-full left-0 w-full bg-navy/95 backdrop-blur-lg border-b border-teal/10 py-6 flex flex-col items-center gap-6">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleNavClick(link.href)}
-              className="flex items-center gap-3 py-2 transition-colors duration-300 capitalize"
-              style={{
-                color: "#e6f1ff",
-                fontFamily: "var(--font-mono)",
-                fontSize: "16px",
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
-              onMouseLeave={(e) => (e.target.style.color = "#e6f1ff")}
+              className="flex items-center gap-3 text-white hover:text-teal transition-colors duration-300 capitalize font-mono text-lg"
             >
-              <span style={{ color: "#64ffda", fontSize: "14px" }}>
-                {link.id}.
-              </span>
+              <span className="text-teal text-sm">{link.id}.</span>
               {link.name}
             </button>
           ))}
