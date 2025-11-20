@@ -1,13 +1,71 @@
-import React from "react";
-import SectionHeader from "../ui/SectionHeader";
-import Link from "next/link";
+"use client";
+import React, { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
+// --- SUB-COMPONENT: Premium Number Counter ---
+const StatCounter = ({ end, suffix, label }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const hasAnimate = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimate.current) {
+          hasAnimate.current = true;
+
+          let start = 0;
+          const duration = 2000;
+          const startTime = performance.now();
+
+          const animate = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 4);
+
+            setCount(Math.floor(easeOut * end));
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setCount(end);
+            }
+          };
+
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [end]);
+
+  return (
+    <div ref={ref} className="group relative text-center">
+      <div className="absolute -left-4 top-0 w-[1px] h-full bg-gradient-to-b from-teal/50 to-transparent hidden md:block"></div>
+      <h3 className="font-heading text-4xl md:text-5xl font-bold text-white group-hover:text-teal transition-colors duration-300">
+        {count}
+        <span className="text-teal text-2xl">{suffix}</span>
+      </h3>
+      <p className="text-slate font-mono text-xs mt-2 uppercase tracking-widest">
+        {label}
+      </p>
+    </div>
+  );
+};
+
+// --- MAIN COMPONENT ---
 const About = () => {
   return (
     <section id="about" className="py-32 max-w-6xl mx-auto px-6 relative z-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        {/* LEFT SIDE: The Hook (Trimmed Down) */}
+        {/* LEFT SIDE: The Hook */}
         <div className="space-y-8">
           <div className="font-mono text-teal text-sm tracking-widest animate-pulse">
             01. THE JOURNEY
@@ -41,52 +99,55 @@ const About = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE: The Stats (Floating / No Boxes) */}
-        <div className="grid grid-cols-2 gap-x-4 gap-y-12 pl-0 md:pl-12">
-          {/* Stat 1 */}
-          <div className="group relative">
-            <div className="absolute -left-4 top-0 w-[1px] h-full bg-gradient-to-b from-teal/50 to-transparent"></div>
-            <h3 className="font-heading text-5xl md:text-6xl font-bold text-white group-hover:text-teal transition-colors duration-300">
-              250<span className="text-teal text-3xl">+</span>
-            </h3>
-            <p className="text-slate/60 font-mono text-xs mt-2 uppercase tracking-widest">
-              Students Mentored
-            </p>
-          </div>
+        {/* RIGHT SIDE: Fixed Image (Natural Color) */}
+        <div className="flex justify-center md:justify-end">
+          <div className="relative group w-72 h-72 mx-auto">
+            {/* 1. THE BORDER FRAME */}
+            <div
+              className="
+              absolute 
+              w-full h-full 
+              border-2 border-teal rounded 
+              translate-x-4 translate-y-4 
+              transition-transform duration-300 ease-out
+              group-hover:translate-x-2 group-hover:translate-y-2
+            "
+            ></div>
 
-          {/* Stat 2 */}
-          <div className="group relative">
-            <div className="absolute -left-4 top-0 w-[1px] h-full bg-gradient-to-b from-teal/50 to-transparent"></div>
-            <h3 className="font-heading text-5xl md:text-6xl font-bold text-white group-hover:text-teal transition-colors duration-300">
-              15<span className="text-teal text-3xl">+</span>
-            </h3>
-            <p className="text-slate/60 font-mono text-xs mt-2 uppercase tracking-widest">
-              Projects Shipped
-            </p>
-          </div>
-
-          {/* Stat 3 */}
-          <div className="group relative">
-            <div className="absolute -left-4 top-0 w-[1px] h-full bg-gradient-to-b from-teal/50 to-transparent"></div>
-            <h3 className="font-heading text-5xl md:text-6xl font-bold text-white group-hover:text-teal transition-colors duration-300">
-              1<span className="text-teal text-3xl">yr</span>
-            </h3>
-            <p className="text-slate/60 font-mono text-xs mt-2 uppercase tracking-widest">
-              USA Exchange
-            </p>
-          </div>
-
-          {/* Stat 4 */}
-          <div className="group relative">
-            <div className="absolute -left-4 top-0 w-[1px] h-full bg-gradient-to-b from-teal/50 to-transparent"></div>
-            <h3 className="font-heading text-5xl md:text-6xl font-bold text-white group-hover:text-teal transition-colors duration-300">
-              500<span className="text-teal text-3xl">+</span>
-            </h3>
-            <p className="text-slate/60 font-mono text-xs mt-2 uppercase tracking-widest">
-              Coffees Consumed
-            </p>
+            {/* 2. THE IMAGE WRAPPER */}
+            <div
+              className="
+              relative 
+              w-full h-full 
+              bg-navy
+              rounded overflow-hidden
+              transition-transform duration-300 ease-out
+              group-hover:-translate-x-1 group-hover:-translate-y-1
+            "
+            >
+              {/* 3. THE IMAGE ITSELF */}
+              <img
+                src="me.jpeg"
+                alt="Muzamil Shiraz"
+                className="
+                  w-full h-full
+                  object-cover
+                  rounded
+                  transition-transform duration-500
+                  group-hover:scale-105
+                "
+              />
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* STATS SECTION: With Animations */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-teal/20">
+        <StatCounter end={250} suffix="+" label="Students Mentored" />
+        <StatCounter end={15} suffix="+" label="Projects Shipped" />
+        <StatCounter end={1} suffix="yr" label="USA Exchange" />
+        <StatCounter end={500} suffix="+" label="Coffees Consumed" />
       </div>
     </section>
   );
