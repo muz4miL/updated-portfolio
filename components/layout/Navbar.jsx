@@ -1,13 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const router = useRouter();
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const pathname = usePathname();
 
+  // Handle Scroll Effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -17,68 +20,127 @@ const Navbar = () => {
   const navLinks = [
     { id: "01", name: "home", href: "/" },
     { id: "02", name: "about", href: "/about" },
-    { id: "03", name: "experience", href: "/experience" },
-    { id: "04", name: "work", href: "/projects" },
-    { id: "05", name: "contact", href: "/contact" },
+    { id: "03", name: "experience", href: "/#experience" },
+    { id: "04", name: "work", href: "/#work" },
+    { id: "05", name: "contact", href: "/#contact" },
   ];
-
-  const handleNavClick = (href) => {
-    setIsMenuOpen(false);
-    router.push(href);
-  };
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-navy/95 backdrop-blur-lg py-4 shadow-xl border-b border-teal/10"
-          : "bg-transparent py-6"
+          ? "bg-navy/85 backdrop-blur-md shadow-lg border-b border-teal/10 h-20"
+          : "bg-transparent h-24"
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="text-2xl font-bold tracking-tighter flex items-center gap-1">
-          <span className="text-teal">Muzamil</span>
-          <span className="text-white">._</span>
-        </div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 font-mono text-sm">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleNavClick(link.href)}
-              className="group flex items-center gap-2 text-lightSlate hover:text-teal transition-colors duration-300"
+      <div className="container mx-auto px-6 h-full flex justify-between items-center">
+        {/* --- LOGO SECTION --- */}
+        <Link
+          href="/"
+          className="group flex items-center gap-3 relative z-50"
+          onClick={() => setIsMenuOpen(false)}
+          onMouseEnter={() => setIsLogoHovered(true)}
+          onMouseLeave={() => setIsLogoHovered(false)}
+        >
+          {/* The Animated Hexagon Icon */}
+          <div className="relative w-12 h-12 flex items-center justify-center">
+            <svg
+              viewBox="0 0 100 100"
+              className="w-full h-full absolute inset-0 transition-all duration-300 group-hover:scale-110"
             >
-              <span className="text-teal text-xs">{link.id}.</span>
-              <span className="relative capitalize">{link.name}</span>
-            </button>
+              <defs>
+                <linearGradient
+                  id="navHexGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#64ffda" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#64ffda" stopOpacity="0.8" />
+                </linearGradient>
+              </defs>
+
+              {/* Hexagon Path with Draw Animation on Hover */}
+              <path
+                d="M50,5 L95,27 L95,72 L50,95 L5,72 L5,27 Z"
+                fill="none"
+                stroke="url(#navHexGradient)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`transition-all duration-1000 ${
+                  isLogoHovered ? "animate-draw-premium" : ""
+                }`}
+                style={{
+                  strokeDasharray: isLogoHovered ? 300 : 0,
+                  strokeDashoffset: isLogoHovered ? 300 : 0,
+                }}
+              />
+            </svg>
+
+            {/* M Letter with Hover Animation */}
+            <span className="relative font-heading font-bold text-teal text-xl transition-all duration-300 group-hover:scale-110 group-hover:text-white">
+              M
+            </span>
+          </div>
+        </Link>
+
+        {/* --- DESKTOP NAVIGATION --- */}
+        <div className="hidden md:flex items-center gap-8 font-mono text-xs">
+          {navLinks.map((link) => (
+            <Link
+              key={link.id}
+              href={link.href}
+              className={`group flex items-center gap-2 transition-colors duration-300 ${
+                pathname === link.href
+                  ? "text-teal"
+                  : "text-slate-400 hover:text-teal"
+              }`}
+            >
+              <span className="text-teal">{link.id}.</span>
+              <span className="relative group-hover:translate-x-1 transition-transform uppercase tracking-widest">
+                {link.name}
+              </span>
+            </Link>
           ))}
         </div>
 
-        {/* Mobile Nav Toggle */}
+        {/* --- MOBILE MENU TOGGLE --- */}
         <button
-          className="md:hidden text-teal hover:text-teal/80 transition-colors"
+          className="md:hidden text-teal hover:text-white transition-colors relative z-50"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-navy/95 backdrop-blur-lg border-b border-teal/10 py-6 flex flex-col items-center gap-6">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleNavClick(link.href)}
-              className="flex items-center gap-3 text-white hover:text-teal transition-colors duration-300 capitalize font-mono text-lg"
-            >
-              <span className="text-teal text-sm">{link.id}.</span>
-              {link.name}
-            </button>
-          ))}
+        {/* --- MOBILE OVERLAY MENU --- */}
+        <div
+          className={`fixed inset-0 bg-navy/95 backdrop-blur-xl flex items-center justify-center transition-all duration-300 md:hidden ${
+            isMenuOpen
+              ? "opacity-100 visible"
+              : "opacity-0 invisible pointer-events-none"
+          }`}
+        >
+          <div className="flex flex-col items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.id}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="flex flex-col items-center group"
+              >
+                <span className="text-teal font-mono text-sm mb-2">
+                  {link.id}.
+                </span>
+                <span className="text-3xl font-bold text-white group-hover:text-teal transition-colors">
+                  {link.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
