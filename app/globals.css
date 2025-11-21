@@ -1,19 +1,13 @@
 @import "tailwindcss";
 
-<<<<<<< HEAD
-/* Import Modular Styles */
-@import "./styles/typography.css";
-@import "./styles/animation.css";
-@import "./styles/aurora.css";
-=======
-
 /* ============================================
    THEME VARIABLES & COLOR PALETTE
    ============================================
    Core color system and font definitions.
    Modify these to change the entire site theme.
    ============================================ */
->>>>>>>4585040 (feat(hero): implement premium animation polish package) @theme {
+
+@theme {
   --color-navy: #0b1120;
   --color-lightNavy: #112240;
   --color-teal: #64ffda;
@@ -42,9 +36,6 @@ body {
   scroll-behavior: smooth;
 }
 
-<<<<<<< HEAD
-/* --- UTILITIES --- */
-=======
 /* ============================================
    TYPOGRAPHY
    ============================================
@@ -108,18 +99,12 @@ h6 {
    ============================================ */
 
 /* Glass Navigation - Used in navbar */
->>>>>>>4585040 (feat(hero): implement premium animation polish package) .glass-nav {
+.glass-nav {
   background: rgba(10, 25, 47, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(100, 255, 218, 0.05);
 }
-
-<<<<<<< HEAD .text-glow {
-  text-shadow: 0 0 40px rgba(100, 255, 218, 0.15);
-}
-
-=======
 
 /* Glass Card - For project cards and containers */
 .glass-card {
