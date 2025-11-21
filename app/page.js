@@ -6,17 +6,27 @@ import Contact from "../components/sections/Contact";
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-6 md:px-12 lg:px-24">
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Contact />
+    <div className="relative min-h-screen w-full overflow-x-hidden">
+      {/* --- THE AURORA BACKGROUND --- */}
+      <div className="aurora-bg">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+      </div>
 
-      {/* Simple Footer Text */}
-      <footer className="py-8 text-center text-slate font-mono text-xs">
-        <p>Designed & Built by Muzamil Shiraz</p>
-      </footer>
+      {/* Main Content Container */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Contact />
+
+        {/* Simple Footer Text */}
+        <footer className="py-8 text-center text-slate font-mono text-xs">
+          <p>Designed & Built by Muzamil Shiraz</p>
+        </footer>
+      </div>
     </div>
   );
 }

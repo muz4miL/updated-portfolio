@@ -1,0 +1,63 @@
+/* --- AURORA BACKGROUND MAGIC --- */
+.aurora-bg {
+  position: fixed; /* Stays fixed while you scroll */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Puts it behind your text */
+  overflow: hidden;
+  background: var(--color-navy);
+  pointer-events: none; /* Lets you click through it */
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px); /* This creates the glow/fog effect */
+  opacity: 0.6;
+  animation: float-slow 20s infinite alternate ease-in-out;
+}
+
+/* The top-left deep blue glow */
+.blob-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: var(--color-lightNavy);
+  animation-delay: 0s;
+}
+
+/* The bottom-right teal highlight (Your accent color) */
+.blob-2 {
+  bottom: -10%;
+  right: -10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(100, 255, 218, 0.2); /* Teal with low opacity */
+  animation-delay: -5s;
+}
+
+/* A wandering middle glow */
+.blob-3 {
+  top: 40%;
+  left: 30%;
+  width: 30vw;
+  height: 30vw;
+  background: #1e3a8a; /* A slightly richer blue */
+  animation-delay: -10s;
+  opacity: 0.4;
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, 40px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, 10px) scale(0.95);
+  }
+}
