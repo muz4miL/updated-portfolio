@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import SectionHeader from "../ui/SectionHeader";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Projects = () => {
   const featuredProjects = [
@@ -21,15 +23,51 @@ const Projects = () => {
     },
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.34, 1.56, 0.64, 1],
+      },
+    },
+  };
+
   return (
     <section id="work" className="py-24 max-w-6xl mx-auto px-6">
       <SectionHeader number="03" title="Featured Work" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+      >
         {featuredProjects.map((project, i) => (
-          <div
+          <motion.div
             key={i}
-            className="group relative p-8 rounded-2xl border border-teal/10 bg-navy/50 backdrop-blur-sm hover:border-teal/30 transition-all duration-300 hover:-translate-y-2"
+            className="group relative p-8 rounded-2xl border border-teal/10 glass-card transition-all duration-300"
+            variants={cardVariants}
+            whileHover={{
+              y: -8,
+              boxShadow:
+                "0 0 30px rgba(100, 255, 218, 0.2), 0 0 60px rgba(100, 255, 218, 0.1)",
+              borderColor: "rgba(100, 255, 218, 0.4)",
+            }}
           >
             {/* Featured Badge */}
             {project.featured && (
@@ -61,9 +99,9 @@ const Projects = () => {
                 <ExternalLink size={18} />
               </a>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <div className="text-center mt-12">
         <Link

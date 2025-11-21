@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 // --- SUB-COMPONENT: Premium Number Counter ---
 const StatCounter = ({ end, suffix, label }) => {
@@ -62,11 +63,52 @@ const StatCounter = ({ end, suffix, label }) => {
 
 // --- MAIN COMPONENT ---
 const About = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const leftVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.34, 1.56, 0.64, 1],
+      },
+    },
+  };
+
+  const rightVariants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.34, 1.56, 0.64, 1],
+      },
+    },
+  };
+
   return (
     <section id="about" className="py-32 max-w-6xl mx-auto px-6 relative z-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+      >
         {/* LEFT SIDE: The Hook */}
-        <div className="space-y-8">
+        <motion.div className="space-y-8" variants={leftVariants}>
           <div className="font-mono text-teal text-sm tracking-widest animate-pulse">
             01. THE JOURNEY
           </div>
@@ -97,10 +139,13 @@ const About = () => {
               />
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT SIDE: Fixed Image (Natural Color) */}
-        <div className="flex justify-center md:justify-end">
+        <motion.div
+          className="flex justify-center md:justify-end"
+          variants={rightVariants}
+        >
           <div className="relative group w-72 h-72 mx-auto">
             {/* 1. THE BORDER FRAME */}
             <div
@@ -139,8 +184,8 @@ const About = () => {
               />
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* STATS SECTION: With Animations */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-teal/20">

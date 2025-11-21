@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import SectionHeader from "../ui/SectionHeader";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -83,12 +84,18 @@ const Contact = () => {
               ></textarea>
             </div>
 
-            <button
+            <motion.button
               type="submit"
               className="w-full bg-teal/10 border border-teal text-teal font-mono py-3 rounded-lg hover:bg-teal hover:text-navy transition-all duration-300 uppercase tracking-widest text-sm"
+              whileHover={{
+                scale: 1.02,
+                boxShadow:
+                  "0 0 30px rgba(100, 255, 218, 0.3), 0 0 60px rgba(100, 255, 218, 0.15)",
+              }}
+              whileTap={{ scale: 0.98 }}
             >
               Send Message
-            </button>
+            </motion.button>
           </form>
         </div>
 
