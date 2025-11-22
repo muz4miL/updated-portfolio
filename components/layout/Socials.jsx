@@ -48,7 +48,7 @@ const Socials = () => {
 
   return (
     <>
-      {/* Desktop Sidebar - Hidden on mobile */}
+      {/* Desktop Sidebar - Hides when Contact visible */}
       <div
         className={`
           fixed bottom-0 left-6 xl:left-12 hidden md:flex flex-col items-center gap-6 z-50 
@@ -107,35 +107,37 @@ const Socials = () => {
         <div className="w-[1px] h-20 bg-gradient-to-b from-teal/50 via-slate/30 to-transparent"></div>
       </div>
 
-      {/* Mobile Bottom Bar - Shows on mobile only */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden z-50 bg-navy/95 backdrop-blur-lg border-t border-teal/20">
-        <div className="container mx-auto px-6 py-3">
-          <ul className="flex justify-around items-center">
-            {socialLinks.map((item, index) => (
-              <li key={index}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.label}
-                  className="
-                    block 
-                    p-3
-                    rounded-lg
-                    text-slate
-                    transition-all duration-300
-                    hover:bg-teal/10
-                    hover:text-teal
-                    active:scale-95
-                  "
-                >
-                  {item.icon}
-                </a>
-              </li>
-            ))}
-          </ul>
+      {/* Mobile Bottom Bar - Shows ONLY when Contact is visible */}
+      {isContactVisible && (
+        <div className="fixed bottom-0 left-0 right-0 md:hidden z-50 bg-navy/95 backdrop-blur-lg border-t border-teal/20">
+          <div className="container mx-auto px-6 py-3">
+            <ul className="flex justify-around items-center">
+              {socialLinks.map((item, index) => (
+                <li key={index}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.label}
+                    className="
+                      block 
+                      p-3
+                      rounded-lg
+                      text-slate
+                      transition-all duration-300
+                      hover:bg-teal/10
+                      hover:text-teal
+                      active:scale-95
+                    "
+                  >
+                    {item.icon}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

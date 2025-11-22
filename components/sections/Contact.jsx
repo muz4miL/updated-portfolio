@@ -112,8 +112,8 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          {/* Social Links - Premium Edition */}
-          <div className="pt-8 border-t border-white/5">
+          {/* Social Links - Premium Edition (Desktop Only) */}
+          <div className="pt-8 border-t border-white/5 hidden md:block">
             <p className="font-mono text-sm text-slate mb-6 text-center font-bold" style={{ textShadow: '0 2px 10px rgba(100, 255, 218, 0.3)' }}>Connect with me</p>
             <div className="flex gap-4 justify-center">
               {socialLinks.map((social, index) => (

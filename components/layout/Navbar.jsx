@@ -27,11 +27,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+      className={`md:fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
           ? "bg-navy/85 backdrop-blur-md shadow-lg border-b border-teal/10 h-20"
           : "bg-transparent h-24"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-6 h-full flex justify-between items-center">
         {/* --- LOGO SECTION --- */}
@@ -69,9 +68,8 @@ const Navbar = () => {
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className={`transition-all duration-1000 ${
-                  isLogoHovered ? "animate-draw-premium" : ""
-                }`}
+                className={`transition-all duration-1000 ${isLogoHovered ? "animate-draw-premium" : ""
+                  }`}
                 style={{
                   strokeDasharray: isLogoHovered ? 300 : 0,
                   strokeDashoffset: isLogoHovered ? 300 : 0,
@@ -92,11 +90,10 @@ const Navbar = () => {
             <Link
               key={link.id}
               href={link.href}
-              className={`group flex items-center gap-2 transition-colors duration-300 ${
-                pathname === link.href
+              className={`group flex items-center gap-2 transition-colors duration-300 ${pathname === link.href
                   ? "text-teal"
                   : "text-slate-400 hover:text-teal"
-              }`}
+                }`}
             >
               <span className="text-teal">{link.id}.</span>
               <span className="relative group-hover:translate-x-1 transition-transform uppercase tracking-widest">
@@ -116,11 +113,10 @@ const Navbar = () => {
 
         {/* --- MOBILE OVERLAY MENU --- */}
         <div
-          className={`fixed inset-0 bg-navy/95 backdrop-blur-xl flex items-center justify-center transition-all duration-300 md:hidden ${
-            isMenuOpen
+          className={`fixed inset-0 bg-navy/95 backdrop-blur-xl flex items-center justify-center transition-all duration-300 md:hidden ${isMenuOpen
               ? "opacity-100 visible"
               : "opacity-0 invisible pointer-events-none"
-          }`}
+            }`}
         >
           <div className="flex flex-col items-center gap-8">
             {navLinks.map((link) => (
