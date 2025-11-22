@@ -3,6 +3,7 @@ import About from "../components/sections/About";
 import Experience from "../components/sections/Experience";
 import Projects from "../components/sections/Projects";
 import Contact from "../components/sections/Contact";
+import ModelingTeaser from "../components/sections/ModelingTeaser";
 
 export default function Home() {
   return (
@@ -20,6 +21,12 @@ export default function Home() {
         <About />
         <Experience />
         <Projects />
+      </div>
+
+      {/* --- MODELING TEASER (Full Width) --- */}
+      <ModelingTeaser />
+
+      <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         <Contact />
 
         {/* Simple Footer Text */}

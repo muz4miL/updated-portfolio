@@ -19,7 +19,7 @@ const Cube = ({ size, animation, className, style }) => {
         <div className="face right border-teal/40 bg-navy/80"></div>
         <div className="face left border-teal/40 bg-navy/80"></div>
         <div className="face top border-teal/40 bg-navy/80"></div>
-        <div className="face bottom border-teal/40 bg-navy/80"></div>
+        <div className="face bottom border-teal/40 bg-navy/80"> </div>
       </div>
     </div>
   );

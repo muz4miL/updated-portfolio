@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Github, Instagram, Linkedin, Facebook, Mail } from "lucide-react";
 import { useScrollContext } from "../../context/ScrollContext";
 
+import XIcon from "../ui/XIcon";
+
 const Socials = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { isContactVisible } = useScrollContext();
@@ -27,10 +29,10 @@ const Socials = () => {
       color: "hover:text-blue-400",
     },
     {
-      icon: <Facebook size={18} />,
-      href: "https://facebook.com/muzamilshiraz",
-      label: "Facebook",
-      color: "hover:text-blue-500",
+      icon: <XIcon size={18} />,
+      href: "https://x.com/muzamilshiraz",
+      label: "X (Twitter)",
+      color: "hover:text-white",
     },
     {
       icon: <Instagram size={18} />,
