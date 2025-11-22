@@ -6,6 +6,7 @@ import Navbar from "../components/layout/Navbar";
 import Socials from "../components/layout/Socials";
 import Background3D from "../components/ui/Background3D";
 import Preloader from "../components/ui/Preloader"; // Import the loader
+import { ScrollProvider } from "../context/ScrollContext";
 
 // Font Setup
 const spaceGrotesk = Space_Grotesk({
@@ -68,18 +69,20 @@ export default function RootLayout({ children }) {
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${firaCode.variable} bg-navy text-slate antialiased overflow-x-hidden selection:bg-teal selection:text-navy`}
       >
-        {/* 1. SHOW LOADER IF LOADING IS TRUE */}
-        {isLoading ? (
-          <Preloader finishLoading={finishLoading} />
-        ) : (
-          /* 2. SHOW WEBSITE IF LOADING IS FALSE */
-          <>
-            <Background3D />
-            <Navbar />
-            <Socials />
-            <main className="relative z-20 animate-fade-in-up">{children}</main>
-          </>
-        )}
+        <ScrollProvider>
+          {/* 1. SHOW LOADER IF LOADING IS TRUE */}
+          {isLoading ? (
+            <Preloader finishLoading={finishLoading} />
+          ) : (
+            /* 2. SHOW WEBSITE IF LOADING IS FALSE */
+            <>
+              <Background3D />
+              <Navbar />
+              <Socials />
+              <main className="relative z-20 animate-fade-in-up">{children}</main>
+            </>
+          )}
+        </ScrollProvider>
       </body>
     </html>
   );
