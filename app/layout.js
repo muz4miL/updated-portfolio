@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Space_Grotesk, Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
+import "./enhancements.css";
 import Navbar from "../components/layout/Navbar";
 import Socials from "../components/layout/Socials";
 import Background3D from "../components/ui/Background3D";

@@ -1,0 +1,57 @@
+/* ============================================
+   MID-LEVEL PROFESSIONAL ENHANCEMENTS
+   Import this in layout.js AFTER globals.css
+   ============================================ */
+
+/* Refined color palette (OLED-safe & Accessibility-optimized) */
+:root {
+    --navy-premium: #0F172A;
+    /* Eliminates OLED smear */
+    --slate-premium: #94A3B8;
+    /* 7:1 contrast ratio */
+    --white-premium: #F1F5F9;
+    /* Reduces halation */
+}
+
+/* Optional utility classes - use these to opt-in to improvements */
+.bg-navy-premium {
+    background-color: var(--navy-premium);
+}
+
+.text-slate-premium {
+    color: var(--slate-premium);
+}
+
+.text-white-premium {
+    color: var(--white-premium);
+}
+
+/* Impact Badge - Universe-level credibility signals */
+.impact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background: rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    color: #64ffda;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.impact-badge:hover {
+    background: rgba(100, 255, 218, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+}
+
+/* Universe-level font weights for dark mode */
+body {
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+}

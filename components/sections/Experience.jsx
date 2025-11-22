@@ -21,7 +21,7 @@ const journeyItems = [
   },
   {
     id: 2,
-    title: "AI Sprint Fellow",
+    title: "AI Sprint Extensive Internship",
     company: "Brave Studios",
     year: "2024",
     description: "Rapid prototyping of AI-driven applications and LLM integration.",
