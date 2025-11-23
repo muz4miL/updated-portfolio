@@ -13,13 +13,13 @@ const ModelingTeaser = () => {
 
     const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
-    // Placeholder images for the film strip - using high quality placeholders
+    // Real modeling portfolio images
     const images = [
-        { src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop", alt: "Modeling Shot 1" },
-        { src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop", alt: "Modeling Shot 2" },
-        { src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1964&auto=format&fit=crop", alt: "Modeling Shot 3" },
-        { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop", alt: "Modeling Shot 4" },
-        { src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop", alt: "Modeling Shot 5" },
+        { src: "/modeling/11.png", alt: "Modeling Shot 1" },
+        { src: "/modeling/22.png", alt: "Modeling Shot 2" },
+        { src: "/modeling/33.png", alt: "Modeling Shot 3" },
+        { src: "/modeling/44.png", alt: "Modeling Shot 4" },
+        { src: "/modeling/55.png", alt: "Modeling Shot 5" },
     ];
 
     return (
@@ -43,7 +43,7 @@ const ModelingTeaser = () => {
                 {/* The Film Strip */}
                 <motion.div style={{ x }} className="flex gap-8 pl-[5vw]">
                     {images.map((img, i) => (
-                        <Link href="/modeling" key={i} className="group relative h-[60vh] w-[40vh] flex-shrink-0 overflow-hidden rounded-sm cursor-pointer">
+                        <Link href="/book" key={i} className="group relative h-[60vh] w-[40vh] flex-shrink-0 overflow-hidden rounded-sm cursor-pointer">
                             {/* Grayscale Filter Overlay */}
                             <div className="absolute inset-0 bg-navy/40 mix-blend-color z-10 transition-all duration-500 group-hover:bg-transparent group-hover:mix-blend-normal" />
                             <div className="absolute inset-0 grayscale transition-all duration-700 group-hover:grayscale-0" />
@@ -63,7 +63,7 @@ const ModelingTeaser = () => {
                     ))}
 
                     {/* "View All" Card at the end */}
-                    <Link href="/modeling" className="group relative h-[60vh] w-[40vh] flex-shrink-0 flex items-center justify-center bg-lightNavy/30 border border-teal/20 hover:bg-teal/10 transition-colors duration-300">
+                    <Link href="/book" className="group relative h-[60vh] w-[40vh] flex-shrink-0 flex items-center justify-center bg-lightNavy/30 border border-teal/20 hover:bg-teal/10 transition-colors duration-300">
                         <div className="text-center">
                             <div className="w-16 h-16 rounded-full border border-teal flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                                 <ArrowRight className="text-teal" size={24} />
@@ -74,7 +74,7 @@ const ModelingTeaser = () => {
                 </motion.div>
 
                 {/* Floating Badge */}
-                <Link href="/modeling" className="absolute bottom-10 right-6 md:right-20 z-20">
+                <Link href="/book" className="absolute bottom-10 right-6 md:right-20 z-20">
                     <div className="glass-card-strong px-6 py-3 rounded-full flex items-center gap-3 hover:scale-105 transition-transform cursor-pointer group">
                         <span className="font-mono text-xs text-white">MUZAMIL SHIRAZ</span>
                         <span className="w-px h-4 bg-white/20"></span>

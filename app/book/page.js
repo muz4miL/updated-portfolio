@@ -14,14 +14,23 @@ const ModelingPage = () => {
         { label: "Location", value: "Peshawar" },
     ];
 
-    // Placeholder Gallery Images
+    // Real modeling portfolio gallery - expanded for fuller showcase
     const galleryImages = [
-        { src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop", alt: "Portrait 1", span: "row-span-2" },
-        { src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop", alt: "Fashion Shot 1", span: "row-span-1" },
-        { src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1964&auto=format&fit=crop", alt: "Editorial 1", span: "row-span-1" },
-        { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop", alt: "Portrait 2", span: "row-span-2" },
-        { src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop", alt: "Lifestyle 1", span: "row-span-1" },
-        { src: "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?q=80&w=1887&auto=format&fit=crop", alt: "Urban Shot", span: "row-span-1" },
+        { src: "/modeling/11.png", alt: "Modeling Shot 1", span: "row-span-2" },
+        { src: "/modeling/22.png", alt: "Modeling Shot 2", span: "row-span-1" },
+        { src: "/modeling/33.png", alt: "Modeling Shot 3", span: "row-span-1" },
+        { src: "/modeling/44.png", alt: "Modeling Shot 4", span: "row-span-2" },
+        { src: "/modeling/55.png", alt: "Modeling Shot 5", span: "row-span-1" },
+        { src: "/modeling/66.png", alt: "Modeling Shot 6", span: "row-span-1" },
+        { src: "/modeling/77.png", alt: "Modeling Shot 7", span: "row-span-2" },
+        { src: "/modeling/88.png", alt: "Modeling Shot 8", span: "row-span-1" },
+        { src: "/modeling/99.png", alt: "Modeling Shot 9", span: "row-span-1" },
+        { src: "/modeling/1010.png", alt: "Modeling Shot 10", span: "row-span-2" },
+        { src: "/modeling/1111.png", alt: "Modeling Shot 11", span: "row-span-1" },
+        { src: "/modeling/1212.png", alt: "Modeling Shot 12", span: "row-span-1" },
+        { src: "/modeling/1313.png", alt: "Modeling Shot 13", span: "row-span-1" },
+        { src: "/modeling/1414.png", alt: "Modeling Shot 14", span: "row-span-2" },
+        { src: "/modeling/1515.png", alt: "Modeling Shot 15", span: "row-span-1" },
     ];
 
     return (
@@ -40,7 +49,7 @@ const ModelingPage = () => {
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop"
+                        src="/modeling/modeling-hero.png"
                         alt="Muzamil Shiraz Hero"
                         fill
                         className="object-cover object-top opacity-60 grayscale hover:grayscale-0 transition-all duration-[2s]"
