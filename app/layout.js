@@ -1,5 +1,6 @@
 "use client"; // Required because we are using useState
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Space_Grotesk, Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
 import "./enhancements.css";
@@ -21,6 +22,7 @@ const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-mono" });
 export default function RootLayout({ children }) {
   // State to track if loading is finished
   const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
 
   // This function is passed to the Preloader to tell us when it's done
   const finishLoading = () => {
@@ -79,7 +81,8 @@ export default function RootLayout({ children }) {
             <>
               <Background3D />
               <Navbar />
-              <Socials />
+              {/* Hide Socials on book page */}
+              {pathname !== "/book" && <Socials />}
               <main className="relative z-20 animate-fade-in-up">{children}</main>
             </>
           )}

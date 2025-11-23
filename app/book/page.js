@@ -1,11 +1,18 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Mail, Instagram, Download } from "lucide-react";
+import { ArrowLeft, Mail, Instagram, Download, ArrowUpRight } from "lucide-react";
 
 const ModelingPage = () => {
+    // Parallax Hooks
+    const { scrollY } = useScroll();
+    const yBg = useTransform(scrollY, [0, 1000], [0, 200]);
+    const yCol1 = useTransform(scrollY, [0, 2000], [0, -100]);
+    const yCol2 = useTransform(scrollY, [0, 2000], [0, -200]);
+    const yCol3 = useTransform(scrollY, [0, 2000], [0, -50]);
+
     // Placeholder Stats
     const stats = [
         { label: "Height", value: "6'1\"" },
@@ -14,23 +21,23 @@ const ModelingPage = () => {
         { label: "Location", value: "Peshawar" },
     ];
 
-    // Real modeling portfolio gallery - expanded for fuller showcase
+    // Real modeling portfolio gallery - premium masonry with metadata
     const galleryImages = [
-        { src: "/modeling/11.png", alt: "Modeling Shot 1", span: "row-span-2" },
-        { src: "/modeling/22.png", alt: "Modeling Shot 2", span: "row-span-1" },
-        { src: "/modeling/33.png", alt: "Modeling Shot 3", span: "row-span-1" },
-        { src: "/modeling/44.png", alt: "Modeling Shot 4", span: "row-span-2" },
-        { src: "/modeling/55.png", alt: "Modeling Shot 5", span: "row-span-1" },
-        { src: "/modeling/66.png", alt: "Modeling Shot 6", span: "row-span-1" },
-        { src: "/modeling/77.png", alt: "Modeling Shot 7", span: "row-span-2" },
-        { src: "/modeling/88.png", alt: "Modeling Shot 8", span: "row-span-1" },
-        { src: "/modeling/99.png", alt: "Modeling Shot 9", span: "row-span-1" },
-        { src: "/modeling/1010.png", alt: "Modeling Shot 10", span: "row-span-2" },
-        { src: "/modeling/1111.png", alt: "Modeling Shot 11", span: "row-span-1" },
-        { src: "/modeling/1212.png", alt: "Modeling Shot 12", span: "row-span-1" },
-        { src: "/modeling/1313.png", alt: "Modeling Shot 13", span: "row-span-1" },
-        { src: "/modeling/1414.png", alt: "Modeling Shot 14", span: "row-span-2" },
-        { src: "/modeling/1515.png", alt: "Modeling Shot 15", span: "row-span-1" },
+        { id: 1, src: "/modeling/11.png", alt: "Modeling Shot 1", year: "2025" },
+        { id: 2, src: "/modeling/22.png", alt: "Modeling Shot 2", year: "2024" },
+        { id: 3, src: "/modeling/33.png", alt: "Modeling Shot 3", year: "2024" },
+        { id: 4, src: "/modeling/44.png", alt: "Modeling Shot 4", year: "2025" },
+        { id: 5, src: "/modeling/65.png", alt: "Modeling Shot 5", year: "2024" },
+        { id: 6, src: "/modeling/66.png", alt: "Modeling Shot 6", year: "2025" },
+        { id: 7, src: "/modeling/77.png", alt: "Modeling Shot 7", year: "2024" },
+        { id: 8, src: "/modeling/88.png", alt: "Modeling Shot 8", year: "2025" },
+        { id: 9, src: "/modeling/99.png", alt: "Modeling Shot 9", year: "2024" },
+        { id: 10, src: "/modeling/1010.png", alt: "Modeling Shot 10", year: "2025" },
+        { id: 11, src: "/modeling/1111.png", alt: "Modeling Shot 11", year: "2024" },
+        { id: 12, src: "/modeling/1212.png", alt: "Modeling Shot 12", year: "2025" },
+        { id: 13, src: "/modeling/13.png", alt: "Modeling Shot 13", year: "2024" },
+        { id: 14, src: "/modeling/1414.png", alt: "Modeling Shot 14", year: "2025" },
+        { id: 15, src: "/modeling/1515.png", alt: "Modeling Shot 15", year: "2024" },
     ];
 
     return (
@@ -46,8 +53,8 @@ const ModelingPage = () => {
 
             {/* HERO SECTION */}
             <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
+                {/* Background Image - Parallax */}
+                <motion.div style={{ y: yBg }} className="absolute inset-0 z-0">
                     <Image
                         src="/modeling/modeling-hero.png"
                         alt="Muzamil Shiraz Hero"
@@ -56,7 +63,7 @@ const ModelingPage = () => {
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/30" />
-                </div>
+                </motion.div>
 
                 {/* Hero Content */}
                 <div className="relative z-10 text-center px-4">
@@ -102,12 +109,12 @@ const ModelingPage = () => {
                         into every shoot, ensuring the vision is executed flawlessly.
                     </p>
                     <div className="flex gap-4 pt-4">
-                        <Link href="/#contact" className="px-8 py-4 bg-white text-navy font-bold font-mono uppercase tracking-widest hover:bg-teal transition-colors">
+                        <MagneticButton href="/#contact" className="px-8 py-4 bg-white text-navy font-bold font-mono uppercase tracking-widest hover:bg-teal transition-colors inline-block">
                             Book Now
-                        </Link>
-                        <button className="px-8 py-4 border border-white/20 text-white font-mono uppercase tracking-widest hover:bg-white/5 transition-colors flex items-center gap-2">
+                        </MagneticButton>
+                        <MagneticButton className="px-8 py-4 border border-white/20 text-white font-mono uppercase tracking-widest hover:bg-white/5 transition-colors flex items-center gap-2 cursor-pointer">
                             <Download size={18} /> Comp Card
-                        </button>
+                        </MagneticButton>
                     </div>
                 </div>
 
@@ -129,32 +136,22 @@ const ModelingPage = () => {
                 </div>
             </section>
 
-            {/* MASONRY GALLERY */}
-            <section className="py-12 px-4 md:px-8 max-w-[1920px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[400px]">
-                    {galleryImages.map((img, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className={`relative group overflow-hidden bg-lightNavy ${img.span}`}
-                        >
-                            <Image
-                                src={img.src}
-                                alt={img.alt}
-                                fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
-                            />
-                            <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-colors duration-500" />
-
-                            {/* Hover Info */}
-                            <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-navy/90 to-transparent">
-                                <p className="font-mono text-teal text-xs tracking-widest uppercase">Editorial</p>
-                            </div>
-                        </motion.div>
+            {/* PARALLAX MASONRY GALLERY */}
+            <section className="py-24 px-4 md:px-8 max-w-[1920px] mx-auto min-h-screen">
+                {/* Mobile/Tablet Layout (Standard Masonry) */}
+                <div className="block lg:hidden columns-1 md:columns-2 gap-8 space-y-8">
+                    {galleryImages.map((img) => (
+                        <div key={img.id} className="break-inside-avoid mb-8">
+                            <GalleryItem img={img} />
+                        </div>
                     ))}
+                </div>
+
+                {/* Desktop Layout (Parallax Columns) */}
+                <div className="hidden lg:flex gap-8 items-start justify-center">
+                    <ParallaxColumn images={galleryImages.filter((_, i) => i % 3 === 0)} y={yCol1} />
+                    <ParallaxColumn images={galleryImages.filter((_, i) => i % 3 === 1)} y={yCol2} />
+                    <ParallaxColumn images={galleryImages.filter((_, i) => i % 3 === 2)} y={yCol3} />
                 </div>
             </section>
 
@@ -164,9 +161,159 @@ const ModelingPage = () => {
                 <Link href="mailto:hello@muzamilshiraz.com" className="inline-flex items-center gap-3 text-teal hover:text-white transition-colors font-mono text-lg tracking-widest uppercase border-b border-teal pb-1 hover:border-white">
                     Get in Touch <Mail size={20} />
                 </Link>
+
+                {/* Social Icons - Premium centered layout */}
+                <div className="flex justify-center items-center gap-6 mt-12">
+                    <a
+                        href="https://github.com/muzamilshiraz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        className="group relative p-4 rounded-lg bg-lightNavy/30 border border-teal/10 backdrop-blur-sm text-slate transition-all duration-300 hover:bg-teal/10 hover:border-teal/30 hover:scale-110 hover:shadow-lg hover:shadow-teal/20"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-white transition-colors">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+
+                    <a
+                        href="https://linkedin.com/in/muzamilshiraz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        className="group relative p-4 rounded-lg bg-lightNavy/30 border border-teal/10 backdrop-blur-sm text-slate transition-all duration-300 hover:bg-teal/10 hover:border-teal/30 hover:scale-110 hover:shadow-lg hover:shadow-teal/20"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-blue-400 transition-colors">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+
+                    <a
+                        href="https://x.com/muzamilshiraz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="X (Twitter)"
+                        className="group relative p-4 rounded-lg bg-lightNavy/30 border border-teal/10 backdrop-blur-sm text-slate transition-all duration-300 hover:bg-teal/10 hover:border-teal/30 hover:scale-110 hover:shadow-lg hover:shadow-teal/20"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="group-hover:text-white transition-colors">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+
+                    <a
+                        href="https://instagram.com/muzamilshiraz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                        className="group relative p-4 rounded-lg bg-lightNavy/30 border border-teal/10 backdrop-blur-sm text-slate transition-all duration-300 hover:bg-teal/10 hover:border-teal/30 hover:scale-110 hover:shadow-lg hover:shadow-teal/20"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-pink-400 transition-colors">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+
+                    <a
+                        href="mailto:hello@muzamilshiraz.com"
+                        aria-label="Email"
+                        className="group relative p-4 rounded-lg bg-lightNavy/30 border border-teal/10 backdrop-blur-sm text-slate transition-all duration-300 hover:bg-teal/10 hover:border-teal/30 hover:scale-110 hover:shadow-lg hover:shadow-teal/20"
+                    >
+                        <Mail size={20} className="group-hover:text-red-500 transition-colors" />
+                    </a>
+                </div>
             </section>
         </div>
     );
 };
 
 export default ModelingPage;
+
+/* --- HELPER COMPONENTS --- */
+
+const ParallaxColumn = ({ images, y }) => {
+    return (
+        <motion.div style={{ y }} className="flex flex-col gap-8 w-full">
+            {images.map((img) => (
+                <GalleryItem key={img.id} img={img} />
+            ))}
+        </motion.div>
+    );
+};
+
+const GalleryItem = ({ img }) => {
+    return (
+        <div className="group relative w-full overflow-hidden rounded-lg">
+            <Image
+                src={img.src}
+                alt={img.alt}
+                width={600}
+                height={800}
+                className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-opacity duration-700" />
+
+            {/* Hover Card */}
+            <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center p-3 rounded-lg backdrop-blur-md bg-navy/60 border border-teal/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+                <span className="font-mono text-xs text-slate tracking-widest">{img.year}</span>
+                <ArrowUpRight size={14} className="text-teal" />
+            </div>
+        </div>
+    );
+};
+
+const MagneticButton = ({ children, className, href }) => {
+    const ref = useRef(null);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const { left, top, width, height } = ref.current.getBoundingClientRect();
+        const centerX = left + width / 2;
+        const centerY = top + height / 2;
+        x.set((clientX - centerX) * 0.2); // Magnetic strength
+        y.set((clientY - centerY) * 0.2);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
+    const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
+    const springX = useSpring(x, springConfig);
+    const springY = useSpring(y, springConfig);
+
+    if (href) {
+        return (
+            <Link href={href}>
+                <motion.div
+                    ref={ref}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    style={{ x: springX, y: springY }}
+                    className={className}
+                >
+                    {children}
+                </motion.div>
+            </Link>
+        );
+    }
+
+    return (
+        <motion.div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ x: springX, y: springY }}
+            className={className}
+        >
+            {children}
+        </motion.div>
+    );
+};
