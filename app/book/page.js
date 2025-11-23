@@ -99,12 +99,13 @@ const ModelingPage = () => {
                         MUZAMIL SHIRAZ
                     </motion.h1>
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.8 }}
-                        className="backdrop-blur-md bg-navy/30 border border-white/10 rounded-full px-6 py-2"
+                        className="flex items-center gap-3"
                     >
-                        <p className="font-mono text-teal text-xs md:text-sm tracking-[0.3em] uppercase">
+                        <span className="font-mono text-teal text-lg md:text-xl">//</span>
+                        <p className="font-mono text-white text-xs md:text-sm tracking-[0.3em] uppercase">
                             The Digital Comp Card
                         </p>
                     </motion.div>
@@ -230,13 +231,19 @@ const ModelingPage = () => {
                             <span className="block text-[15vw]">SHIRAZ.COM</span>
                         </h2>
 
-                        {/* Desktop Layout (>= md) */}
-                        <h2 className="hidden md:block font-heading font-bold text-white group-hover:text-teal transition-colors duration-500 leading-none text-[5.5vw] tracking-tighter">
-                            HELLO@MUZAMILSHIRAZ.COM
-                        </h2>
+                        {/* Desktop Layout (>= md) with inline arrow */}
+                        <div className="hidden md:flex items-center justify-center gap-4">
+                            <h2 className="font-heading font-bold text-white group-hover:text-teal transition-colors duration-500 leading-none text-[5.5vw] tracking-tighter">
+                                HELLO@MUZAMILSHIRAZ.COM
+                            </h2>
+                            {/* Inline Arrow */}
+                            <ArrowUpRight className="text-teal opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-0 group-hover:translate-x-2 w-16 h-16 md:w-20 md:h-20 pointer-events-none" />
+                        </div>
 
-                        {/* Floating Arrow - Moved to Top Right to avoid text overlap */}
-                        <ArrowUpRight className="absolute -top-6 -right-6 md:-top-20 md:-right-20 text-teal opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-x-4 group-hover:-translate-y-4 w-12 h-12 md:w-32 md:h-32 pointer-events-none" />
+                        {/* Mobile Arrow - Below text */}
+                        <div className="md:hidden flex justify-center mt-4">
+                            <ArrowUpRight className="text-teal opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-0 group-hover:translate-y-2 w-12 h-12 pointer-events-none" />
+                        </div>
                     </a>
                 </div>
 
@@ -245,22 +252,22 @@ const ModelingPage = () => {
 
                     {/* Social Icons */}
                     <div className="flex gap-6">
-                        <SocialIcon href="https://instagram.com/muzamilshiraz" label="Instagram">
+                        <SocialIcon href="https://instagram.com/muzamilshiraz" label="Instagram" brandColor="#E4405F">
                             <Instagram size={24} />
                         </SocialIcon>
-                        <SocialIcon href="https://x.com/muzamilshiraz" label="X (Twitter)">
+                        <SocialIcon href="https://x.com/muzamilshiraz" label="X (Twitter)" brandColor="#FFFFFF">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
                         </SocialIcon>
-                        <SocialIcon href="https://linkedin.com/in/muzamilshiraz" label="LinkedIn">
+                        <SocialIcon href="https://linkedin.com/in/muzamilshiraz" label="LinkedIn" brandColor="#0A66C2">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                                 <rect x="2" y="9" width="4" height="12"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
                         </SocialIcon>
-                        <SocialIcon href="https://github.com/muzamilshiraz" label="GitHub">
+                        <SocialIcon href="https://github.com/muzamilshiraz" label="GitHub" brandColor="#FFFFFF">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
@@ -372,16 +379,21 @@ const MagneticButton = ({ children, className, href }) => {
     );
 };
 
-const SocialIcon = ({ href, children, label }) => {
+const SocialIcon = ({ href, children, label, brandColor }) => {
     return (
         <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
-            className="group relative p-3 rounded-full border border-white/10 text-slate hover:text-white hover:bg-white/5 hover:border-teal/50 transition-all duration-300"
+            className="group relative p-3 rounded-full border border-white/10 hover:bg-white/5 hover:border-teal/50 transition-all duration-300"
+            style={{
+                color: brandColor, // Always show brand color on mobile
+            }}
         >
-            {children}
+            <div className="md:group-hover:[color:inherit] md:[color:#94a3b8] transition-colors duration-300">
+                {children}
+            </div>
         </a>
     );
 };
