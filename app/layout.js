@@ -80,7 +80,8 @@ export default function RootLayout({ children }) {
             /* 2. SHOW WEBSITE IF LOADING IS FALSE */
             <>
               <Background3D />
-              <Navbar />
+              {/* Hide Navbar on book page */}
+              {pathname !== "/book" && <Navbar />}
               {/* Hide Socials on book page */}
               {pathname !== "/book" && <Socials />}
               <main className="relative z-20 animate-fade-in-up">{children}</main>
