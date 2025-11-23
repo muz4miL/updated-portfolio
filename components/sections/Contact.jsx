@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import SectionHeader from "../ui/SectionHeader";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Calendar, Copy, Check, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Calendar, Copy, Check, Github, Linkedin, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "../ui/Magnetic";
 import { useScrollContext } from "../../context/ScrollContext";
@@ -55,7 +55,10 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 max-w-5xl mx-auto px-6 relative overflow-hidden">
+    <section id="contact" ref={sectionRef} className="pt-8 pb-24 max-w-5xl mx-auto px-6 relative overflow-hidden">
+      {/* Subtle Top Gradient Overlay */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-lightNavy/30 to-transparent pointer-events-none"></div>
+
       <SectionHeader number="04" title="Get In Touch" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-12 relative z-10">
         {/* Left Column */}
@@ -136,7 +139,10 @@ const Contact = () => {
             className="p-8 rounded-2xl border border-white/20 relative overflow-hidden backdrop-blur-[30px] bg-navy/60 shadow-xl"
             style={{ background: 'linear-gradient(to bottom right, rgba(255,255,255,0.05), rgba(0,255,200,0.05))' }}
           >
-            <h3 className="font-heading text-2xl text-white mb-6">Send a Message 🚀</h3>
+            <h3 className="font-heading text-2xl text-white mb-6 flex items-center gap-3">
+              Send a Message
+              <Send size={20} className="text-teal" />
+            </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">Name</label>

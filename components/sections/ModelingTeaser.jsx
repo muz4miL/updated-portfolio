@@ -15,7 +15,7 @@ const ModelingTeaser = () => {
         { src: "/modeling/22.png", alt: "Modeling Shot 2" },
         { src: "/modeling/33.png", alt: "Modeling Shot 3" },
         { src: "/modeling/44.png", alt: "Modeling Shot 4" },
-        { src: "/modeling/55.png", alt: "Modeling Shot 5" },
+        { src: "/modeling/88.png", alt: "Modeling Shot 5" },
         { src: "/modeling/65.png", alt: "Modeling Shot 6" },
         { src: "/modeling/66.png", alt: "Modeling Shot 7" },
         { src: "/modeling/77.png", alt: "Modeling Shot 8" },
@@ -164,8 +164,8 @@ const ModelingTeaser = () => {
                                     key={idx}
                                     onClick={() => goToSlide(idx)}
                                     className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex
-                                            ? "w-10 bg-teal"
-                                            : "w-1.5 bg-white/20 hover:bg-white/40"
+                                        ? "w-10 bg-teal"
+                                        : "w-1.5 bg-white/20 hover:bg-white/40"
                                         }`}
                                     aria-label={`Go to slide ${idx + 1}`}
                                 />
@@ -213,8 +213,8 @@ const ModelingTeaser = () => {
                                     key={idx}
                                     onClick={() => goToSlide(idx)}
                                     className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex
-                                            ? "w-8 bg-teal"
-                                            : "w-1.5 bg-white/20"
+                                        ? "w-8 bg-teal"
+                                        : "w-1.5 bg-white/20"
                                         }`}
                                     aria-label={`Go to slide ${idx + 1}`}
                                 />
@@ -240,6 +240,15 @@ const ModelingTeaser = () => {
                     </div>
                 </div>
 
+            </div>
+
+            {/* Premium Diagonal Transition Bridge */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy/50 to-lightNavy"></div>
+                <svg className="absolute bottom-0 w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,0 L1200,60 L1200,120 L0,120 Z" fill="#0A192F" opacity="0.5"></path>
+                    <path d="M0,20 L1200,80 L1200,120 L0,120 Z" fill="#112240" opacity="0.8"></path>
+                </svg>
             </div>
         </section>
     );
