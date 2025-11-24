@@ -43,7 +43,7 @@ const ContactPage = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("bcs.230302211@imsciences.edu.pk");
+    navigator.clipboard.writeText("shirazmuzamil2@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -74,7 +74,7 @@ const ContactPage = () => {
 
       <div className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Left Side - Hero Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -137,7 +137,7 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <p className="text-xs font-mono text-teal uppercase tracking-wider mb-1">Email</p>
-                        <p className="text-white font-medium">bcs.230302211@imsciences.edu.pk</p>
+                        <p className="text-white font-medium">shirazmuzamil2@gmail.com</p>
                       </div>
                     </div>
                     <div className="text-slate group-hover:text-teal transition-colors">
@@ -171,25 +171,29 @@ const ContactPage = () => {
                 </div>
               </motion.div>
 
-              {/* Social Links - Completely Hidden (using bottom section instead) */}
+              {/* Social Links - Desktop Only Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="hidden"
+                className="hidden md:block"
               >
-                <p className="text-slate text-sm mb-4">Connect with me</p>
-                <div className="flex gap-3">
-                  {socialLinks.map((social, i) => (
-                    <PremiumSocialIcon
-                      key={i}
-                      Icon={social.icon}
-                      href={social.href}
-                      label={social.label}
-                      brandColor={social.brandColor}
-                      delay={i * 0.1}
-                    />
-                  ))}
+                <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-white font-medium">Check my code</p>
+                    <div className="flex gap-3">
+                      {socialLinks.map((social, i) => (
+                        <PremiumSocialIcon
+                          key={i}
+                          Icon={social.icon}
+                          href={social.href}
+                          label={social.label}
+                          brandColor={social.brandColor}
+                          delay={i * 0.1}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
@@ -207,14 +211,6 @@ const ContactPage = () => {
               <div className="relative p-8 md:p-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
                 {/* Form Header */}
                 <div className="mb-8">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 rounded-lg bg-gradient-to-br from-teal/20 to-teal/5">
-                      <Send size={22} className="text-teal" />
-                    </div>
-                    <h2 className="font-heading text-2xl md:text-3xl text-white font-bold">
-                      Send Message
-                    </h2>
-                  </div>
                   <p className="text-slate text-sm">I'll respond within 24 hours</p>
                 </div>
 
