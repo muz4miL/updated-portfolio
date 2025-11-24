@@ -56,21 +56,17 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-navy relative overflow-hidden">
-      {/* Animated Mesh Gradient Background */}
-      <div className="fixed inset-0 opacity-40">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
-        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
-      </div>
+      {/* Engineering Grid Background */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-      {/* Grid Pattern Overlay */}
-      <div className="fixed inset-0 opacity-[0.02]" style={{
-        backgroundImage: `
-          linear-gradient(rgba(100, 255, 218, 0.5) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(100, 255, 218, 0.5) 1px, transparent 1px)
-        `,
-        backgroundSize: '80px 80px',
-      }} />
+      {/* Ambient Glows */}
+      <div className="fixed inset-0 pointer-events-none">
+        {/* LEFT GLOW (Cyan) - Behind the Text */}
+        <div className="absolute top-20 left-0 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob"></div>
+
+        {/* RIGHT GLOW (Purple) - Behind the Form */}
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
+      </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-7xl">
@@ -90,14 +86,14 @@ const ContactPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="font-heading text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-6"
+                  className="font-heading text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-6 md:mt-3"
                 >
-                  Have a project
+                  Turning concepts
                   <br />
-                  in{" "}
+                  into{" "}
                   <span className="relative inline-block">
                     <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-teal via-cyan-400 to-blue-400">
-                      mind?
+                      Reality
                     </span>
                     <motion.span
                       className="absolute bottom-2 left-0 right-0 h-3 bg-teal/20 blur-sm"
@@ -113,8 +109,7 @@ const ContactPage = () => {
                   transition={{ delay: 0.4 }}
                   className="text-slate text-xl leading-relaxed max-w-lg"
                 >
-                  I'm always excited to collaborate on new projects. Drop me a message and let's create something amazing together.
-                </motion.p>
+                  Bridging the gap between design and engineering. I craft pixel-perfect, responsive interfaces that focus on user experience and performance.                </motion.p>
               </div>
 
               {/* Quick Contact Cards */}
@@ -170,32 +165,6 @@ const ContactPage = () => {
                   </div>
                 </div>
               </motion.div>
-
-              {/* Social Links - Desktop Only Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="hidden md:block"
-              >
-                <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-white font-medium">Check my code</p>
-                    <div className="flex gap-3">
-                      {socialLinks.map((social, i) => (
-                        <PremiumSocialIcon
-                          key={i}
-                          Icon={social.icon}
-                          href={social.href}
-                          label={social.label}
-                          brandColor={social.brandColor}
-                          delay={i * 0.1}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
 
             {/* Right Side - Contact Form */}
@@ -203,16 +172,13 @@ const ContactPage = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="relative"
+              className="relative md:mt-10"
             >
               {/* Floating Orb */}
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-teal/20 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative p-8 md:p-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
                 {/* Form Header */}
-                <div className="mb-8">
-                  <p className="text-slate text-sm">I'll respond within 24 hours</p>
-                </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name Input */}
