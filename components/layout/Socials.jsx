@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { Github, Instagram, Linkedin, Facebook, Mail } from "lucide-react";
 import { useScrollContext } from "../../context/ScrollContext";
-
+import { usePathname } from "next/navigation";
 import XIcon from "../ui/XIcon";
 
 const Socials = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { isContactVisible } = useScrollContext();
+  const pathname = usePathname();
+  const isContactPage = pathname === "/contact";
 
   // Trigger fade-in animation on mount (after hero section animations)
   useEffect(() => {
@@ -50,14 +52,14 @@ const Socials = () => {
 
   return (
     <>
-      {/* Desktop Sidebar - Hides when Contact visible */}
+      {/* Desktop Sidebar - Hides when Contact visible OR on Contact page */}
       <div
         className={`
           fixed bottom-0 left-6 xl:left-12 hidden md:flex flex-col items-center gap-6 z-50 
           transition-all duration-500
           ${!isMounted ? 'opacity-0 -translate-x-8' : ''}
-          ${isMounted && !isContactVisible ? 'opacity-100 translate-x-0' : ''}
-          ${isMounted && isContactVisible ? 'opacity-0 -translate-x-12' : ''}
+          ${isMounted && !isContactVisible && !isContactPage ? 'opacity-100 translate-x-0' : ''}
+          ${isMounted && (isContactVisible || isContactPage) ? 'opacity-0 -translate-x-12' : ''}
         `}
         aria-hidden={isContactVisible}
       >

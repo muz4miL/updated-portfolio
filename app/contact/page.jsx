@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Mail,
   MapPin,
@@ -9,9 +9,7 @@ import {
   Github,
   Linkedin,
   ArrowUpRight,
-  Sparkles,
 } from "lucide-react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import PremiumSocialIcon from "../../components/ui/PremiumSocialIcon";
 import XIcon from "../../components/ui/XIcon";
@@ -25,6 +23,11 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,40 +57,97 @@ const ContactPage = () => {
     { icon: XIcon, href: "#", label: "X", brandColor: "#ffffff" },
   ];
 
+  // Premium Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1.0], // Smooth "Apple-like" ease
+      },
+    },
+  };
+
+  const ghostVariants = {
+    initial: { opacity: 0, rotate: -15, x: 100 },
+    animate: {
+      opacity: 0.03,
+      x: 0,
+      transition: { duration: 1.5, ease: "easeOut" }
+    },
+    float: {
+      y: [0, -20, 0],
+      rotate: [-15, -10, -15],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-navy relative overflow-hidden">
-      {/* Engineering Grid Background */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div className="min-h-screen bg-navy relative overflow-hidden selection:bg-teal/30">
+      {/* Optimized Background Layers */}
 
-      {/* Ambient Glows */}
-      <div className="fixed inset-0 pointer-events-none">
-        {/* LEFT GLOW (Cyan) - Behind the Text */}
-        <div className="absolute top-20 left-0 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob"></div>
-
-        {/* RIGHT GLOW (Purple) - Behind the Form */}
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
+      {/* 1. Engineering Grid - Hardware Accelerated */}
+      <div className="absolute inset-0 z-0 transform-gpu">
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]"
+          style={{ opacity: 0.6 }}
+        />
       </div>
 
+      {/* 2. Noise Overlay - Optimized Opacity */}
+      <div className="fixed inset-0 z-[1] opacity-[0.07] pointer-events-none mix-blend-overlay transform-gpu"
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+      />
+
+      {/* 3. Ambient Glows - Will-Change for Performance */}
+      <div className="fixed inset-0 pointer-events-none z-[0]">
+        <div className="absolute top-20 left-0 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-multiply filter blur-[128px] animate-blob will-change-transform"></div>
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-500/20 rounded-full mix-blend-multiply filter blur-[128px] animate-blob animation-delay-2000 will-change-transform"></div>
+      </div>
+
+      {/* 4. The Code Ghost - Animated */}
+      <motion.div
+        variants={ghostVariants}
+        initial="initial"
+        animate={["animate", "float"]}
+        className="absolute top-1/3 right-0 -translate-y-1/2 translate-x-1/4 z-[0] pointer-events-none select-none"
+      >
+        <span className="font-mono text-[20rem] md:text-[30rem] font-bold text-white leading-none">
+          {"/>"}
+        </span>
+      </motion.div>
+
+      {/* Main Content Container */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Left Side - Hero Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="space-y-10"
-            >
-
-
+            <div className="space-y-10">
               {/* Main Heading */}
-              <div>
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="font-heading text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-6 md:mt-3"
-                >
+              <motion.div variants={itemVariants}>
+                <h1 className="font-heading text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-6 md:mt-3">
                   Turning concepts
                   <br />
                   into{" "}
@@ -101,28 +161,19 @@ const ContactPage = () => {
                       transition={{ duration: 3, repeat: Infinity }}
                     />
                   </span>
-                </motion.h1>
+                </h1>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-slate text-xl leading-relaxed max-w-lg"
-                >
-                  Bridging the gap between design and engineering. I craft pixel-perfect, responsive interfaces that focus on user experience and performance.                </motion.p>
-              </div>
+                <p className="text-slate text-xl leading-relaxed max-w-lg">
+                  Bridging the gap between design and engineering. I craft pixel-perfect, responsive interfaces that focus on user experience and performance.
+                </p>
+              </motion.div>
 
               {/* Quick Contact Cards */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="space-y-4"
-              >
+              <motion.div variants={itemVariants} className="space-y-4">
                 {/* Email */}
                 <div
                   onClick={handleCopy}
-                  className="group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-teal/30 transition-all duration-300 cursor-pointer overflow-hidden"
+                  className="group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-teal/30 transition-all duration-300 cursor-pointer overflow-hidden transform-gpu"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-teal/0 via-teal/5 to-teal/0 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="relative flex items-center justify-between">
@@ -143,7 +194,7 @@ const ContactPage = () => {
 
                 {/* Location & Availability */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
+                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-colors">
                     <div className="flex items-center gap-3 mb-2">
                       <MapPin size={18} className="text-purple-400" />
                       <p className="text-xs font-mono text-purple-400 uppercase tracking-wider">Location</p>
@@ -152,7 +203,7 @@ const ContactPage = () => {
                     <p className="text-slate text-sm mt-1">Remote worldwide</p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
+                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-colors">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -165,24 +216,20 @@ const ContactPage = () => {
                   </div>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* Right Side - Contact Form */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              variants={itemVariants}
               className="relative md:mt-10"
             >
               {/* Floating Orb */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-teal/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-teal/20 rounded-full blur-3xl pointer-events-none opacity-50" />
 
-              <div className="relative p-8 md:p-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
-                {/* Form Header */}
-
+              <div className="relative p-8 md:p-10 rounded-3xl bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-2xl">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name Input */}
-                  <div className="group">
+                  <motion.div variants={itemVariants} className="group">
                     <label className="block text-sm font-medium text-slate mb-2">
                       Your Name
                     </label>
@@ -195,10 +242,10 @@ const ContactPage = () => {
                       className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate/50 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all"
                       placeholder="John Doe"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Email Input */}
-                  <div className="group">
+                  <motion.div variants={itemVariants} className="group">
                     <label className="block text-sm font-medium text-slate mb-2">
                       Email Address
                     </label>
@@ -211,10 +258,10 @@ const ContactPage = () => {
                       className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate/50 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all"
                       placeholder="john@example.com"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Message Input */}
-                  <div className="group">
+                  <motion.div variants={itemVariants} className="group">
                     <label className="block text-sm font-medium text-slate mb-2">
                       Message
                     </label>
@@ -227,12 +274,15 @@ const ContactPage = () => {
                       className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate/50 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all resize-none"
                       placeholder="Tell me about your project..."
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Submit Button */}
-                  <button
+                  <motion.button
+                    variants={itemVariants}
                     type="submit"
                     disabled={isSubmitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="group relative w-full px-8 py-4 bg-gradient-to-r from-teal to-cyan-400 text-navy font-bold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(100,255,218,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
@@ -249,7 +299,7 @@ const ContactPage = () => {
                       )}
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  </button>
+                  </motion.button>
                 </form>
 
                 {/* Success Message */}
@@ -281,12 +331,13 @@ const ContactPage = () => {
                 )}
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Mobile Only - Social Links at Bottom */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
             transition={{ delay: 0.8 }}
             className="md:hidden mt-16"
           >
