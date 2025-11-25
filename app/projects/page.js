@@ -1,135 +1,571 @@
 "use client";
-import React from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowLeft, ExternalLink, Github, Folder, Star, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
+// ============================================
+// PROJECT DATA
+// ============================================
 const allProjects = [
-    {
-        title: "Damosa",
-        description: "Authentic Flavours & Premium Brand Experience. A luxury showcase for residential and commercial developments.",
-        tech: ["React", "Next.js", "Tailwind"],
-        link: "https://damosa-premium.vercel.app/",
-        image: "/images/damosa-preview.png",
-        category: "Web App",
-        featured: true,
-    },
-    {
-        title: "Pyramids",
-        description: "Building The Future. A high-end portfolio for Architecture, Landscape Design, and Engineering Excellence.",
-        tech: ["React", "Next.js", "Framer Motion"],
-        link: "https://pyramids-website.vercel.app/",
-        image: "/images/pyramids-preview.png",
-        category: "Portfolio",
-        featured: true,
-    },
-    // Placeholder for future projects
-    {
-        title: "Portfolio v1",
-        description: "My previous portfolio website built with HTML/CSS and Vanilla JavaScript.",
-        tech: ["HTML", "CSS", "JavaScript"],
-        link: "#",
-        image: null, // Placeholder
-        category: "Website",
-        featured: false,
-    }
+  // === FEATURED CLIENT WORK ===
+  {
+    title: "Damosa",
+    description:
+      "Authentic Flavours & Premium Brand Experience. A luxury showcase featuring a custom global cart system with seamless WhatsApp checkout integration for instant ordering.",
+    tech: ["React", "Next.js", "Tailwind", "Framer Motion"],
+    link: "https://damosa-premium.vercel.app/",
+    github: null,
+    image: "/images/damosa-preview.png",
+    category: "Client Work",
+    featured: true,
+    year: "2024",
+    color: "#F97316",
+  },
+  {
+    title: "Pyramids",
+    description:
+      "Building The Future. A high-end portfolio for Architecture, Landscape Design, and Engineering Excellence. Features smooth scroll animations and immersive UI.",
+    tech: ["React", "Next.js", "Framer Motion", "GSAP"],
+    link: "https://pyramids-website.vercel.app/",
+    github: null,
+    image: "/images/pyramids-preview.png",
+    category: "Client Work",
+    featured: true,
+    year: "2024",
+    color: "#14B8A6",
+  },
+  // === PERSONAL / LEARNING PROJECTS ===
+  {
+    title: "Portfolio v2",
+    description:
+      "You're looking at it. A premium developer portfolio with 3D elements, glassmorphism, aurora backgrounds, and micro-interactions throughout.",
+    tech: ["Next.js 16", "React 19", "Tailwind v4", "Framer Motion"],
+    link: "/",
+    github: "https://github.com/muz4miL/updated-portfolio",
+    image: null,
+    category: "Personal",
+    featured: true,
+    year: "2024",
+    color: "#64FFDA",
+  },
+  {
+    title: "Premium Landing Page",
+    description:
+      "Designed a premium landing page for a music store using Figma and implemented it using React and Tailwind CSS.",
+    tech: ["React", "Tailwind CSS", "Figma"],
+    link: "#",
+    github: null,
+    image: null,
+    category: "Personal",
+    featured: false,
+    year: "2023",
+    color: "#A855F7",
+  },
+  {
+    title: "Pizza Ordering Website",
+    description:
+      "Developed a pizza ordering website using React, Tailwind CSS, and Firebase for authentication and database management.",
+    tech: ["React", "Tailwind CSS", "Firebase", "Auth"],
+    link: "#",
+    github: null,
+    image: null,
+    category: "Personal",
+    featured: false,
+    year: "2023",
+    color: "#EF4444",
+  },
+  {
+    title: "Todo App",
+    description:
+      "A simple yet responsive todo app built with React and Tailwind CSS. Features task management with clean UI.",
+    tech: ["React", "Tailwind CSS"],
+    link: "#",
+    github: null,
+    image: null,
+    category: "Personal",
+    featured: false,
+    year: "2023",
+    color: "#3B82F6",
+  },
+  {
+    title: "Travel List App",
+    description:
+      "A travel list app built with React and Tailwind CSS. Plan and organize your trips with an intuitive interface.",
+    tech: ["React", "Tailwind CSS"],
+    link: "#",
+    github: null,
+    image: null,
+    category: "Personal",
+    featured: false,
+    year: "2023",
+    color: "#F59E0B",
+  },
+  {
+    title: "Portfolio v1",
+    description:
+      "My first portfolio website. Built from scratch with vanilla technologies to understand the fundamentals before moving to frameworks.",
+    tech: ["HTML", "CSS", "JavaScript", "GSAP"],
+    link: "https://muzamilshiraz.me",
+    github: null,
+    image: null,
+    category: "Personal",
+    featured: false,
+    year: "2023",
+    color: "#8B5CF6",
+  },
 ];
 
-const ProjectsPage = () => {
-    return (
-        <main className="min-h-screen bg-navy text-slate selection:bg-teal selection:text-navy">
-            {/* Header */}
-            <header className="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <Link href="/" className="group flex items-center gap-2 text-teal hover:text-white transition-colors">
-                        <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-mono text-sm">Back to Home</span>
-                    </Link>
-                    <div className="font-heading text-xl font-bold text-white">
-                        All Projects
-                    </div>
-                    <div className="w-20" /> {/* Spacer for centering */}
-                </div>
-            </header>
+const categories = ["All", "Client Work", "Personal"];
 
-            <div className="pt-32 pb-24 max-w-7xl mx-auto px-6">
-                {/* Intro */}
-                <div className="text-center mb-16">
-                    <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
-                        The Archive
-                    </h1>
-                    <p className="text-lg max-w-2xl mx-auto text-slate/80">
-                        A complete list of things I’ve built. From premium client work to experimental side projects.
-                    </p>
-                </div>
+// ============================================
+// ANIMATION VARIANTS
+// ============================================
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {allProjects.map((project, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="group relative bg-lightNavy rounded-xl overflow-hidden border border-white/5 hover:border-teal/30 transition-colors duration-300"
-                        >
-                            {/* Image Area */}
-                            <div className="relative h-48 bg-navy/50 overflow-hidden">
-                                {project.image ? (
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center text-slate/20 font-mono text-4xl font-bold">
-                                        M
-                                    </div>
-                                )}
-                                <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-colors" />
-                            </div>
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.34, 1.56, 0.64, 1],
+    },
+  },
+};
 
-                            {/* Content */}
-                            <div className="p-6">
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="font-heading text-xl font-bold text-white group-hover:text-teal transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <div className="flex gap-3">
-                                        {project.link !== "#" && (
-                                            <a
-                                                href={project.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-slate hover:text-teal transition-colors"
-                                            >
-                                                <ExternalLink size={18} />
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
-                                <p className="text-sm text-slate mb-6 line-clamp-3">
-                                    {project.description}
-                                </p>
+// ============================================
+// FEATURED PROJECT CARD (Large, with 3D tilt)
+// ============================================
+const FeaturedProjectCard = ({ project, index }) => {
+  const cardRef = useRef(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-                                <div className="flex flex-wrap gap-2 mt-auto">
-                                    {project.tech.map((t, index) => (
-                                        <span key={index} className="text-xs font-mono text-teal/80 bg-teal/10 px-2 py-1 rounded">
-                                            {t}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setRotateX(y * -10);
+    setRotateY(x * 10);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+    setIsHovered(false);
+  };
+
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={cardRef}
+      variants={itemVariants}
+      className="group relative"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: 1000 }}
+    >
+      <motion.div
+        className="relative grid grid-cols-1 lg:grid-cols-12 gap-4 items-center p-6 md:p-8 rounded-2xl glass-card-strong border border-white/5 hover:border-teal/30 transition-all duration-500"
+        style={{
+          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+          transformStyle: "preserve-3d",
+        }}
+      >
+        {/* Accent glow */}
+        <div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(600px circle at ${isHovered ? "50%" : "0%"} 50%, ${project.color}10, transparent 60%)`,
+          }}
+        />
+
+        {/* Image Section */}
+        <div
+          className={`relative lg:col-span-7 ${isEven ? "" : "lg:order-2"} h-64 md:h-80 rounded-xl overflow-hidden`}
+        >
+          {project.image ? (
+            <>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-navy/40 group-hover:bg-navy/20 transition-colors duration-500" />
+            </>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-lightNavy to-navy flex items-center justify-center">
+              <Folder
+                size={80}
+                className="text-teal/20 group-hover:text-teal/40 transition-colors duration-300"
+              />
             </div>
-        </main>
-    );
+          )}
+
+          {/* Featured badge */}
+          <div
+            className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal/90 text-navy font-mono text-xs font-bold"
+            style={{ transform: "translateZ(30px)" }}
+          >
+            <Star size={12} fill="currentColor" />
+            Featured
+          </div>
+        </div>
+
+        {/* Content Section */}
+        <div
+          className={`lg:col-span-5 ${isEven ? "" : "lg:order-1"} space-y-4 relative z-10`}
+          style={{ transform: "translateZ(20px)" }}
+        >
+          {/* Category & Year */}
+          <div className="flex items-center gap-3 text-xs font-mono">
+            <span className="text-teal">{project.category}</span>
+            <span className="w-1 h-1 rounded-full bg-slate/50" />
+            <span className="text-slate/60">{project.year}</span>
+          </div>
+
+          {/* Title */}
+          <h3 className="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-teal transition-colors duration-300">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-slate leading-relaxed text-sm md:text-base">
+            {project.description}
+          </p>
+
+          {/* Tech Stack */}
+          <div className="flex flex-wrap gap-2 pt-2">
+            {project.tech.map((t, i) => (
+              <span
+                key={i}
+                className="tech-chip text-xs font-mono px-3 py-1.5 rounded-full"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-4 pt-4">
+            {project.link && project.link !== "#" && (
+              <a
+                href={project.link}
+                target={project.link.startsWith("/") ? "_self" : "_blank"}
+                rel="noopener noreferrer"
+                className="group/link inline-flex items-center gap-2 text-teal font-mono text-sm hover:text-white transition-colors"
+              >
+                <span>View Project</span>
+                <ArrowUpRight
+                  size={16}
+                  className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
+                />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate hover:text-teal transition-colors"
+              >
+                <Github size={20} />
+              </a>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// ============================================
+// REGULAR PROJECT CARD (Grid style)
+// ============================================
+const ProjectCard = ({ project }) => {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="group relative h-full"
+    >
+      <div className="h-full flex flex-col p-6 rounded-xl glass-card border border-white/5 hover:border-teal/20 hover-lift transition-all duration-300">
+        {/* Top Row: Folder icon + Links */}
+        <div className="flex items-start justify-between mb-6">
+          <div
+            className="w-12 h-12 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: `${project.color}15` }}
+          >
+            <Folder size={24} style={{ color: project.color }} />
+          </div>
+          <div className="flex items-center gap-3">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate hover:text-teal transition-colors"
+              >
+                <Github size={20} />
+              </a>
+            )}
+            {project.link && project.link !== "#" && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate hover:text-teal transition-colors"
+              >
+                <ExternalLink size={20} />
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Title */}
+        <h3 className="font-heading text-xl font-bold text-white group-hover:text-teal transition-colors mb-3">
+          {project.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-slate text-sm leading-relaxed flex-grow mb-6">
+          {project.description}
+        </p>
+
+        {/* Tech Stack */}
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {project.tech.slice(0, 4).map((t, i) => (
+            <span key={i} className="text-xs font-mono text-slate/70">
+              {t}
+              {i < Math.min(project.tech.length, 4) - 1 && (
+                <span className="ml-2 text-teal/50">•</span>
+              )}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// ============================================
+// MAIN PAGE COMPONENT
+// ============================================
+const ProjectsPage = () => {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const featuredProjects = allProjects.filter((p) => p.featured);
+  const otherProjects = allProjects.filter((p) => !p.featured);
+
+  const filteredFeatured =
+    activeCategory === "All"
+      ? featuredProjects
+      : featuredProjects.filter((p) => p.category === activeCategory);
+
+  const filteredOther =
+    activeCategory === "All"
+      ? otherProjects
+      : otherProjects.filter((p) => p.category === activeCategory);
+
+  return (
+    <main className="relative min-h-screen">
+      {/* Aurora Background */}
+      <div className="aurora-bg">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 pt-32 pb-24">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Back Navigation */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-3 text-slate hover:text-teal transition-colors mb-16"
+            >
+              <ArrowLeft
+                size={18}
+                className="group-hover:-translate-x-1 transition-transform"
+              />
+              <span className="font-mono text-sm uppercase tracking-widest">
+                Back to Home
+              </span>
+            </Link>
+          </motion.div>
+
+          {/* Page Header */}
+          <motion.div
+            className="mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.div
+              variants={fadeInUp}
+              className="flex items-center gap-4 mb-6"
+            >
+              <span className="font-mono text-teal text-lg">04.</span>
+              <h1 className="font-heading text-4xl md:text-6xl font-bold text-white">
+                The Archive
+              </h1>
+              <div className="hidden md:block h-[1px] bg-slate/20 flex-grow max-w-xs" />
+            </motion.div>
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-slate text-lg max-w-2xl leading-relaxed"
+            >
+              A curated collection of projects I&apos;ve crafted. From premium client
+              work to experimental side projects—each one represents a step in my
+              journey as a developer.
+            </motion.p>
+          </motion.div>
+
+          {/* Category Filter */}
+          <motion.div
+            className="flex flex-wrap gap-3 mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-widest border transition-all duration-300 ${activeCategory === cat ? "bg-teal text-navy border-teal" : "bg-transparent text-slate border-slate/20 hover:border-teal/50 hover:text-teal"}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+
+          {/* Featured Projects */}
+          {filteredFeatured.length > 0 && (
+            <motion.section
+              className="mb-24"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={containerVariants}
+            >
+              <motion.h2
+                variants={fadeInUp}
+                className="font-mono text-teal text-sm uppercase tracking-widest mb-8"
+              >
+                ✦ Featured Projects
+              </motion.h2>
+
+              <div className="space-y-12">
+                <AnimatePresence mode="wait">
+                  {filteredFeatured.map((project, i) => (
+                    <FeaturedProjectCard
+                      key={project.title}
+                      project={project}
+                      index={i}
+                    />
+                  ))}
+                </AnimatePresence>
+              </div>
+            </motion.section>
+          )}
+
+          {/* Other Projects */}
+          {filteredOther.length > 0 && (
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={containerVariants}
+            >
+              <motion.h2
+                variants={fadeInUp}
+                className="font-mono text-teal text-sm uppercase tracking-widest mb-8"
+              >
+                ✦ Other Noteworthy Projects
+              </motion.h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <AnimatePresence mode="wait">
+                  {filteredOther.map((project) => (
+                    <ProjectCard key={project.title} project={project} />
+                  ))}
+                </AnimatePresence>
+              </div>
+            </motion.section>
+          )}
+
+          {/* Empty State */}
+          {filteredFeatured.length === 0 && filteredOther.length === 0 && (
+            <motion.div
+              className="text-center py-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <Folder size={60} className="mx-auto text-slate/30 mb-6" />
+              <p className="text-slate font-mono">
+                No projects found in this category.
+              </p>
+            </motion.div>
+          )}
+
+          {/* Footer CTA */}
+          <motion.div
+            className="text-center mt-24 pt-16 border-t border-slate/10"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
+              Interested in working together?
+            </h3>
+            <p className="text-slate mb-8 max-w-md mx-auto">
+              I&apos;m always open to discussing new projects, creative ideas, or
+              opportunities to be part of your vision.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-teal/10 border-2 border-teal rounded-lg font-mono uppercase text-sm tracking-widest text-teal hover:bg-teal hover:text-navy transition-all duration-300"
+            >
+              Get In Touch
+              <ArrowUpRight size={18} />
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </main>
+  );
 };
 
 export default ProjectsPage;
