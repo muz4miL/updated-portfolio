@@ -20,31 +20,31 @@ const Socials = () => {
   const socialLinks = [
     {
       icon: <Github size={18} />,
-      href: "https://github.com/muzamilshiraz",
+      href: "https://github.com/muz4miL",
       label: "GitHub",
       color: "hover:text-white",
     },
     {
       icon: <Linkedin size={18} />,
-      href: "https://linkedin.com/in/muzamilshiraz",
+      href: "https://www.linkedin.com/in/muz4mil9/",
       label: "LinkedIn",
       color: "hover:text-blue-400",
     },
     {
       icon: <XIcon size={18} />,
-      href: "https://x.com/muzamilshiraz",
+      href: "https://x.com/muz4mil9",
       label: "X (Twitter)",
       color: "hover:text-white",
     },
     {
       icon: <Instagram size={18} />,
-      href: "https://instagram.com/muzamilshiraz",
+      href: "https://instagram.com/muz4mil9",
       label: "Instagram",
       color: "hover:text-pink-400",
     },
     {
       icon: <Mail size={18} />,
-      href: "mailto:hello@muzamilshiraz.com",
+      href: "mailto:shirazmuzamil2@gmail.com",
       label: "Email",
       color: "hover:text-teal",
     },

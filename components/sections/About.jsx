@@ -131,11 +131,11 @@ const About = () => {
               <span className="absolute bottom-1 left-0 w-full h-[2px] bg-teal/30 rounded-full"></span>
             </span>{" "}
             <br />
-            YES Alumnus.
+            CS Student.
           </motion.h2>
 
           <motion.p variants={itemVariants} className="text-slate text-base leading-relaxed max-w-md">
-            Specializing in pixel-perfect, accessible React interfaces. My <strong className="text-white hover:text-teal transition-colors cursor-default">YES Exchange</strong> experience taught me adaptability—vital for solving complex UI challenges. Passionate about crafting smooth, high-performance web experiences.
+            Pursuing a CS degree while building modern web experiences with React & Next.js. My <strong className="text-white hover:text-teal transition-colors cursor-default">YES Exchange</strong> year in the USA taught me adaptability and cross-cultural communication. I&apos;ve mentored <strong className="text-white hover:text-teal transition-colors cursor-default">1000+ students</strong> and completed <strong className="text-white hover:text-teal transition-colors cursor-default">20+ projects</strong>.
           </motion.p>
 
           {/* Minimal CTA */}
@@ -214,10 +214,10 @@ const About = () => {
           visible: { transition: { staggerChildren: 0.1 } }
         }}
       >
-        <StatCard end={250} suffix="+" label="Developers Trained" Icon={Users} />
-        <StatCard end={15} suffix="+" label="Production Deploys" Icon={Rocket} />
+        <StatCard end={1000} suffix="+" label="Students Mentored" Icon={Users} />
+        <StatCard end={20} suffix="+" label="Projects Completed" Icon={Rocket} />
         <StatCard end={1} suffix="" label="Global Exchange" Icon={Globe} />
-        <StatCard end={500} suffix="+" label="Coffees Consumed" Icon={Coffee} />
+        <StatCard end={5} suffix="" label="Languages Spoken" Icon={Coffee} />
       </motion.div>
     </section>
   );

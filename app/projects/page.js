@@ -36,7 +36,7 @@ const allProjects = [
     year: "2024",
     color: "#14B8A6",
   },
-  // === PERSONAL / LEARNING PROJECTS ===
+  // === PORTFOLIO VERSIONS ===
   {
     title: "Portfolio v2",
     description:
@@ -44,20 +44,34 @@ const allProjects = [
     tech: ["Next.js 16", "React 19", "Tailwind v4", "Framer Motion"],
     link: "/",
     github: "https://github.com/muz4miL/updated-portfolio",
-    image: null,
+    image: "/images/portfolio-v2-preview.png", // Add your screenshot
     category: "Personal",
     featured: true,
     year: "2024",
     color: "#64FFDA",
   },
   {
+    title: "Portfolio v1",
+    description:
+      "My first portfolio website. Built from scratch with vanilla technologies to understand the fundamentals before moving to frameworks. Clean, minimal design with smooth animations.",
+    tech: ["HTML", "CSS", "JavaScript", "GSAP"],
+    link: "https://muzamilshiraz.me",
+    github: null,
+    image: "/images/portfolio-v1-preview.png", // Add your screenshot
+    category: "Personal",
+    featured: true,
+    year: "2023",
+    color: "#8B5CF6",
+  },
+  // === REACT PROJECTS ===
+  {
     title: "Premium Landing Page",
     description:
-      "Designed a premium landing page for a music store using Figma and implemented it using React and Tailwind CSS.",
+      "Designed a premium landing page for a music store using Figma and implemented it using React and Tailwind CSS. Features modern UI patterns and responsive design.",
     tech: ["React", "Tailwind CSS", "Figma"],
-    link: "#",
+    link: "https://premium-landing-demo.vercel.app", // Update with your actual URL
     github: null,
-    image: null,
+    image: "/images/landing-page-preview.png", // Add your screenshot
     category: "Personal",
     featured: false,
     year: "2023",
@@ -66,11 +80,11 @@ const allProjects = [
   {
     title: "Pizza Ordering Website",
     description:
-      "Developed a pizza ordering website using React, Tailwind CSS, and Firebase for authentication and database management.",
+      "Developed a full-stack pizza ordering website using React, Tailwind CSS, and Firebase for authentication and real-time database management.",
     tech: ["React", "Tailwind CSS", "Firebase", "Auth"],
-    link: "#",
+    link: "https://pizza-ordering-demo.vercel.app", // Update with your actual URL
     github: null,
-    image: null,
+    image: "/images/pizza-app-preview.png", // Add your screenshot
     category: "Personal",
     featured: false,
     year: "2023",
@@ -79,11 +93,11 @@ const allProjects = [
   {
     title: "Todo App",
     description:
-      "A simple yet responsive todo app built with React and Tailwind CSS. Features task management with clean UI.",
-    tech: ["React", "Tailwind CSS"],
-    link: "#",
+      "A responsive todo application built with React and Tailwind CSS. Features task creation, completion tracking, and local storage persistence.",
+    tech: ["React", "Tailwind CSS", "LocalStorage"],
+    link: "https://todo-app-demo.vercel.app", // Update with your actual URL
     github: null,
-    image: null,
+    image: "/images/todo-app-preview.png", // Add your screenshot
     category: "Personal",
     featured: false,
     year: "2023",
@@ -92,28 +106,15 @@ const allProjects = [
   {
     title: "Travel List App",
     description:
-      "A travel list app built with React and Tailwind CSS. Plan and organize your trips with an intuitive interface.",
+      "A travel packing list app built with React and Tailwind CSS. Plan and organize your trips with an intuitive drag-and-drop interface.",
     tech: ["React", "Tailwind CSS"],
-    link: "#",
+    link: "https://travel-list-demo.vercel.app", // Update with your actual URL
     github: null,
-    image: null,
+    image: "/images/travel-list-preview.png", // Add your screenshot
     category: "Personal",
     featured: false,
     year: "2023",
     color: "#F59E0B",
-  },
-  {
-    title: "Portfolio v1",
-    description:
-      "My first portfolio website. Built from scratch with vanilla technologies to understand the fundamentals before moving to frameworks.",
-    tech: ["HTML", "CSS", "JavaScript", "GSAP"],
-    link: "https://muzamilshiraz.me",
-    github: null,
-    image: null,
-    category: "Personal",
-    featured: false,
-    year: "2023",
-    color: "#8B5CF6",
   },
 ];
 
@@ -306,7 +307,7 @@ const FeaturedProjectCard = ({ project, index }) => {
 };
 
 // ============================================
-// REGULAR PROJECT CARD (Grid style)
+// REGULAR PROJECT CARD (Grid style - Premium)
 // ============================================
 const ProjectCard = ({ project }) => {
   return (
@@ -314,59 +315,93 @@ const ProjectCard = ({ project }) => {
       variants={itemVariants}
       className="group relative h-full"
     >
-      <div className="h-full flex flex-col p-6 rounded-xl glass-card border border-white/5 hover:border-teal/20 hover-lift transition-all duration-300">
-        {/* Top Row: Folder icon + Links */}
-        <div className="flex items-start justify-between mb-6">
-          <div
-            className="w-12 h-12 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: `${project.color}15` }}
-          >
-            <Folder size={24} style={{ color: project.color }} />
-          </div>
-          <div className="flex items-center gap-3">
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate hover:text-teal transition-colors"
+      <div className="h-full flex flex-col rounded-xl glass-card border border-white/5 hover:border-teal/20 hover-lift transition-all duration-300 overflow-hidden">
+        {/* Image Section */}
+        <div className="relative h-48 bg-gradient-to-br from-lightNavy to-navy overflow-hidden">
+          {project.image ? (
+            <>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-navy/30 group-hover:bg-navy/10 transition-colors duration-300" />
+            </>
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div 
+                className="w-16 h-16 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: `${project.color}20` }}
               >
-                <Github size={20} />
-              </a>
+                <Folder size={32} style={{ color: project.color }} className="group-hover:scale-110 transition-transform" />
+              </div>
+            </div>
+          )}
+          
+          {/* Year badge */}
+          <div className="absolute top-3 right-3 px-2 py-1 rounded-md bg-navy/80 backdrop-blur-sm text-xs font-mono text-slate">
+            {project.year}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col flex-grow p-5">
+          {/* Title */}
+          <h3 className="font-heading text-lg font-bold text-white group-hover:text-teal transition-colors mb-2">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-slate text-sm leading-relaxed flex-grow mb-4 line-clamp-3">
+            {project.description}
+          </p>
+
+          {/* Tech Stack */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.tech.slice(0, 3).map((t, i) => (
+              <span 
+                key={i} 
+                className="text-[10px] font-mono px-2 py-1 rounded-md"
+                style={{ 
+                  backgroundColor: `${project.color}15`,
+                  color: project.color 
+                }}
+              >
+                {t}
+              </span>
+            ))}
+            {project.tech.length > 3 && (
+              <span className="text-[10px] font-mono px-2 py-1 rounded-md bg-slate/10 text-slate">
+                +{project.tech.length - 3}
+              </span>
             )}
+          </div>
+
+          {/* Action Links */}
+          <div className="flex items-center gap-3 pt-3 border-t border-white/5">
             {project.link && project.link !== "#" && (
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate hover:text-teal transition-colors"
+                className="group/btn flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-teal/10 border border-teal/30 text-teal text-xs font-mono uppercase tracking-wider hover:bg-teal hover:text-navy transition-all duration-300"
               >
-                <ExternalLink size={20} />
+                <span>View Live</span>
+                <ExternalLink size={12} className="group-hover/btn:rotate-12 transition-transform" />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg border border-white/10 text-slate hover:text-teal hover:border-teal/30 transition-all"
+              >
+                <Github size={16} />
               </a>
             )}
           </div>
-        </div>
-
-        {/* Title */}
-        <h3 className="font-heading text-xl font-bold text-white group-hover:text-teal transition-colors mb-3">
-          {project.title}
-        </h3>
-
-        {/* Description */}
-        <p className="text-slate text-sm leading-relaxed flex-grow mb-6">
-          {project.description}
-        </p>
-
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {project.tech.slice(0, 4).map((t, i) => (
-            <span key={i} className="text-xs font-mono text-slate/70">
-              {t}
-              {i < Math.min(project.tech.length, 4) - 1 && (
-                <span className="ml-2 text-teal/50">•</span>
-              )}
-            </span>
-          ))}
         </div>
       </div>
     </motion.div>

@@ -12,9 +12,9 @@ const Hero = () => {
   // Rotating roles for typewriter effect
   const roles = [
     "FRONTEND DEVELOPER",
+    "CS STUDENT",
     "TECH EDUCATOR",
-    "MODEL",
-    "UI/UX ENTHUSIAST",
+    "YES ALUMNUS",
   ];
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);

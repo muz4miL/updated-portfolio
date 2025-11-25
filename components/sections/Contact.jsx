@@ -43,14 +43,14 @@ const Contact = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("bcs.230302211@imsciences.edu.pk");
+    navigator.clipboard.writeText("shirazmuzamil2@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub", brandColor: "#ffffff" },
-    { icon: Linkedin, href: "#", label: "LinkedIn", brandColor: "#0A66C2" },
+    { icon: Github, href: "https://github.com/muz4miL", label: "GitHub", brandColor: "#ffffff" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/muz4mil9/", label: "LinkedIn", brandColor: "#0A66C2" },
     { icon: XIcon, href: "#", label: "X (Twitter)", brandColor: "#ffffff" },
   ];
 
@@ -85,7 +85,7 @@ const Contact = () => {
                 </div>
                 <div className="flex-grow overflow-hidden">
                   <p className="font-mono text-xs text-teal uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-white font-medium text-sm md:text-lg truncate">bcs.230302211@imsciences.edu.pk</p>
+                  <p className="text-white font-medium text-sm md:text-lg truncate">shirazmuzamil2@gmail.com</p>
                 </div>
                 <div className="text-slate group-hover:text-teal transition-colors">
                   {copied ? <Check size={20} /> : <Copy size={20} />}
