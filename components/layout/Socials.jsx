@@ -7,7 +7,7 @@ import XIcon from "../ui/XIcon";
 
 const Socials = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const { isContactVisible } = useScrollContext();
+  const { isContactVisible, isModelingVisible } = useScrollContext();
   const pathname = usePathname();
   const isContactPage = pathname === "/contact";
 
@@ -50,23 +50,30 @@ const Socials = () => {
     },
   ];
 
+  // Determine if social icons should be visible
+  const shouldHide = isContactVisible || isContactPage || isModelingVisible;
+
   return (
     <>
-      {/* Desktop Sidebar - Hides when Contact visible OR on Contact page */}
+      {/* Desktop Sidebar - Hides when Contact visible OR on Contact page OR ModelingTeaser visible */}
       <div
         className={`
           fixed bottom-0 left-6 xl:left-12 hidden md:flex flex-col items-center gap-6 z-50 
-          transition-all duration-500
-          ${!isMounted ? 'opacity-0 -translate-x-8' : ''}
-          ${isMounted && !isContactVisible && !isContactPage ? 'opacity-100 translate-x-0' : ''}
-          ${isMounted && (isContactVisible || isContactPage) ? 'opacity-0 -translate-x-12' : ''}
+          transition-all duration-700 ease-out
+          ${!isMounted || shouldHide ? 'opacity-0 -translate-x-12' : 'opacity-100 translate-x-0'}
         `}
-        aria-hidden={isContactVisible}
+        aria-hidden={shouldHide}
       >
         {/* Social Icons List */}
         <ul className="flex flex-col gap-5">
           {socialLinks.map((item, index) => (
-            <li key={index} className="group relative">
+            <li
+              key={index}
+              className="group relative"
+              style={{
+                animation: isMounted ? `slideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.2 + index * 0.1}s both` : 'none'
+              }}
+            >
               {/* Hover Tooltip */}
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 translate-x-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                 <div className="bg-navy border border-teal/30 rounded-lg px-3 py-1.5 backdrop-blur-sm">
@@ -108,7 +115,12 @@ const Socials = () => {
         </ul>
 
         {/* The Vertical Line with Gradient */}
-        <div className="w-[1px] h-20 bg-gradient-to-b from-teal/50 via-slate/30 to-transparent"></div>
+        <div
+          className="w-[1px] h-20 bg-gradient-to-b from-teal/50 via-slate/30 to-transparent"
+          style={{
+            animation: isMounted ? 'fadeInScale 0.8s ease-out 0.9s both' : 'none'
+          }}
+        ></div>
       </div>
 
       {/* Mobile Bottom Bar - Shows ONLY when Contact is visible */}
