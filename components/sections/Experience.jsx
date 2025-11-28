@@ -73,22 +73,43 @@ const JourneyCard = ({ item }) => {
         </div>
 
         {/* The Glass Badge Logo */}
-        <div className={`
-            relative w-14 h-14 md:w-16 md:h-16 
-            rounded-xl bg-white/5 border border-white/10 
+        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden">
+          {/* Main glass container */}
+          <div className="
+            absolute inset-0
+            bg-gradient-to-br from-white/20 to-white/10
             flex items-center justify-center 
-            backdrop-blur-sm
-            group-hover:scale-110 transition-transform duration-500
-            ${item.color}
-        `}>
-          <Image
-            src={item.logo}
-            alt={item.company}
-            width={64}
-            height={64}
-            className="object-contain w-8 h-8 md:w-10 md:h-10 opacity-80 group-hover:opacity-100 transition-opacity"
-            unoptimized
-          />
+            shadow-[0_0_25px_rgba(255,255,255,0.1),inset_0_1px_1px_rgba(255,255,255,0.3)]
+            group-hover:shadow-[0_0_40px_rgba(100,255,218,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)]
+            group-hover:from-white/25 group-hover:to-white/15
+            transition-all duration-500
+          ">
+            {/* Backdrop blur layer behind logo */}
+            <div className="absolute inset-0 backdrop-blur-md" />
+            
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+            
+            {/* Logo container - this scales */}
+            <div className="relative z-10 group-hover:scale-110 transition-transform duration-500">
+              <Image
+                src={item.logo}
+                alt={item.company}
+                width={80}
+                height={80}
+                className="object-contain w-11 h-11 md:w-14 md:h-14 brightness-[1.3] contrast-[1.3] saturate-[1.2] drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)] group-hover:brightness-[1.4] group-hover:contrast-[1.4] group-hover:drop-shadow-[0_4px_12px_rgba(100,255,218,0.5)] transition-all duration-500"
+                unoptimized
+              />
+            </div>
+          </div>
+          
+          {/* Border layer - on top, no color change on hover */}
+          <div className="
+            absolute inset-0 rounded-lg border border-white/30 
+            group-hover:border-white/40
+            transition-all duration-500
+            pointer-events-none
+          " />
         </div>
       </div>
 
