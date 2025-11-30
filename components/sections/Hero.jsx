@@ -1,13 +1,18 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { SiReact, SiNextdotjs, SiTailwindcss, SiGithub } from "react-icons/si";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 
 const Hero = () => {
-  // Intro text
-  const introText = "HELLO WORLD, I'M";
-  const words = introText.split(" ");
+  // Refs for GSAP animations
+  const introRef = useRef(null);
+  const nameRef = useRef(null);
+  const typewriterRef = useRef(null);
+  const ctaRef = useRef(null);
 
   // Rotating roles for typewriter effect
   const roles = [
@@ -22,17 +27,133 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
-  // Timing calculations
-  const letterDelay = 0.05; // 50ms per letter for intro
-  const totalLetters = introText.replace(/ /g, "").length;
-  const introDuration = totalLetters * letterDelay;
-  const nameDelay = introDuration + 0.3;
-  const typewriterStartDelay = (nameDelay + 1.5) * 1000; // ms
+  // GSAP Power Mode Animations
+  useGSAP(() => {
+    // Intro text: Magnetic letter reveal with SplitType
+    if (introRef.current) {
+      const split = new SplitType(introRef.current, {
+        types: 'chars',
+        tagName: 'span'
+      });
 
-  // Typewriter effect
+      gsap.fromTo(
+        split.chars,
+        {
+          opacity: 0,
+          y: 50,
+          rotateX: -90,
+          color: "#0a0f1a",
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          color: "#64ffda",
+          duration: 0.8,
+          stagger: {
+            amount: 0.6,
+            from: "start",
+            ease: "power3.out"
+          },
+          ease: "back.out(1.7)",
+        }
+      );
+    }
+
+    // Name: Premium SplitType elastic reveal with magnetic hover
+    if (nameRef.current) {
+      const nameSplit = new SplitType(nameRef.current, {
+        types: 'chars',
+        tagName: 'span'
+      });
+
+      // Style each character for proper display
+      nameSplit.chars.forEach((char) => {
+        char.style.display = 'inline-block';
+        char.style.transformOrigin = 'bottom center';
+      });
+
+      // Premium elastic reveal animation
+      gsap.fromTo(
+        nameSplit.chars,
+        {
+          y: 120,
+          opacity: 0,
+          rotateX: -90,
+          scale: 0.5,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          scale: 1,
+          duration: 1.6,
+          delay: 0.8,
+          stagger: {
+            each: 0.04,
+            from: "start",
+          },
+          ease: "elastic.out(1, 0.6)",
+          clearProps: "all" // Clear inline styles after animation
+        }
+      );
+
+      // Magnetic hover effect on each character
+      nameSplit.chars.forEach((char) => {
+        char.style.cursor = 'default';
+
+        char.addEventListener('mouseenter', () => {
+          gsap.to(char, {
+            y: -15,
+            scale: 1.3,
+            color: "#5eead4",
+            duration: 0.4,
+            ease: "back.out(2)"
+          });
+        });
+
+        char.addEventListener('mouseleave', () => {
+          gsap.to(char, {
+            y: 0,
+            scale: 1,
+            color: "inherit",
+            duration: 0.5,
+            ease: "elastic.out(1, 0.4)"
+          });
+        });
+      });
+    }
+
+    // Typewriter container fade-in
+    if (typewriterRef.current) {
+      gsap.fromTo(
+        typewriterRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 2.5, ease: "power3.out" }
+      );
+    }
+
+    // CTA button with bounce
+    if (ctaRef.current) {
+      gsap.fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 30, scale: 0.8 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          delay: 3,
+          ease: "back.out(2)"
+        }
+      );
+    }
+  }, []);
+
+  // Typewriter effect - starts after GSAP animations
   useEffect(() => {
     if (!hasStarted) {
-      const start = setTimeout(() => setHasStarted(true), typewriterStartDelay);
+      const start = setTimeout(() => setHasStarted(true), 2500);
       return () => clearTimeout(start);
     }
     const timeout = setTimeout(() => {
@@ -50,33 +171,12 @@ const Hero = () => {
       }
     }, isDeleting ? 20 : 40);
     return () => clearTimeout(timeout);
-  }, [hasStarted, displayedText, isDeleting, currentRoleIndex, roles, typewriterStartDelay]);
-
-  // Animation variants
-  const letterVariants = {
-    hidden: { opacity: 0, color: "#0a0f1a" },
-    visible: { opacity: 1, color: "#64ffda", transition: { duration: 0.3, ease: "easeOut" } },
-  };
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: letterDelay } },
-  };
-  const nameVariants = {
-    hidden: { opacity: 0, scale: 0.5, y: 20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { delay: nameDelay, duration: 1, ease: [0.34, 1.56, 0.64, 1] },
-    },
-  };
+  }, [hasStarted, displayedText, isDeleting, currentRoleIndex]);
 
   return (
-    <motion.section
+    <section
       id="home"
       className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-4"
-      initial="hidden"
-      animate="visible"
     >
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -91,44 +191,27 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Intro label with text shadow */}
-      <motion.div
+      {/* Intro label with GSAP magnetic reveal */}
+      <div
+        ref={introRef}
         className="font-mono tracking-widest text-xs md:text-sm mb-4"
-        variants={containerVariants}
         style={{ textShadow: "0 0 8px rgba(100,255,218,0.6)" }}
       >
-        {words.map((word, wi) => (
-          <span key={wi} className="inline-block">
-            {word.split("").map((letter, li) => (
-              <motion.span
-                key={`${wi}-${li}`}
-                variants={letterVariants}
-                className="inline-block"
-              >
-                {letter}
-              </motion.span>
-            ))}
-            {wi < words.length - 1 && (
-              <motion.span variants={letterVariants} className="inline-block">&nbsp;</motion.span>
-            )}
-          </span>
-        ))}
-      </motion.div>
+        HELLO WORLD, I&apos;M
+      </div>
 
-      {/* Name */}
-      <motion.h1
-        className="text-[12vw] md:text-9xl font-black text-gradient tracking-tighter leading-[0.85] mb-6 select-none hover:text-glow-strong transition-all duration-300"
-        variants={nameVariants}
+      {/* Name with premium elastic reveal + magnetic hover */}
+      <h1
+        ref={nameRef}
+        className="text-[12vw] md:text-9xl font-black text-gradient tracking-tighter leading-[0.85] mb-6 select-none transition-all duration-300"
       >
-        MUZAMIL <br className="md:hidden" /> SHIRAZ
-      </motion.h1>
+        MUZAMIL SHIRAZ
+      </h1>
 
       {/* Typewriter subtitle */}
-      <motion.div
+      <div
+        ref={typewriterRef}
         className="text-sm md:text-xl font-bold text-slate-300 uppercase tracking-[0.2em] max-w-2xl mb-8 h-8 flex items-center justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: nameDelay + 1.5, duration: 0.6 }}
       >
         <span className="text-teal-400 px-2">•</span>
         <span>{displayedText}</span>
@@ -137,20 +220,30 @@ const Hero = () => {
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 0.8, repeat: Infinity }}
         />
-      </motion.div>
+      </div>
 
       {/* CTA button */}
-      <motion.a
+      <a
+        ref={ctaRef}
         href="#contact"
-        className="inline-flex items-center gap-3 px-8 py-4 bg-teal/10 border-2 border-teal rounded-lg font-mono uppercase text-sm tracking-widest text-teal hover:bg-teal hover:text-navy transition-all duration-300 mb-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: nameDelay + 2, duration: 0.6 }}
-        whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(100,255,218,0.3), 0 0 60px rgba(100,255,218,0.15)" }}
-        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center gap-3 px-8 py-4 bg-teal/10 border-2 border-teal rounded-lg font-mono uppercase text-sm tracking-widest text-teal hover:bg-teal hover:text-navy transition-all duration-300 mb-16 cursor-pointer"
+        onMouseEnter={(e) => {
+          gsap.to(e.currentTarget, {
+            scale: 1.05,
+            boxShadow: "0 0 30px rgba(100,255,218,0.3), 0 0 60px rgba(100,255,218,0.15)",
+            duration: 0.3
+          });
+        }}
+        onMouseLeave={(e) => {
+          gsap.to(e.currentTarget, {
+            scale: 1,
+            boxShadow: "none",
+            duration: 0.3
+          });
+        }}
       >
         Let&apos;s Talk<span className="text-xl">→</span>
-      </motion.a>
+      </a>
 
       {/* Core Stack with larger icons */}
       <div className="absolute bottom-24 flex flex-col items-center gap-6">
@@ -165,7 +258,7 @@ const Hero = () => {
               className="relative group"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 2 + i * 0.1, duration: 0.3 }}
+              transition={{ delay: 3.2 + i * 0.1, duration: 0.3 }}
               whileHover={{ scale: 1.2, zIndex: 10 }}
             >
               {/* Tooltip below */}
@@ -194,7 +287,7 @@ const Hero = () => {
       >
         <ArrowDown size={24} />
       </motion.div>
-    </motion.section>
+    </section>
   );
 };
 
