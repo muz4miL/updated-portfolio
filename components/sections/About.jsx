@@ -1,69 +1,36 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { ArrowRight, Users, Rocket, Globe, Coffee } from "lucide-react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
+import NumberTicker from "@/components/magicui/number-ticker";
 
-// --- SUB-COMPONENT: Premium Stat Card ---
-const StatCard = ({ end, suffix, label, Icon, delay }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const hasAnimate = useRef(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimate.current) {
-          hasAnimate.current = true;
-          let start = 0;
-          const duration = 2000;
-          const startTime = performance.now();
-
-          const animate = (currentTime) => {
-            const elapsedTime = currentTime - startTime;
-            const progress = Math.min(elapsedTime / duration, 1);
-            const easeOut = 1 - Math.pow(1 - progress, 4);
-
-            setCount(Math.floor(easeOut * end));
-
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            } else {
-              setCount(end);
-            }
-          };
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    return () => observer.disconnect();
-  }, [end]);
-
+// --- SUB-COMPONENT: Premium Stat Card with Magic UI Number Ticker ---
+const StatCard = ({ end, suffix, label, Icon }) => {
   return (
     <motion.div
-      ref={ref}
       variants={{
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: 20, scale: 0.9 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.5, ease: "backOut" }
+          scale: 1,
+          transition: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }
         }
       }}
-      className="glass-card p-4 rounded-xl relative group hover-lift hover-glow transition-all duration-300 border border-teal/10"
+      whileHover={{
+        scale: 1.05,
+        transition: { duration: 0.3, ease: "backOut" }
+      }}
+      className="glass-card p-4 rounded-xl relative group hover-lift hover-glow transition-all duration-300 border border-teal/10 cursor-default"
     >
-      <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-navy rounded-full border border-teal/20 flex items-center justify-center group-hover:border-teal/50 transition-colors z-10">
-        <Icon size={18} className="text-teal group-hover:scale-110 transition-transform duration-300" />
+      <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-navy rounded-full border border-teal/20 flex items-center justify-center group-hover:border-teal/50 group-hover:scale-110 transition-all duration-300 z-10">
+        <Icon size={18} className="text-teal transition-transform duration-300" />
       </div>
 
       <div className="mt-3 text-center relative z-0">
-        <h3 className="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-teal transition-colors duration-300">
-          {count}
+        <h3 className="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-teal transition-colors duration-300 flex justify-center items-center">
+          <NumberTicker value={end} className="text-white group-hover:text-teal transition-colors duration-300" />
           <span className="text-teal text-lg ml-0.5">{suffix}</span>
         </h3>
         <p className="text-slate font-mono text-[10px] mt-1 uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">
