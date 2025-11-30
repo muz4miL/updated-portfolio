@@ -21,13 +21,9 @@ export default function Home() {
       const projectsTop = projectsRect.top;
       const windowHeight = window.innerHeight;
 
-      // Hide icons if:
-      // 1. Projects section is approaching (within 300px from bottom of viewport)
-      // 2. Projects section has scrolled past (top is above viewport)
-      const isApproaching = projectsTop < windowHeight + 300;
-      const hasScrolledPast = projectsTop < 0;
-
-      const shouldHide = isApproaching || hasScrolledPast;
+      // Hide icons when Projects section reaches the top of viewport
+      // This ensures icons stay visible through Experience and only hide at Featured Work
+      const shouldHide = projectsTop <= 100; // Hide when section header is at/near top
 
       setIsModelingVisible(shouldHide);
     };
@@ -63,9 +59,11 @@ export default function Home() {
       {/* --- MODELING TEASER (Full Width) --- */}
       <ModelingTeaser />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        <Contact />
+      {/* --- CONTACT SECTION (Full Width) --- */}
+      <Contact />
 
+      {/* Footer Container */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         {/* Simple Footer Text */}
         <footer className="py-8 text-center text-slate font-mono text-xs">
           <p>Designed & Built by Muzamil Shiraz</p>

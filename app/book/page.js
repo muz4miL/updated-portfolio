@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTe
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Mail, Instagram, Download, ArrowUpRight } from "lucide-react";
+import { SOCIAL_LINKS, getEmailLink, SOCIAL_BRAND_COLORS } from "../../config/socialLinks";
 
 const ModelingPage = () => {
     // Mobile Detection for Parallax Disable
@@ -221,20 +222,20 @@ const ModelingPage = () => {
                 <div className="flex-1 flex flex-col justify-center items-center relative z-10 my-12 w-full">
                     <p className="font-mono text-slate text-sm tracking-[0.3em] uppercase mb-8">Initiate Collaboration</p>
                     <a
-                        href="mailto:hello@muzamilshiraz.com"
+                        href={getEmailLink()}
                         className="group relative w-full text-center block"
                     >
                         {/* Mobile Layout (< md) */}
                         <h2 className="md:hidden font-heading font-bold text-white group-hover:text-teal transition-colors duration-500 leading-none">
-                            <span className="block text-[15vw]">HELLO@</span>
-                            <span className="block text-[15vw]">MUZAMIL</span>
-                            <span className="block text-[15vw]">SHIRAZ.COM</span>
+                            <span className="block text-[15vw]">{SOCIAL_LINKS.email.split('@')[0].toUpperCase()}@</span>
+                            <span className="block text-[15vw]">{SOCIAL_LINKS.email.split('@')[1].split('.')[0].toUpperCase()}.</span>
+                            <span className="block text-[15vw]">{SOCIAL_LINKS.email.split('@')[1].split('.')[1].toUpperCase()}</span>
                         </h2>
 
                         {/* Desktop Layout (>= md) with inline arrow */}
                         <div className="hidden md:flex items-center justify-center gap-4">
                             <h2 className="font-heading font-bold text-white group-hover:text-teal transition-colors duration-500 leading-none text-[5.5vw] tracking-tighter">
-                                HELLO@MUZAMILSHIRAZ.COM
+                                {SOCIAL_LINKS.email.toUpperCase()}
                             </h2>
                             {/* Inline Arrow */}
                             <ArrowUpRight className="text-teal opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-0 group-hover:translate-x-2 w-16 h-16 md:w-20 md:h-20 pointer-events-none" />
@@ -252,22 +253,22 @@ const ModelingPage = () => {
 
                     {/* Social Icons */}
                     <div className="flex gap-6">
-                        <SocialIcon href="https://instagram.com/muzamilshiraz" label="Instagram" brandColor="#E4405F">
+                        <SocialIcon href={SOCIAL_LINKS.instagram} label="Instagram" brandColor={SOCIAL_BRAND_COLORS.instagram}>
                             <Instagram size={24} />
                         </SocialIcon>
-                        <SocialIcon href="https://x.com/muzamilshiraz" label="X (Twitter)" brandColor="#FFFFFF">
+                        <SocialIcon href={SOCIAL_LINKS.twitter} label="X (Twitter)" brandColor={SOCIAL_BRAND_COLORS.twitter}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
                         </SocialIcon>
-                        <SocialIcon href="https://linkedin.com/in/muzamilshiraz" label="LinkedIn" brandColor="#0A66C2">
+                        <SocialIcon href={SOCIAL_LINKS.linkedin} label="LinkedIn" brandColor={SOCIAL_BRAND_COLORS.linkedin}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                                 <rect x="2" y="9" width="4" height="12"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
                         </SocialIcon>
-                        <SocialIcon href="https://github.com/muzamilshiraz" label="GitHub" brandColor="#FFFFFF">
+                        <SocialIcon href={SOCIAL_LINKS.github} label="GitHub" brandColor={SOCIAL_BRAND_COLORS.github}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>

@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import SectionHeader from "../ui/SectionHeader";
-import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Calendar, Copy, Check, Github, Linkedin, Send } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import Magnetic from "../ui/Magnetic";
+import { ArrowRight, Send } from "lucide-react";
+import { motion } from "framer-motion";
 import { useScrollContext } from "../../context/ScrollContext";
 import PremiumSocialIcon from "../ui/PremiumSocialIcon";
 import XIcon from "../ui/XIcon";
+import { Github, Linkedin } from "lucide-react";
+import { SOCIAL_LINKS, SOCIAL_BRAND_COLORS } from "../../config/socialLinks";
 
 const Contact = () => {
   const { setIsContactVisible } = useScrollContext();
@@ -31,7 +31,6 @@ const Contact = () => {
   }, [setIsContactVisible]);
 
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [copied, setCopied] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,83 +41,35 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("shirazmuzamil2@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const socialLinks = [
-    { icon: Github, href: "https://github.com/muz4miL", label: "GitHub", brandColor: "#ffffff" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/muz4mil9/", label: "LinkedIn", brandColor: "#0A66C2" },
-    { icon: XIcon, href: "#", label: "X (Twitter)", brandColor: "#ffffff" },
+    { icon: Github, href: SOCIAL_LINKS.github, label: "GitHub", brandColor: SOCIAL_BRAND_COLORS.github },
+    { icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: "LinkedIn", brandColor: SOCIAL_BRAND_COLORS.linkedin },
+    { icon: XIcon, href: SOCIAL_LINKS.twitter, label: "X (Twitter)", brandColor: SOCIAL_BRAND_COLORS.twitter },
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="pt-8 pb-24 max-w-5xl mx-auto px-6 relative overflow-hidden">
-      {/* Subtle Top Gradient Overlay */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-lightNavy/30 to-transparent pointer-events-none"></div>
-
+    <section id="contact" ref={sectionRef} className="py-24 max-w-6xl mx-auto px-6 relative">
       <SectionHeader number="04" title="Get In Touch" />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-12 relative z-10">
-        {/* Left Column */}
-        <div className="space-y-10">
-          <div>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              Let&apos;s Build Something <span className="text-gradient">Amazing</span>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mt-16 items-start">
+        {/* Left Column - Content */}
+        <div className="space-y-8">
+          {/* Headline & Description */}
+          <div className="space-y-6">
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+              Let's Build Something{" "}
+              <span className="text-gradient block mt-2">Amazing</span>
             </h2>
-            <p className="text-slate text-lg leading-relaxed">
-              I&apos;m currently open for new opportunities. Whether you have a question,
-              a project idea, or just want to say hi, I&apos;ll try my best to get back to you!
+            <p className="text-slate text-lg leading-relaxed max-w-lg">
+              I'm currently open for new opportunities. Whether you have a question,
+              a project idea, or just want to say hi, I'll try my best to get back to you!
             </p>
           </div>
-          {/* Contact Details */}
-          <div className="space-y-6">
-            {/* Email */}
-            <div className="group relative">
-              <div
-                onClick={handleCopy}
-                className="flex items-center gap-4 p-4 rounded-xl glass-card hover:bg-teal/5 cursor-pointer transition-all duration-300 border border-transparent hover:border-teal/20"
-              >
-                <div className="p-3 rounded-lg bg-teal/10 text-teal">
-                  <Mail size={24} />
-                </div>
-                <div className="flex-grow overflow-hidden">
-                  <p className="font-mono text-xs text-teal uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-white font-medium text-sm md:text-lg truncate">shirazmuzamil2@gmail.com</p>
-                </div>
-                <div className="text-slate group-hover:text-teal transition-colors">
-                  {copied ? <Check size={20} /> : <Copy size={20} />}
-                </div>
-              </div>
-              <AnimatePresence>
-                {copied && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute -top-10 right-4 bg-teal text-navy text-xs font-bold px-3 py-1 rounded shadow-lg"
-                  >
-                    Copied!
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            {/* Location */}
-            <div className="flex items-center gap-4 p-4 rounded-xl glass-card border border-transparent">
-              <div className="p-3 rounded-lg bg-teal/10 text-teal">
-                <MapPin size={24} />
-              </div>
-              <div>
-                <p className="font-mono text-xs text-teal uppercase tracking-widest mb-1">Location</p>
-                <p className="text-white font-medium text-lg">Peshawar, Pakistan</p>
-              </div>
-            </div>
-          </div>
-          {/* Social Links - Premium Edition (Desktop Only) */}
-          <div className="pt-8 border-t border-white/5 hidden md:block">
-            <p className="font-mono text-sm text-slate mb-6 text-center font-bold" style={{ textShadow: '0 2px 10px rgba(100, 255, 218, 0.3)' }}>Connect with me</p>
-            <div className="flex gap-4 justify-center">
+
+          {/* Social Icons - Desktop Only */}
+          <div className="pt-6 hidden md:block">
+            <p className="font-mono text-sm text-slate/80 mb-6">Connect with me</p>
+            <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <PremiumSocialIcon
                   key={index}
@@ -132,75 +83,114 @@ const Contact = () => {
             </div>
           </div>
         </div>
+
         {/* Right Column - Form */}
-        <div className="relative mx-4 md:mx-0">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-teal/20 rounded-full blur-3xl -z-10 pointer-events-none" />
-          <div
-            className="p-8 rounded-2xl border border-white/20 relative overflow-hidden backdrop-blur-[30px] bg-navy/60 shadow-xl"
-            style={{ background: 'linear-gradient(to bottom right, rgba(255,255,255,0.05), rgba(0,255,200,0.05))' }}
-          >
-            <h3 className="font-heading text-2xl text-white mb-6 flex items-center gap-3">
-              Send a Message
-              <Send size={20} className="text-teal" />
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="relative">
+          {/* Decorative Glow */}
+          <div className="absolute -top-10 -right-10 w-48 h-48 bg-teal/10 rounded-full blur-[100px] pointer-events-none -z-10" />
+
+          <div className="p-8 md:p-9 rounded-2xl glass-card shadow-2xl">
+            {/* Form Header */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 rounded-lg bg-teal/10">
+                <Send size={20} className="text-teal" />
+              </div>
+              <h3 className="font-heading text-2xl text-white font-semibold">Send a Message</h3>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Name Input */}
               <div className="space-y-2">
-                <label htmlFor="name" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">Name</label>
+                <label htmlFor="name" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">
+                  Name
+                </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none"
                   placeholder="John Doe"
                   required
                 />
               </div>
+
+              {/* Email Input */}
               <div className="space-y-2">
-                <label htmlFor="email" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">Email</label>
+                <label htmlFor="email" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">
+                  Email
+                </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none"
                   placeholder="john@example.com"
                   required
                 />
               </div>
+
+              {/* Message Textarea */}
               <div className="space-y-2">
-                <label htmlFor="message" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">Message</label>
+                <label htmlFor="message" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">
+                  Message
+                </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows="4"
+                  rows="5"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none resize-none"
                   placeholder="Hello! I'd like to discuss..."
                   required
                 />
               </div>
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  className="group w-full bg-gradient-to-r from-teal-400 to-teal-500 text-navy font-bold font-mono py-4 rounded-xl hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] transition-all duration-300 flex items-center justify-center gap-2 active:scale-[0.98]"
-                >
-                  <span>Send Message</span>
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
-                </button>
-              </div>
+
+              {/* Submit Button */}
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group w-full bg-gradient-to-r from-teal-400 to-teal-500 text-navy font-bold font-mono py-4 rounded-xl hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <span>Send Message</span>
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </motion.button>
             </form>
           </div>
         </div>
       </div>
-      {/* Animated Background Blob */}
+
+      {/* Mobile Social Icons - Bottom Center */}
+      <div className="md:hidden mt-12 pt-8 border-t border-white/5">
+        <p className="font-mono text-sm text-slate/60 mb-6 text-center">Connect with me</p>
+        <div className="flex gap-6 justify-center">
+          {socialLinks.map((social, index) => (
+            <a
+              key={index}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="p-3 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300 active:scale-95"
+              style={{ color: social.brandColor }}
+            >
+              <social.icon size={24} strokeWidth={1.5} />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Ambient Background Blob */}
       <motion.div
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0], opacity: [0.3, 0.5, 0.3] }}
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0], opacity: [0.15, 0.25, 0.15] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 -right-20 w-96 h-96 bg-teal/10 rounded-full blur-3xl -z-10"
+        className="absolute top-1/2 -left-32 w-96 h-96 bg-teal/10 rounded-full blur-[120px] -z-10 pointer-events-none"
       />
     </section>
   );

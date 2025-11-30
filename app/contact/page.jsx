@@ -13,6 +13,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import PremiumSocialIcon from "../../components/ui/PremiumSocialIcon";
 import XIcon from "../../components/ui/XIcon";
+import { SOCIAL_LINKS, SOCIAL_BRAND_COLORS } from "../../config/socialLinks";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -46,15 +47,15 @@ const ContactPage = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("shirazmuzamil2@gmail.com");
+    navigator.clipboard.writeText(SOCIAL_LINKS.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub", brandColor: "#ffffff" },
-    { icon: Linkedin, href: "#", label: "LinkedIn", brandColor: "#0A66C2" },
-    { icon: XIcon, href: "#", label: "X", brandColor: "#ffffff" },
+    { icon: Github, href: SOCIAL_LINKS.github, label: "GitHub", brandColor: SOCIAL_BRAND_COLORS.github },
+    { icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: "LinkedIn", brandColor: SOCIAL_BRAND_COLORS.linkedin },
+    { icon: XIcon, href: SOCIAL_LINKS.twitter, label: "X", brandColor: SOCIAL_BRAND_COLORS.twitter },
   ];
 
   // Premium Animation Variants
@@ -183,7 +184,7 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <p className="text-xs font-mono text-teal uppercase tracking-wider mb-1">Email</p>
-                        <p className="text-white font-medium">shirazmuzamil2@gmail.com</p>
+                        <p className="text-white font-medium">{SOCIAL_LINKS.email}</p>
                       </div>
                     </div>
                     <div className="text-slate group-hover:text-teal transition-colors">
