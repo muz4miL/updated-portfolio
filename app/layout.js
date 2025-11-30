@@ -70,6 +70,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body
+        suppressHydrationWarning={true}
         className={`${spaceGrotesk.variable} ${inter.variable} ${firaCode.variable} bg-navy text-slate antialiased overflow-x-hidden selection:bg-teal selection:text-navy`}
       >
         <ScrollProvider>
