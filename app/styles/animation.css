@@ -3,14 +3,17 @@
   from {
     transform: rotate3d(1, 1, 1, 0deg);
   }
+
   to {
     transform: rotate3d(1, 1, 1, 360deg);
   }
 }
+
 @keyframes rotate-reverse {
   from {
     transform: rotate3d(1, -1, 0, 360deg);
   }
+
   to {
     transform: rotate3d(1, -1, 0, 0deg);
   }
@@ -20,10 +23,12 @@
   perspective: 1000px;
   transform-style: preserve-3d;
 }
+
 .cube-wrapper {
   transform-style: preserve-3d;
   position: absolute;
 }
+
 .cube {
   width: 100%;
   height: 100%;
@@ -35,11 +40,9 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(25, 35, 60, 0.9),
-    rgba(10, 15, 30, 0.95)
-  );
+  background: linear-gradient(135deg,
+      rgba(25, 35, 60, 0.9),
+      rgba(10, 15, 30, 0.95));
   border: 1px solid rgba(100, 255, 218, 0.15);
   backface-visibility: visible;
 }
@@ -47,20 +50,99 @@
 .front {
   transform: rotateY(0deg) translateZ(var(--half-size));
 }
+
 .back {
   transform: rotateY(180deg) translateZ(var(--half-size));
 }
+
 .right {
   transform: rotateY(90deg) translateZ(var(--half-size));
 }
+
 .left {
   transform: rotateY(-90deg) translateZ(var(--half-size));
 }
+
 .top {
   transform: rotateX(90deg) translateZ(var(--half-size));
 }
+
 .bottom {
   transform: rotateX(-90deg) translateZ(var(--half-size));
+}
+
+/* --- 3D OCTAHEDRON MAGIC --- */
+.octahedron-wrapper {
+  transform-style: preserve-3d;
+  position: absolute;
+}
+
+.octahedron {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.triangle-face {
+  position: absolute;
+  width: calc(var(--half-size) * 1.732);
+  /* sqrt(3) for equilateral triangle */
+  height: var(--half-size);
+  background: linear-gradient(135deg,
+      rgba(25, 35, 60, 0.9),
+      rgba(10, 15, 30, 0.95));
+  border: 1px solid rgba(100, 255, 218, 0.15);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  backface-visibility: visible;
+  transform-origin: 50% 66.66%;
+  left: 50%;
+  top: 50%;
+  box-shadow:
+    inset 0 0 20px rgba(100, 255, 218, 0.05),
+    0 0 30px rgba(100, 255, 218, 0.1);
+}
+
+/* Top pyramid faces (4 triangular faces forming the top half) */
+.top-front {
+  transform:
+    translate(-50%, calc(-50% - var(--half-size) * 0.5)) rotateX(109.47deg);
+}
+
+.top-back {
+  transform:
+    translate(-50%, calc(-50% - var(--half-size) * 0.5)) rotateX(109.47deg) rotateZ(180deg);
+}
+
+.top-left {
+  transform:
+    translate(-50%, calc(-50% - var(--half-size) * 0.5)) rotateX(109.47deg) rotateZ(-90deg);
+}
+
+.top-right {
+  transform:
+    translate(-50%, calc(-50% - var(--half-size) * 0.5)) rotateX(109.47deg) rotateZ(90deg);
+}
+
+/* Bottom pyramid faces (4 triangular faces forming the bottom half) */
+.bottom-front {
+  transform:
+    translate(-50%, calc(-50% + var(--half-size) * 0.5)) rotateX(-109.47deg) rotateZ(180deg);
+}
+
+.bottom-back {
+  transform:
+    translate(-50%, calc(-50% + var(--half-size) * 0.5)) rotateX(-109.47deg);
+}
+
+.bottom-left {
+  transform:
+    translate(-50%, calc(-50% + var(--half-size) * 0.5)) rotateX(-109.47deg) rotateZ(90deg);
+}
+
+.bottom-right {
+  transform:
+    translate(-50%, calc(-50% + var(--half-size) * 0.5)) rotateX(-109.47deg) rotateZ(-90deg);
 }
 
 /* --- PREMIUM HEXAGON ANIMATIONS --- */
@@ -72,12 +154,15 @@
     opacity: 0;
     filter: drop-shadow(0 0 0px rgba(100, 255, 218, 0));
   }
+
   20% {
     opacity: 1;
   }
+
   70% {
     filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.4));
   }
+
   100% {
     stroke-dashoffset: 0;
     opacity: 1;
@@ -92,14 +177,17 @@
     transform: translateY(20px) scale(0.3);
     filter: brightness(3) blur(10px);
   }
+
   50% {
     opacity: 0.8;
     transform: translateY(-5px) scale(1.1);
     filter: brightness(2) blur(5px);
   }
+
   70% {
     transform: translateY(2px) scale(1.05);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -109,11 +197,13 @@
 
 /* 3. Slow Pulse for Outer Ring */
 @keyframes pulse-slow {
+
   0%,
   100% {
     opacity: 0.3;
     transform: scale(1.1);
   }
+
   50% {
     opacity: 0.6;
     transform: scale(1.15);
@@ -122,17 +212,21 @@
 
 /* 4. Floating Particles - Start hidden, animate after delay */
 @keyframes float-particle {
+
   0%,
   100% {
     transform: translateY(0px) translateX(0px);
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   50% {
     transform: translateY(-15px) translateX(5px);
   }
+
   90% {
     opacity: 0.3;
   }
@@ -144,10 +238,12 @@
     width: 0%;
     opacity: 0.7;
   }
+
   50% {
     width: 70%;
     opacity: 1;
   }
+
   100% {
     width: 100%;
     opacity: 0.7;
@@ -160,9 +256,11 @@
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.8);
@@ -172,10 +270,12 @@
 
 /* 7. Simple Pulse */
 @keyframes pulse {
+
   0%,
   100% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 1;
   }
@@ -185,19 +285,24 @@
 .animate-draw-premium {
   animation: draw-premium 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
+
 .animate-m-premium {
   animation: m-premium 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.8s;
   opacity: 0;
 }
+
 .animate-pulse-slow {
   animation: pulse-slow 3s ease-in-out infinite;
 }
+
 .animate-loading-bar {
   animation: loading-bar 2s ease-in-out infinite;
 }
+
 .animate-preloader-exit {
   animation: preloader-exit 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
 }
+
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
@@ -207,6 +312,7 @@
   opacity: 0;
   animation: fade-in 0.5s ease-in forwards 0.5s;
 }
+
 .particle {
   animation: float-particle 4s ease-in-out infinite;
   opacity: 0;

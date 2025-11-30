@@ -31,9 +31,9 @@ const Counter = ({ value, direction = "up" }) => {
         );
       }
     };
-    
+
     motionValue.on("change", updateCounter);
-    
+
     return () => {
       motionValue.clearListeners();
     };
@@ -60,7 +60,7 @@ const GlassCard = React.memo(({ children, className, delay = 0 }) => (
   >
     <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none ${className}`} />
     <div className="relative z-10 h-full">
-        {children}
+      {children}
     </div>
   </motion.div>
 ));
@@ -91,11 +91,11 @@ const AboutHero = ({ containerRef }) => {
           nameSplit.chars,
           { y: 100, opacity: 0, rotateX: -90 },
           {
-            y: 0, 
-            opacity: 1, 
-            rotateX: 0, 
+            y: 0,
+            opacity: 1,
+            rotateX: 0,
             duration: 1.2,
-            stagger: 0.05, 
+            stagger: 0.05,
             ease: "power3.out",
             delay: 0.2,
           }
@@ -107,36 +107,36 @@ const AboutHero = ({ containerRef }) => {
 
   return (
     <section ref={container} className="relative min-h-screen flex items-center pt-20 pb-20 overflow-hidden bg-transparent">
-      
+
       {/* Lighter vignette for better performance */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.4)_100%)]" />
+      <div className="absolute inset-0 pointer-events-none " />
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-        
+
         {/* Back Button */}
         <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
-            className="absolute top-0 left-6 md:left-0"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+          className="absolute top-0 left-6 md:left-0"
         >
-            <Link 
-              href="/" 
-              className="group flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-              prefetch={false}
-            >
-                <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
-                    <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
-                </div>
-                <span className="tracking-widest uppercase text-xs font-mono">Back Home</span>
-            </Link>
+          <Link
+            href="/"
+            className="group flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
+            prefetch={false}
+          >
+            <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+              <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+            </div>
+            <span className="tracking-widest uppercase text-xs font-mono">Back Home</span>
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center mt-16">
-          
+
           {/* Left Column: Text */}
-          <motion.div 
-            className="lg:col-span-7 flex flex-col items-start text-left" 
+          <motion.div
+            className="lg:col-span-7 flex flex-col items-start text-left"
             style={{ y, opacity }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -152,19 +152,19 @@ const AboutHero = ({ containerRef }) => {
             </h1>
 
             <div className="flex items-center gap-4 mb-8">
-               <span className="h-px w-12 bg-zinc-700"></span>
-               <span className="text-lg md:text-xl text-zinc-300 font-light tracking-widest uppercase">Full Stack Engineer</span>
+              <span className="h-px w-12 bg-zinc-700"></span>
+              <span className="text-lg md:text-xl text-zinc-300 font-light tracking-widest uppercase">Full Stack Engineer</span>
             </div>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
               className="text-zinc-400 text-lg leading-relaxed max-w-2xl"
             >
-              I bridge the gap between <span className="text-white font-medium">design and engineering</span>. 
-              Currently a CS student in Pakistan, I build pixel-perfect digital experiences 
-              that live on the internet. Former exchange scholar, musician, and obsessed with 
+              I bridge the gap between <span className="text-white font-medium">design and engineering</span>.
+              Currently a CS student in Pakistan, I build pixel-perfect digital experiences
+              that live on the internet. Former exchange scholar, musician, and obsessed with
               UI details.
             </motion.p>
           </motion.div>
@@ -172,43 +172,43 @@ const AboutHero = ({ containerRef }) => {
           {/* Right Column: Stats Grid */}
           <div className="lg:col-span-5 w-full">
             <div className="grid grid-cols-2 gap-3">
-                <GlassCard className="col-span-2 aspect-[2/1] from-violet-500/20 to-purple-500/5">
-                    <div className="flex flex-col justify-between h-full">
-                        <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-violet-300">
-                            <Users size={20} />
-                        </div>
-                        <div>
-                            <div className="text-5xl font-bold text-white mb-1 tracking-tight flex items-center gap-1">
-                                <Counter value={1000} />+
-                            </div>
-                            <p className="text-sm text-zinc-400 font-mono uppercase tracking-wider">Students Mentored</p>
-                        </div>
+              <GlassCard className="col-span-2 aspect-[2/1] from-violet-500/20 to-purple-500/5">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-violet-300">
+                    <Users size={20} />
+                  </div>
+                  <div>
+                    <div className="text-5xl font-bold text-white mb-1 tracking-tight flex items-center gap-1">
+                      <Counter value={1000} />+
                     </div>
-                </GlassCard>
+                    <p className="text-sm text-zinc-400 font-mono uppercase tracking-wider">Students Mentored</p>
+                  </div>
+                </div>
+              </GlassCard>
 
-                <GlassCard className="aspect-square from-blue-500/20 to-cyan-500/5 delay-100">
-                    <div className="flex flex-col justify-between h-full">
-                        <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-blue-300">
-                            <Code2 size={20} />
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold text-white mb-1"><Counter value={20} />+</div>
-                            <p className="text-xs text-zinc-500 font-mono uppercase">Projects</p>
-                        </div>
-                    </div>
-                </GlassCard>
+              <GlassCard className="aspect-square from-blue-500/20 to-cyan-500/5 delay-100">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-blue-300">
+                    <Code2 size={20} />
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-white mb-1"><Counter value={20} />+</div>
+                    <p className="text-xs text-zinc-500 font-mono uppercase">Projects</p>
+                  </div>
+                </div>
+              </GlassCard>
 
-                <GlassCard className="aspect-square from-teal-500/20 to-emerald-500/5 delay-200">
-                    <div className="flex flex-col justify-between h-full">
-                        <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-teal-300">
-                            <Globe size={20} />
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold text-white mb-1">YES</div>
-                            <p className="text-xs text-zinc-500 font-mono uppercase">Alumnus</p>
-                        </div>
-                    </div>
-                </GlassCard>
+              <GlassCard className="aspect-square from-teal-500/20 to-emerald-500/5 delay-200">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-teal-300">
+                    <Globe size={20} />
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-white mb-1">YES</div>
+                    <p className="text-xs text-zinc-500 font-mono uppercase">Alumnus</p>
+                  </div>
+                </div>
+              </GlassCard>
             </div>
           </div>
 

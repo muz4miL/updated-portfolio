@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Space_Grotesk, Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
+import "./styles/animation.css";
 import "./enhancements.css";
 import Navbar from "../components/layout/Navbar";
 import Socials from "../components/layout/Socials";
 import Background3D from "../components/ui/Background3D";
+import OctahedronBackground from "../components/ui/OctahedronBackground";
 import Preloader from "../components/ui/Preloader"; // Import the loader
 import { ScrollProvider } from "../context/ScrollContext";
 
@@ -80,7 +82,9 @@ export default function RootLayout({ children }) {
           ) : (
             /* 2. SHOW WEBSITE IF LOADING IS FALSE */
             <>
-              <Background3D />
+              {/* Conditional backgrounds based on route */}
+              {pathname === "/" && <Background3D />}
+              {pathname?.startsWith("/about") && <OctahedronBackground />}
               {/* Hide Navbar on book page */}
               {pathname !== "/book" && <Navbar />}
               {/* Hide Socials on book page */}

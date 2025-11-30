@@ -17,7 +17,7 @@ const AboutPage = () => {
   const containerRef = useRef(null);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-navy">
+    <div ref={containerRef} className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
       {/* HERO HEADER */}
       <AboutHero containerRef={containerRef} />
 
