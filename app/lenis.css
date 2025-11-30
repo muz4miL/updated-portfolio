@@ -1,0 +1,32 @@
+/* ============================================
+   LENIS SMOOTH SCROLL STYLES
+   ============================================
+   Essential CSS for Lenis smooth scrolling.
+   DO NOT MODIFY - Required for proper functionality.
+   ============================================ */
+
+/* Allow html/body to expand with content */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+/* Override browser default smooth scrolling */
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+/* Prevent scroll on  specific elements */
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+/* When scrolling is programmatically stopped */
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* Prevent iframe pointer events during scroll */
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
