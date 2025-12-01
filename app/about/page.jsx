@@ -41,6 +41,13 @@ const AboutPage = () => {
 
           {/* CTA */}
           <AboutCTA />
+
+          <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+            {/* Simple Footer Text */}
+            <footer className="py-8 text-center text-slate font-mono text-xs">
+              <p>Designed & Built by Muzamil Shiraz</p>
+            </footer>
+          </div>
         </div>
       </div>
     </div>
