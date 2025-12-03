@@ -106,7 +106,7 @@ const AboutHero = ({ containerRef }) => {
   );
 
   return (
-    <section ref={container} className="relative min-h-screen flex items-center pt-20 pb-20 overflow-hidden bg-transparent">
+    <section ref={container} className="relative flex items-center pt-32 pb-24 overflow-hidden bg-transparent">
 
       {/* Lighter vignette for better performance */}
       <div className="absolute inset-0 pointer-events-none " />
@@ -143,8 +143,7 @@ const AboutHero = ({ containerRef }) => {
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/30 bg-teal-500/10 backdrop-blur-md mb-8">
-              <Sparkles size={12} className="text-teal-400" />
-              <span className="text-xs font-mono text-teal-300 uppercase tracking-widest">About The Developer</span>
+              <span className="text-xs font-mono text-teal-300 uppercase tracking-widest">About ME</span>
             </div>
 
             <h1 ref={nameRef} className="font-heading text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9] mb-6 mix-blend-screen">

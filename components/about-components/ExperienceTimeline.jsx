@@ -1,132 +1,148 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Code2, Users, Globe } from "lucide-react";
+import Image from "next/image";
 
-// Experience data with highlighted text spans for key stats
+// Updated Experience data with company logos
 const experiencesData = [
   {
-    year: "2024",
+    year: "Oct 2024",
     yearEnd: "Present",
-    role: "Frontend Developer",
-    company: "Freelance",
+    role: "Web Developer (Internship)",
+    company: "Code Club",
     location: "Peshawar, Pakistan",
-    // Description with highlights - we'll parse these in the component
-    description: "Delivered high-performance React applications for",
-    highlight1: "3+ startup clients",
-    descriptionMid: ", focusing on pixel-perfect Figma implementations and optimizing load times by",
-    highlight2: "20%",
+    description: "Delivered performance-driven React applications focusing on pixel-perfect Figma implementations and optimizing load times.",
+    highlight1: "Figma/React",
+    descriptionMid: " stack. Skills include: ",
+    highlight2: "UI/UX & Next.js",
     descriptionEnd: ".",
-    tech: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
-    icon: Code2,
-    isActive: true,
+    tech: ["React.js", "Next.js", "Figma", "Visual Web Dev"],
+    logoPath: "/logos/codeclub2.png",
     accentColor: "teal",
   },
   {
-    year: "2023",
-    yearEnd: "Present",
-    role: "Tech Educator & Mentor",
-    company: "Community Teaching",
+    year: "Jul 2024",
+    yearEnd: "Nov 2024",
+    role: "English Language Teacher",
+    company: "ILCC - Institute of Languages",
     location: "Peshawar, Pakistan",
-    description: "Mentored",
-    highlight1: "1000+ students",
-    descriptionMid: " in programming fundamentals, web development, and computer science concepts through",
-    highlight2: "workshops and one-on-one sessions",
+    description: "Utilized cross-cultural experience (USA Exchange) to empower students to communicate effectively, focusing on literature and grammar.",
+    highlight1: "5 mos Contract",
+    descriptionMid: ", empowering over ",
+    highlight2: "50+ students",
     descriptionEnd: ".",
-    tech: ["Teaching", "Mentorship", "Python", "Java"],
-    icon: Users,
-    isActive: true,
+    tech: ["Teaching English", "Cross-functional Leadership", "TOEFL"],
+    logoPath: "/logos/illc.png",
+    accentColor: "rose",
+  },
+  {
+    year: "Aug 2024",
+    yearEnd: "Aug 2024",
+    role: "AI Sprint Extensive (Paid Internship)",
+    company: "Bave Technologies",
+    location: "Peshawar, Pakistan",
+    description: "One-month intense internship focusing on core AI concepts and technologies at the Arfa Karim Incubation Center.",
+    highlight1: "1 mo AI Sprint",
+    descriptionMid: ", gaining exposure to industry best practices in ",
+    highlight2: "AI technology",
+    descriptionEnd: ".",
+    tech: ["AI Concepts", "Bave Technologies"],
+    logoPath: "/logos/brave.png",
     accentColor: "violet",
   },
   {
-    year: "2019",
-    yearEnd: "2020",
-    role: "YES Exchange Student",
-    company: "US Department of State",
-    location: "Washington, USA",
-    description: "Selected for the prestigious Kennedy-Lugar Youth Exchange & Study program among",
-    highlight1: "top 1% of 20,000+ applicants",
-    descriptionMid: ". Developed",
-    highlight2: "cross-cultural leadership skills",
+    year: "Oct 2022",
+    yearEnd: "Jan 2023",
+    role: "Studio Manager & Photographer (Paid Internship)",
+    company: "Camouflage Studio",
+    location: "Peshawar, Pakistan",
+    description: "Managed studio operations and developed photography skills, specializing in commercial and portrait shoots.",
+    highlight1: "4 mos Internship",
+    descriptionMid: ", resulting in proficiency in ",
+    highlight2: "Adobe Photoshop & Team Management",
     descriptionEnd: ".",
-    tech: ["Leadership", "Communication", "Adaptability"],
-    icon: Globe,
-    isActive: false,
-    accentColor: "blue",
+    tech: ["Photography", "Adobe Photoshop", "Team Management"],
+    logoPath: "/logos/camouflage-studio.png",
+    accentColor: "amber",
   },
 ];
 
-// Ultra-Premium Timeline Card Component
+// Ultra-Premium Timeline Card Component with 3D Tilt
 const TimelineCard = ({ exp, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const IconComponent = exp.icon;
 
-  // Premium accent configurations with hover states
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  // Premium accent configurations with glow colors
   const accentConfig = {
     teal: {
       accent: "text-teal-400",
-      accentHover: "group-hover:text-teal-400",
-      iconRing: "ring-slate-900",
-      iconBorder: "border-slate-700",
-      iconColor: "text-teal-400",
       hoverBorder: "hover:border-teal-500/30",
-      hoverShadow: "hover:shadow-teal-500/10",
-      badgeBg: "bg-teal-500/10",
-      badgeText: "text-teal-300",
-      badgeBorder: "border-teal-500/20",
-      badgeGlow: "shadow-[0_0_12px_-3px_rgba(20,184,166,0.4)]",
       highlight: "text-teal-400",
-      // Jewel-like tag styling
       tagBg: "bg-teal-500/5",
       tagText: "text-teal-300",
       tagBorder: "border-teal-500/20",
-      tagGlow: "shadow-[0_0_10px_rgba(20,184,166,0.1)]",
       tagHover: "hover:bg-teal-500/10",
+      glowColor: "#14b8a6",
+      shadowGlow: "0 0 15px rgba(20,184,166,0.6), 0 0 30px rgba(20,184,166,0.3)",
+    },
+    rose: {
+      accent: "text-rose-400",
+      hoverBorder: "hover:border-rose-500/30",
+      highlight: "text-rose-400",
+      tagBg: "bg-rose-500/5",
+      tagText: "text-rose-300",
+      tagBorder: "border-rose-500/20",
+      tagHover: "hover:bg-rose-500/10",
+      glowColor: "#f43f5e",
+      shadowGlow: "0 0 15px rgba(244,63,94,0.6), 0 0 30px rgba(244,63,94,0.3)",
     },
     violet: {
       accent: "text-violet-400",
-      accentHover: "group-hover:text-violet-400",
-      iconRing: "ring-slate-900",
-      iconBorder: "border-slate-700",
-      iconColor: "text-violet-400",
       hoverBorder: "hover:border-violet-500/30",
-      hoverShadow: "hover:shadow-violet-500/10",
-      badgeBg: "bg-violet-500/10",
-      badgeText: "text-violet-300",
-      badgeBorder: "border-violet-500/20",
-      badgeGlow: "shadow-[0_0_12px_-3px_rgba(139,92,246,0.4)]",
       highlight: "text-violet-400",
-      // Jewel-like tag styling
       tagBg: "bg-violet-500/5",
       tagText: "text-violet-300",
       tagBorder: "border-violet-500/20",
-      tagGlow: "shadow-[0_0_10px_rgba(139,92,246,0.1)]",
       tagHover: "hover:bg-violet-500/10",
+      glowColor: "#8b5cf6",
+      shadowGlow: "0 0 15px rgba(139,92,246,0.6), 0 0 30px rgba(139,92,246,0.3)",
     },
-    blue: {
-      accent: "text-blue-400",
-      accentHover: "group-hover:text-blue-400",
-      iconRing: "ring-slate-900",
-      iconBorder: "border-slate-700",
-      iconColor: "text-blue-400",
-      hoverBorder: "hover:border-blue-500/30",
-      hoverShadow: "hover:shadow-blue-500/10",
-      badgeBg: "bg-blue-500/10",
-      badgeText: "text-blue-300",
-      badgeBorder: "border-blue-500/20",
-      badgeGlow: "shadow-[0_0_12px_-3px_rgba(59,130,246,0.4)]",
-      highlight: "text-blue-400",
-      // Jewel-like tag styling
-      tagBg: "bg-blue-500/5",
-      tagText: "text-blue-300",
-      tagBorder: "border-blue-500/20",
-      tagGlow: "shadow-[0_0_10px_rgba(59,130,246,0.1)]",
-      tagHover: "hover:bg-blue-500/10",
+    amber: {
+      accent: "text-amber-400",
+      hoverBorder: "hover:border-amber-500/30",
+      highlight: "text-amber-400",
+      tagBg: "bg-amber-500/5",
+      tagText: "text-amber-300",
+      tagBorder: "border-amber-500/20",
+      tagHover: "hover:bg-amber-500/10",
+      glowColor: "#fbbf24",
+      shadowGlow: "0 0 15px rgba(251,191,36,0.6), 0 0 30px rgba(251,191,36,0.3)",
     },
   };
 
   const colors = accentConfig[exp.accentColor] || accentConfig.teal;
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateXValue = ((y - centerY) / centerY) * -2;
+    const rotateYValue = ((x - centerX) / centerX) * 2;
+
+    setRotateX(rotateXValue);
+    setRotateY(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
 
   return (
     <motion.div
@@ -136,68 +152,102 @@ const TimelineCard = ({ exp, index }) => {
       transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
       className="relative pl-16 md:pl-24 pb-16 last:pb-0 group"
     >
-      {/* Timeline Vertical Line - Gradient */}
-      <div className="absolute left-[22px] md:left-[26px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-slate-700 via-slate-800 to-transparent" />
+      {/* Clean Timeline Vertical Line - No animation */}
+      <div
+        className="absolute left-[22px] md:left-[26px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400/60 via-slate-700/40 to-transparent"
+      />
 
-      {/* Timeline Icon Node - With Ring Effect */}
+      {/* Kinetic Pulse Node - Clean Logo Display */}
       <div className="absolute left-0 top-1 z-20">
-        <div className={`
-          relative w-11 h-11 md:w-13 md:h-13 rounded-full 
-          bg-slate-900 
-          border ${colors.iconBorder}
-          ring-4 ${colors.iconRing}
-          flex items-center justify-center
-          shadow-xl
-          transition-all duration-300
-        `}>
-          <IconComponent size={20} className={colors.iconColor} strokeWidth={1.5} />
-        </div>
+        <motion.div
+          className={`
+            relative w-11 h-11 md:w-13 md:h-13 rounded-full 
+            bg-slate-50
+            border-2 border-slate-700
+            ring-4 ring-slate-900
+            flex items-center justify-center
+            transition-all duration-300
+            overflow-hidden
+            shadow-lg
+          `}
+          style={{
+            boxShadow: colors.shadowGlow,
+          }}
+          animate={{
+            boxShadow: [
+              colors.shadowGlow,
+              `0 0 20px ${colors.glowColor}80, 0 0 40px ${colors.glowColor}40`,
+              colors.shadowGlow,
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {/* Original Company Logo - No Filters */}
+          <Image
+            src={exp.logoPath}
+            alt={`${exp.company} logo`}
+            width={36}
+            height={36}
+            className="w-8 h-8 md:w-9 md:h-9 object-contain"
+          />
+        </motion.div>
 
-        {/* Horizontal Connector */}
-        <div className="absolute left-full top-1/2 -translate-y-1/2 h-[1px] w-6 md:w-10 bg-gradient-to-r from-slate-700 to-transparent" />
+        {/* Horizontal Connector - Disappears on hover */}
+        <div className="absolute left-full top-1/2 -translate-y-1/2 h-[1px] w-6 md:w-10 bg-gradient-to-r from-slate-700 to-transparent group-hover:opacity-0 transition-opacity duration-300" />
       </div>
 
-      {/* Ultra-Premium Card - Glass Border */}
-      <div className={`
-        relative 
-        p-8 
-        rounded-3xl 
-        border border-white/10
-        bg-slate-900/50 
-        backdrop-blur-md
-        hover:border-white/20
-        hover:bg-slate-800/50
-        hover:shadow-2xl
-        ${colors.hoverShadow}
-        transition-all duration-300
-      `}>
-        {/* Header Section */}
-        <div className="flex flex-col sm:flex-row justify-between sm:items-start mb-5">
+      {/* Ultra-Premium Card with 3D Tilt */}
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        animate={{
+          rotateX: rotateX,
+          rotateY: rotateY,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+        }}
+        className={`
+          relative 
+          p-8 
+          rounded-3xl 
+          border border-white/10
+          bg-slate-900/50 
+          backdrop-blur-md
+          hover:border-white/20
+          hover:bg-slate-800/50
+          hover:shadow-2xl
+          ${colors.hoverBorder}
+          transition-all duration-300
+        `}
+        style={{
+          transformStyle: "preserve-3d",
+          perspective: "1000px",
+        }}
+      >
+        {/* Header Section - Cleaned up, no separate date */}
+        <div className="mb-5">
           <div>
             {/* Title - High Contrast White */}
-            <h3 className={`text-xl md:text-2xl font-bold text-slate-100 mb-2 ${colors.accentHover} transition-colors`}>
+            <h3 className={`text-xl md:text-2xl font-bold text-slate-100 mb-2 transition-colors`}>
               {exp.role}
             </h3>
             {/* Company & Location Row */}
-            <div className="flex items-center flex-wrap">
+            <div className="flex items-center flex-wrap gap-2">
               <span className={`text-sm font-semibold ${colors.accent} tracking-wide uppercase`}>
                 {exp.company}
               </span>
-              <span className="text-slate-600 mx-2">|</span>
+              <span className="text-slate-600">•</span>
               <span className="text-xs text-slate-400">{exp.location}</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-xs text-slate-500 font-mono">{exp.year} — {exp.yearEnd}</span>
             </div>
-          </div>
-          
-          {/* Date & Badge - Right Aligned */}
-          <div className="flex items-center gap-2 mt-3 sm:mt-0">
-            <span className="text-slate-400 text-xs font-mono">{exp.year} —</span>
-            {exp.isActive ? (
-              <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${colors.badgeBg} ${colors.badgeText} border ${colors.badgeBorder} ${colors.badgeGlow}`}>
-                Present
-              </span>
-            ) : (
-              <span className="text-slate-400 text-xs font-mono">{exp.yearEnd}</span>
-            )}
           </div>
         </div>
 
@@ -222,7 +272,6 @@ const TimelineCard = ({ exp, index }) => {
                 ${colors.tagBg}
                 ${colors.tagText}
                 border ${colors.tagBorder}
-                ${colors.tagGlow}
                 ${colors.tagHover}
                 transition-colors cursor-default
               `}
@@ -231,7 +280,7 @@ const TimelineCard = ({ exp, index }) => {
             </span>
           ))}
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

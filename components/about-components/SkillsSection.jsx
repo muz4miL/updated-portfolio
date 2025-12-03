@@ -1,102 +1,152 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import {
   SiHtml5,
   SiJavascript,
   SiReact,
+  SiTailwindcss,
+  SiPython,
   SiPostgresql,
-  SiPython
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
+import { CheckCircle } from "lucide-react";
 
-// Skills data with authentic brand logos and colors
+// Skills data with semantic proficiency levels and brand colors
 const skillsData = [
-  { name: "HTML/CSS", level: 90, icon: SiHtml5, brandColor: 'text-orange-500', bar: 'from-orange-500 to-blue-500', bg: 'bg-orange-500/10', hover: 'group-hover:bg-orange-500/20' },
-  { name: "JavaScript", level: 85, icon: SiJavascript, brandColor: 'text-yellow-400', bar: 'from-yellow-500 via-yellow-400 to-yellow-300', bg: 'bg-yellow-500/10', hover: 'group-hover:bg-yellow-500/20' },
-  { name: "React/Next.js", level: 85, icon: SiReact, brandColor: 'text-cyan-400', bar: 'from-cyan-500 via-cyan-400 to-cyan-300', bg: 'bg-cyan-500/10', hover: 'group-hover:bg-cyan-500/20' },
-  { name: "PostgreSQL", level: 95, icon: SiPostgresql, brandColor: 'text-blue-400', bar: 'from-blue-500 via-blue-400 to-blue-300', bg: 'bg-blue-500/10', hover: 'group-hover:bg-blue-500/20' },
-  { name: "Python", level: 85, icon: SiPython, brandColor: 'text-blue-500', bar: 'from-[#306998] to-[#FFD43B]', bg: 'bg-blue-600/10', hover: 'group-hover:bg-blue-600/20' },
-  { name: "Java", level: 85, icon: FaJava, brandColor: 'text-orange-600', bar: 'from-orange-600 via-orange-500 to-orange-400', bg: 'bg-orange-600/10', hover: 'group-hover:bg-orange-600/20' },
+  {
+    name: "HTML/CSS",
+    proficiency: "Expert",
+    icon: SiHtml5,
+    brandColor: "text-orange-500",
+    glowHex: "#f97316",
+    // ✅ FIX: Use Sololearn domain
+    certLink: "https://www.sololearn.com/en/certificates/CC-I3V1L7C4",
+  },
+  {
+    name: "JavaScript",
+    proficiency: "Advanced",
+    icon: SiJavascript,
+    brandColor: "text-yellow-400",
+    glowHex: "#facc15",
+    // ✅ FIX: Use Sololearn domain
+    certLink: "https://www.linkedin.com/in/muz4mil9/",
+  },
+  {
+    name: "React/Next.js",
+    proficiency: "Advanced",
+    icon: SiReact,
+    brandColor: "text-cyan-400",
+    glowHex: "#22d3ee",
+    // ✅ FIX: Use Frontend Masters domain
+    certLink: "https://static.frontendmasters.com/ud/c/3f7cbf218a/hixpadIGiV/complete-react-v9.pdf",
+  },
+  {
+    name: "Tailwind",
+    proficiency: "Expert",
+    icon: SiTailwindcss,
+    brandColor: "text-cyan-400",
+    glowHex: "#06b6d4",
+    // ⚠️ Placeholder: You must replace 'tailwind-expert' with your actual certificate link.
+    certLink: "https://www.linkedin.com/in/muz4mil9/",
+  },
+  {
+    name: "Python",
+    proficiency: "Advanced",
+    icon: SiPython,
+    brandColor: "text-blue-500",
+    glowHex: "#3b82f6",
+    certLink: null,
+  },
+  {
+    name: "Java Object-oriented",
+    proficiency: "Advanced",
+    icon: FaJava,
+    brandColor: "text-orange-600",
+    glowHex: "#ea580c",
+    certLink: null,
+  },
 ];
 
-const SkillCard = ({ skill, index }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  useEffect(() => {
-    if (isInView) {
-      let start = 0;
-      const duration = 1500;
-      const startTime = performance.now();
-
-      const animate = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-
-        setCount(Math.floor(easeOut * skill.level));
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
-      requestAnimationFrame(animate);
-    }
-  }, [isInView, skill.level]);
+const SkillBadge = ({ skill, index }) => {
+  const hasCert = !!skill.certLink;
+  const BadgeWrapper = hasCert ? motion.a : motion.div;
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="group relative"
+    <BadgeWrapper
+      href={hasCert ? skill.certLink : undefined}
+      target={hasCert ? "_blank" : undefined}
+      rel={hasCert ? "noopener noreferrer" : undefined}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      whileHover={{ scale: 1.05 }}
+      className="group relative w-20 h-20 md:w-24 md:h-24 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col items-center justify-center cursor-pointer overflow-hidden"
+      style={{
+        boxShadow: `inset 0 0 20px ${skill.glowHex}15, 0 0 15px ${skill.glowHex}10`,
+      }}
     >
-      <div className="glass-card p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-all duration-300 hover-lift relative overflow-hidden">
-        {/* Subtle brand-colored glow on hover */}
-        <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 blur-xl ${skill.bg}`} />
+      {/* Permanent subtle glow */}
+      <div
+        className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-300 blur-xl"
+        style={{
+          background: `radial-gradient(circle at center, ${skill.glowHex}, transparent 70%)`,
+        }}
+      />
 
-        <div className="flex items-center justify-between mb-3 relative z-10">
-          <div className="flex items-center gap-3">
-            <div className={`w-12 h-12 rounded-lg ${skill.bg} ${skill.hover} flex items-center justify-center transition-all duration-300 group-hover:scale-110`}>
-              <skill.icon size={24} className={skill.brandColor} />
-            </div>
-            <span className="text-white font-semibold">{skill.name}</span>
-          </div>
-          <span className={`font-mono text-lg ${skill.brandColor} font-bold`}>{count}%</span>
+      {/* Verification Badge */}
+      {hasCert && (
+        <div className="absolute top-1 right-1 z-20">
+          <CheckCircle
+            size={12}
+            className="text-cyan-400 drop-shadow-[0_0_4px_rgba(34,211,238,0.8)]"
+          />
         </div>
+      )}
 
-        {/* Progress Bar with brand color */}
-        <div className="h-1.5 bg-lightNavy/50 rounded-full overflow-hidden relative z-10">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut", delay: index * 0.05 }}
-            className={`h-full bg-gradient-to-r ${skill.bar} rounded-full relative`}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
-          </motion.div>
-        </div>
+      {/* Icon */}
+      <div className="relative z-10 mb-1">
+        <skill.icon
+          size={28}
+          className={`${skill.brandColor} group-hover:drop-shadow-[0_0_8px_currentColor] transition-all duration-300`}
+        />
       </div>
-    </motion.div>
+
+      {/* Skill Name */}
+      <div className="relative z-10 text-center px-1">
+        <p className="text-[10px] text-white/90 font-medium leading-tight mb-0.5">
+          {skill.name}
+        </p>
+        <p className="text-[8px] text-teal-400/70 uppercase tracking-wider font-mono">
+          {skill.proficiency}
+        </p>
+      </div>
+    </BadgeWrapper>
   );
 };
 
 const SkillsSection = () => {
   return (
-    <section>
-      <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
-        <span className="text-gradient">Technical Skills</span>
-        <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent" />
-      </h2>
+    <section className="py-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-3">
+          <span className="text-gradient">Technical Skills</span>
+          <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent" />
+        </h2>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {skillsData.map((skill, index) => (
-          <SkillCard key={index} skill={skill} index={index} />
-        ))}
-      </div>
+        {/* Compact Badge Row */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+          {skillsData.map((skill, index) => (
+            <SkillBadge key={index} skill={skill} index={index} />
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };

@@ -615,10 +615,70 @@ input:-webkit-autofill:active {
   from {
     opacity: 0;
     transform: scaleY(0);
+    background: transparent;
+    border: 1px solid;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    backface-visibility: visible;
+  }
+
+
+}
+
+.octa-front {
+  transform: rotateY(0deg) translateZ(var(--half-size, 75px));
+  border-color: rgba(100, 255, 218, 0.6);
+}
+
+.octa-back {
+  transform: rotateY(180deg) translateZ(var(--half-size, 75px));
+  border-color: rgba(100, 255, 218, 0.6);
+}
+
+.octa-right {
+  transform: rotateY(90deg) translateZ(var(--half-size, 75px));
+  border-color: rgba(100, 255, 218, 0.5);
+}
+
+.octa-left {
+  transform: rotateY(-90deg) translateZ(var(--half-size, 75px));
+  border-color: rgba(100, 255, 218, 0.5);
+}
+
+.octa-top {
+  transform: rotateX(90deg) translateZ(var(--half-size, 75px));
+  border-color: rgba(100, 255, 218, 0.4);
+}
+
+.octa-bottom {
+  transform: rotateX(-90deg) translateZ(var(--half-size, 75px));
+  border-color: rgba(100, 255, 218, 0.4);
+}
+
+/* Octahedron-specific animations */
+@keyframes rotate-slow {
+  from {
+    transform: rotate3d(1, 1, 1, 0deg);
   }
 
   to {
-    opacity: 1;
-    transform: scaleY(1);
+    transform: rotate3d(1, 1, 1, 360deg);
   }
+}
+
+@keyframes rotate-reverse {
+  from {
+    transform: rotate3d(1, 1, 1, 360deg);
+  }
+
+  to {
+    transform: rotate3d(1, 1, 1, 0deg);
+  }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+.animate-rotate-reverse {
+  animation: rotate-reverse 15s linear infinite;
 }
