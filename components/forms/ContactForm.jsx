@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { ArrowRight, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ContactForm = () => {
+const ContactForm = ({
+    buttonClassName = "group w-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold font-mono py-4 rounded-xl hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed",
+    buttonIcon = ArrowRight
+}) => {
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [status, setStatus] = useState("idle"); // idle, loading, success, error
     const [errorMessage, setErrorMessage] = useState("");
@@ -143,7 +146,7 @@ const ContactForm = () => {
                             disabled={status === "loading"}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group w-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold font-mono py-4 rounded-xl hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className={buttonClassName}
                         >
                             {status === "loading" ? (
                                 <>
@@ -153,7 +156,10 @@ const ContactForm = () => {
                             ) : (
                                 <>
                                     <span>Send Message</span>
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                                    {React.createElement(buttonIcon, {
+                                        size: 18,
+                                        className: "group-hover:translate-x-1 transition-transform duration-300"
+                                    })}
                                 </>
                             )}
                         </motion.button>

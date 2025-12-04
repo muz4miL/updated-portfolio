@@ -1,16 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Mail,
   MapPin,
-  Send,
   Copy,
   Check,
+  Send,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SOCIAL_LINKS } from "../../config/socialLinks";
 import dynamic from "next/dynamic";
 import AboutFooter from "@/components/layout/AboutFooter";
+import ContactForm from "@/components/forms/ContactForm";
 
 // Dynamic import for 3D background
 const ThreeBackground = dynamic(
@@ -19,30 +20,7 @@ const ThreeBackground = dynamic(
 );
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
   const [copied, setCopied] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setSubmitStatus(null), 5000);
-    }, 2000);
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(SOCIAL_LINKS.email);
@@ -176,94 +154,11 @@ const ContactPage = () => {
                 {/* Subtle accent line */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-transparent via-teal-400/30 to-transparent rounded-full" />
 
-                <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
-                  {/* Name */}
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition-all"
-                      placeholder="John Doe"
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition-all"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows="5"
-                      className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition-all resize-none"
-                      placeholder="Tell me about your project..."
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="group relative w-full px-8 py-4 bg-teal-500 hover:bg-teal-400 text-navy font-bold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-2 border-navy border-t-transparent" />
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Send Message</span>
-                          <Send size={18} className="group-hover:translate-x-0.5 transition-transform" />
-                        </>
-                      )}
-                    </span>
-                  </button>
-                </form>
-
-                {/* Success Message */}
-                <AnimatePresence>
-                  {submitStatus === "success" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="mt-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex items-start gap-3"
-                    >
-                      <Check size={20} className="text-green-500 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <p className="text-green-500 font-semibold text-sm">Message sent successfully!</p>
-                        <p className="text-slate-400 text-xs mt-1">I'll get back to you soon.</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Use the ContactForm component */}
+                <ContactForm
+                  buttonClassName="group relative w-full px-8 py-4 bg-teal-500 hover:bg-teal-400 text-navy font-bold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 flex items-center justify-center gap-2"
+                  buttonIcon={Send}
+                />
 
                 {/* Decorative corners */}
                 <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-teal-500/20 rounded-tl-lg" />

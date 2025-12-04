@@ -91,7 +91,9 @@ const Contact = () => {
             </div>
 
             {/* Form */}
-            <ContactForm />
+            <ContactForm
+              buttonClassName="group w-full bg-teal hover:bg-teal-400 text-navy font-bold font-mono py-4 rounded-xl hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+            />
           </div>
         </div>
       </div>

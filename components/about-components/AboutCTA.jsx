@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import ContactForm from "../forms/ContactForm";
 
 const AboutCTA = () => {
   const containerRef = useRef(null);
@@ -141,10 +140,8 @@ const AboutCTA = () => {
                 Let's turn your vision into reality with cutting-edge solutions and collaboration.
               </p>
 
-              {/* Contact Form Portal */}
-              <div className="w-full max-w-md mx-auto mt-8 md:mt-12 text-left">
-                <ContactForm />
-              </div>
+
+
             </div>
           </div>
 
