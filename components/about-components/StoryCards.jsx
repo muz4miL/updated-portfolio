@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useMotionValue, useMotionTemplate, useSpring } from "framer-motion";
 import { StudentIcon, LaptopIcon, GlobalIcon, UIIcon } from "@/components/icons";
 

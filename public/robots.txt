@@ -1,0 +1,21 @@
+# Muzamil Shiraz Portfolio - SEO Configuration
+# Allows all search engines to crawl the entire site
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /.next/
+Disallow: /node_modules/
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl-delay to prevent server overload (in seconds)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://muzamilshiraz.com/sitemap.xml

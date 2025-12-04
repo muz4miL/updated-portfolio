@@ -54,7 +54,7 @@ const experienceData = [
         title: "AI Sprint Extensive (Paid Internship)",
         org: "Bave Technologies",
         date: "Aug 2024",
-        location: "Karachi, Pakistan",
+        location: "Peshawar, Pakistan",
         description: "One-month intense internship focusing on core AI concepts and technologies at the Arfa Karim Incubation Center.",
         highlight1: "1 mo AI Sprint",
         highlightMid: ", gaining exposure to industry best practices in ",

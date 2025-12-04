@@ -6,7 +6,7 @@ import Image from "next/image";
 // Updated Experience data with company logos
 const experiencesData = [
   {
-    year: "Oct 2024",
+    year: "Oct 2025",
     yearEnd: "Present",
     role: "Web Developer (Internship)",
     company: "Code Club",
@@ -40,7 +40,7 @@ const experiencesData = [
     yearEnd: "Aug 2024",
     role: "AI Sprint Extensive (Paid Internship)",
     company: "Bave Technologies",
-    location: "Peshawar, Pakistan",
+    location: "Pes, Pakistan",
     description: "One-month intense internship focusing on core AI concepts and technologies at the Arfa Karim Incubation Center.",
     highlight1: "1 mo AI Sprint",
     descriptionMid: ", gaining exposure to industry best practices in ",

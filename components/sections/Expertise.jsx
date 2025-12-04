@@ -1,4 +1,3 @@
-import React from "react";
 import SectionHeader from "../ui/SectionHeader";
 import { Monitor, Code, Smartphone, Zap, Cpu, Palette } from "lucide-react";
 
