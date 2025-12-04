@@ -1,8 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import ContactForm from "../forms/ContactForm";
 
 const AboutCTA = () => {
   const containerRef = useRef(null);
@@ -142,30 +141,10 @@ const AboutCTA = () => {
                 Let's turn your vision into reality with cutting-edge solutions and collaboration.
               </p>
 
-              {/* CTA Button - SMALLER ON MOBILE */}
-              <motion.div
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                <Link
-                  href="/#contact"
-                  className="group relative inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-navy font-bold text-xs md:text-base tracking-wide overflow-hidden transition-all duration-300 hover:shadow-[0_0_50px_rgba(100,255,218,0.5)]"
-                >
-                  {/* Shimmer effect */}
-                  <motion.div
-                    className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                    }}
-                  />
-
-                  <span className="relative z-10 uppercase">Start Your Project</span>
-                  <ArrowRight
-                    size={16}
-                    className="relative z-10 group-hover:translate-x-1 transition-transform duration-300 md:w-5 md:h-5"
-                  />
-                </Link>
-              </motion.div>
+              {/* Contact Form Portal */}
+              <div className="w-full max-w-md mx-auto mt-8 md:mt-12 text-left">
+                <ContactForm />
+              </div>
             </div>
           </div>
 

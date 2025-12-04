@@ -1,13 +1,14 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import SectionHeader from "../ui/SectionHeader";
-import { ArrowRight, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollContext } from "../../context/ScrollContext";
 import PremiumSocialIcon from "../ui/PremiumSocialIcon";
 import XIcon from "../ui/XIcon";
 import { Github, Linkedin } from "lucide-react";
 import { SOCIAL_LINKS, SOCIAL_BRAND_COLORS } from "../../config/socialLinks";
+import ContactForm from "../forms/ContactForm";
 
 const Contact = () => {
   const { setIsContactVisible } = useScrollContext();
@@ -30,16 +31,7 @@ const Contact = () => {
     };
   }, [setIsContactVisible]);
 
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const socialLinks = [
     { icon: Github, href: SOCIAL_LINKS.github, label: "GitHub", brandColor: SOCIAL_BRAND_COLORS.github },
@@ -99,69 +91,7 @@ const Contact = () => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name Input */}
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none"
-                  placeholder="John Doe"
-                  required
-                />
-              </div>
-
-              {/* Email Input */}
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none"
-                  placeholder="john@example.com"
-                  required
-                />
-              </div>
-
-              {/* Message Textarea */}
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-xs font-mono text-teal/80 uppercase tracking-widest ml-1">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-800/30 border border-white/5 text-white font-mono text-[15px] placeholder-slate/30 focus:border-teal focus:bg-slate-800/50 focus:shadow-[0_0_20px_rgba(100,255,218,0.1)] transition-all duration-300 outline-none resize-none"
-                  placeholder="Hello! I'd like to discuss..."
-                  required
-                />
-              </div>
-
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group w-full bg-gradient-to-r from-teal-400 to-teal-500 text-navy font-bold font-mono py-4 rounded-xl hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <span>Send Message</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
-              </motion.button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </div>

@@ -166,7 +166,7 @@ const ModelingTeaser = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="space-y-8"
+                        className="space-y-8 flex flex-col items-center text-center"
                     >
                         {/* Title Section */}
                         <div>
@@ -181,7 +181,7 @@ const ModelingTeaser = () => {
                             </p>
                         </div>
 
-                        <div className="h-px bg-gradient-to-r from-teal/50 to-transparent"></div>
+                        <div className="w-full h-px bg-gradient-to-r from-transparent via-teal/50 to-transparent"></div>
 
                         {/* Navigation Controls */}
                         <div className="space-y-6">
@@ -232,7 +232,7 @@ const ModelingTeaser = () => {
                             </div>
                         </div>
 
-                        <div className="h-px bg-gradient-to-r from-teal/50 to-transparent"></div>
+                        <div className="w-full h-px bg-gradient-to-r from-transparent via-teal/50 to-transparent"></div>
 
                         {/* Enter Portfolio Button */}
                         <Link href="/book">
