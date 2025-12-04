@@ -150,7 +150,7 @@ const TimelineCard = ({ exp, index }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-      className="relative pl-16 md:pl-24 pb-16 last:pb-0 group"
+      className="relative pl-12 md:pl-24 pb-12 md:pb-16 last:pb-0 group"
     >
       {/* Clean Timeline Vertical Line - No animation */}
       <div
@@ -161,10 +161,10 @@ const TimelineCard = ({ exp, index }) => {
       <div className="absolute left-0 top-1 z-20">
         <motion.div
           className={`
-            relative w-11 h-11 md:w-13 md:h-13 rounded-full 
+            relative w-9 h-9 md:w-11 md:h-11 rounded-full 
             bg-slate-50
             border-2 border-slate-700
-            ring-4 ring-slate-900
+            ring-2 md:ring-4 ring-slate-900
             flex items-center justify-center
             transition-all duration-300
             overflow-hidden
@@ -192,7 +192,7 @@ const TimelineCard = ({ exp, index }) => {
             alt={`${exp.company} logo`}
             width={36}
             height={36}
-            className="w-8 h-8 md:w-9 md:h-9 object-contain"
+            className="w-6 h-6 md:w-8 md:h-8 object-contain"
           />
         </motion.div>
 
@@ -215,8 +215,8 @@ const TimelineCard = ({ exp, index }) => {
         }}
         className={`
           relative 
-          p-8 
-          rounded-3xl 
+          p-5 md:p-8 
+          rounded-2xl md:rounded-3xl 
           border border-white/10
           bg-slate-900/50 
           backdrop-blur-md
@@ -232,27 +232,27 @@ const TimelineCard = ({ exp, index }) => {
         }}
       >
         {/* Header Section - Cleaned up, no separate date */}
-        <div className="mb-5">
+        <div className="mb-4 md:mb-5">
           <div>
             {/* Title - High Contrast White */}
-            <h3 className={`text-xl md:text-2xl font-bold text-slate-100 mb-2 transition-colors`}>
+            <h3 className={`text-lg md:text-2xl font-bold text-slate-100 mb-2 transition-colors leading-tight`}>
               {exp.role}
             </h3>
             {/* Company & Location Row */}
-            <div className="flex items-center flex-wrap gap-2">
-              <span className={`text-sm font-semibold ${colors.accent} tracking-wide uppercase`}>
+            <div className="flex items-center flex-wrap gap-1.5 md:gap-2">
+              <span className={`text-xs md:text-sm font-semibold ${colors.accent} tracking-wide uppercase`}>
                 {exp.company}
               </span>
-              <span className="text-slate-600">•</span>
-              <span className="text-xs text-slate-400">{exp.location}</span>
-              <span className="text-slate-600">•</span>
-              <span className="text-xs text-slate-500 font-mono">{exp.year} — {exp.yearEnd}</span>
+              <span className="text-slate-600 text-xs">•</span>
+              <span className="text-[10px] md:text-xs text-slate-400">{exp.location}</span>
+              <span className="text-slate-600 text-xs">•</span>
+              <span className="text-[10px] md:text-xs text-slate-500 font-mono">{exp.year} — {exp.yearEnd}</span>
             </div>
           </div>
         </div>
 
         {/* Description - With Highlighted Stats */}
-        <p className="text-slate-300 text-sm leading-relaxed mb-6 max-w-2xl">
+        <p className="text-slate-300 text-xs md:text-sm leading-relaxed mb-4 md:mb-6 max-w-2xl">
           {exp.description}{" "}
           <span className="text-white font-medium">{exp.highlight1}</span>
           {exp.descriptionMid}{" "}
@@ -261,14 +261,14 @@ const TimelineCard = ({ exp, index }) => {
         </p>
 
         {/* Tech Tags - Jewel-like with Glow */}
-        <div className="flex flex-wrap gap-2 mt-6">
+        <div className="flex flex-wrap gap-1.5 md:gap-2 mt-4 md:mt-6">
           {exp.tech.map((tech, i) => (
             <span
               key={i}
               className={`
-                px-3 py-1 
-                text-[11px] font-semibold tracking-wide uppercase
-                rounded-md 
+                px-2 py-0.5 md:px-3 md:py-1 
+                text-[9px] md:text-[11px] font-semibold tracking-wide uppercase
+                rounded md:rounded-md 
                 ${colors.tagBg}
                 ${colors.tagText}
                 border ${colors.tagBorder}
@@ -291,7 +291,7 @@ const ExperienceTimeline = () => {
 
   return (
     <section ref={sectionRef} className="relative">
-      <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-12 flex items-center gap-3">
+      <h2 className="font-heading text-2xl md:text-4xl font-bold text-white mb-8 md:mb-12 flex items-center gap-3">
         <span className="text-gradient">Experience</span>
         <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent" />
       </h2>

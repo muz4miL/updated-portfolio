@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Code2, Music, Camera, Users, Globe } from "lucide-react";
+import { Code2, Music, Camera, Users } from "lucide-react";
 import { GlobalIcon } from "@/components/icons";
 
 // --- Configuration ---
@@ -21,7 +21,7 @@ const interests = [
   { name: "Culture", icon: GlobalIcon, color: "text-rose-400", shadow: "group-hover:shadow-[0_0_30px_-5px_rgba(251,113,133,0.3)]" },
 ];
 
-// --- 1. 3D Tilt Card Component ---
+// --- 1. 3D Tilt Card Component - MOBILE OPTIMIZED ---
 const TiltCard = ({ interest, index }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -53,7 +53,7 @@ const TiltCard = ({ interest, index }) => {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
       style={{ perspective: 1000 }}
-      className="flex-grow min-w-[140px] max-w-[180px]"
+      className="flex-grow min-w-[110px] md:min-w-[140px] max-w-[140px] md:max-w-[180px]"
     >
       <motion.div
         onMouseMove={handleMouseMove}
@@ -61,21 +61,21 @@ const TiltCard = ({ interest, index }) => {
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className={`
           group relative w-full aspect-square
-          flex flex-col items-center justify-center gap-3
-          rounded-2xl bg-white/[0.03] border border-white/5 
+          flex flex-col items-center justify-center gap-2 md:gap-3
+          rounded-xl md:rounded-2xl bg-white/[0.03] border border-white/5 
           hover:border-white/20 hover:bg-white/[0.08] 
           transition-colors duration-300
           ${interest.shadow}
         `}
       >
         <div style={{ transform: "translateZ(30px)" }} className={`
-          p-3 rounded-xl bg-white/5 ${interest.color}
+          p-2 md:p-3 rounded-lg md:rounded-xl bg-white/5 ${interest.color}
           group-hover:scale-110 transition-transform duration-300
         `}>
-          <interest.icon size={28} />
+          <interest.icon className="w-5 h-5 md:w-7 md:h-7" />
         </div>
 
-        <span style={{ transform: "translateZ(20px)" }} className="text-sm text-zinc-400 font-medium group-hover:text-white transition-colors">
+        <span style={{ transform: "translateZ(20px)" }} className="text-xs md:text-sm text-zinc-400 font-medium group-hover:text-white transition-colors">
           {interest.name}
         </span>
       </motion.div>
@@ -83,7 +83,7 @@ const TiltCard = ({ interest, index }) => {
   );
 };
 
-// --- 2. Liquid Menu Component ---
+// --- 2. Liquid Menu Component - MOBILE OPTIMIZED ---
 const LanguageList = () => {
   let [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -93,28 +93,28 @@ const LanguageList = () => {
         <div
           key={index}
           onMouseEnter={() => setHoveredIndex(index)}
-          className="relative flex items-center justify-between py-4 px-4 cursor-default z-10"
+          className="relative flex items-center justify-between py-3 md:py-4 px-3 md:px-4 cursor-default z-10"
         >
           {/* The Liquid Hover Background */}
           {hoveredIndex === index && (
             <motion.div
               layoutId="hover-bg"
-              className="absolute inset-0 bg-white/[0.06] rounded-xl border border-white/5 -z-10"
+              className="absolute inset-0 bg-white/[0.06] rounded-lg md:rounded-xl border border-white/5 -z-10"
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
           )}
 
-          <div className="flex items-center gap-4">
-            <span className={`font-mono text-xs transition-colors ${hoveredIndex === index ? "text-teal-400" : "text-zinc-600"}`}>
+          <div className="flex items-center gap-3 md:gap-4">
+            <span className={`font-mono text-[10px] md:text-xs transition-colors ${hoveredIndex === index ? "text-teal-400" : "text-zinc-600"}`}>
               0{index + 1}
             </span>
-            <span className={`font-medium tracking-wide transition-colors ${hoveredIndex === index ? "text-white" : "text-zinc-300"}`}>
+            <span className={`font-medium text-sm md:text-base tracking-wide transition-colors ${hoveredIndex === index ? "text-white" : "text-zinc-300"}`}>
               {lang.name}
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className={`text-xs font-mono uppercase tracking-wider transition-colors ${hoveredIndex === index ? "text-white" : "text-zinc-500"}`}>
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className={`text-[10px] md:text-xs font-mono uppercase tracking-wider transition-colors ${hoveredIndex === index ? "text-white" : "text-zinc-500"}`}>
               {lang.level}
             </span>
             {/* Dynamic Status Dot */}
@@ -126,15 +126,15 @@ const LanguageList = () => {
   );
 };
 
-// --- 3. Main Section ---
+// --- 3. Main Section - MOBILE OPTIMIZED ---
 const InterestsLanguages = () => {
   return (
-    <section className="py-12">
-      <div className="grid md:grid-cols-12 gap-12 items-start">
+    <section className="py-8 md:py-12">
+      <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
 
         {/* Left: Languages with Liquid Motion */}
         <div className="md:col-span-5">
-          <h2 className="font-heading text-2xl font-bold text-white mb-6 flex items-center gap-3">
+          <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
             <span className="text-gradient">Languages</span>
           </h2>
           <LanguageList />
@@ -142,11 +142,11 @@ const InterestsLanguages = () => {
 
         {/* Right: Interests with 3D Tilt */}
         <div className="md:col-span-7">
-          <h2 className="font-heading text-2xl font-bold text-white mb-6 flex items-center gap-3">
+          <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
             <span className="text-gradient">Interests</span>
           </h2>
 
-          <div className="flex flex-wrap gap-4 justify-start md:justify-center">
+          <div className="flex flex-wrap gap-3 md:gap-4 justify-start md:justify-center">
             {interests.map((interest, index) => (
               <TiltCard key={index} interest={interest} index={index} />
             ))}

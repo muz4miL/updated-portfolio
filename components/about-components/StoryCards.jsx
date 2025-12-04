@@ -75,7 +75,7 @@ const StoryCard = ({ item, index }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       onMouseMove={handleMouseMove}
-      className="group relative overflow-hidden rounded-2xl bg-white/[0.03] border border-white/5 transition-all duration-300 backdrop-blur-sm hover:border-white/10"
+      className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white/[0.03] border border-white/5 transition-all duration-300 backdrop-blur-sm hover:border-white/10"
     >
       {/* HoloSpotlight overlay */}
       <motion.div
@@ -83,18 +83,18 @@ const StoryCard = ({ item, index }) => {
         style={{ background }}
       />
 
-      {/* Card content */}
-      <div className="relative z-10 p-6">
+      {/* Card content - MOBILE OPTIMIZED */}
+      <div className="relative z-10 p-5 md:p-6">
         <div
-          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-4 p-2 transition-all duration-300 group-hover:scale-110`}
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-3 md:mb-4 p-2 transition-all duration-300 group-hover:scale-110`}
           style={{
             boxShadow: `0 0 20px 0 ${item.glowColor}, 0 0 40px 0 ${item.glowColor.replace('0.4', '0.2')}`
           }}
         >
-          <IconComponent size={item.iconSize || 32} className={`text-white ${item.iconClass || ''}`} />
+          <IconComponent className={`text-white ${item.iconClass || ''} w-6 h-6 md:w-8 md:h-8`} />
         </div>
-        <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-        <p className="text-slate text-sm leading-relaxed">
+        <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">{item.title}</h3>
+        <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
           {item.description}
         </p>
       </div>
@@ -111,12 +111,12 @@ const StoryCards = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-3">
+        <h2 className="font-heading text-2xl md:text-4xl font-bold text-white mb-6 md:mb-8 flex items-center gap-3">
           <span className="text-gradient">My Story</span>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent" />
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
           {storyData.map((item, index) => (
             <StoryCard key={index} item={item} index={index} />
           ))}

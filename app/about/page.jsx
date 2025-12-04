@@ -11,46 +11,45 @@ import {
   InterestsLanguages,
   AboutCTA,
 } from "@/components/about-components";
+import AboutFooter from "@/components/layout/AboutFooter";
 
 // ----- MAIN PAGE COMPONENT -----
 const AboutPage = () => {
   const containerRef = useRef(null);
 
   return (
-    <div ref={containerRef} className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-      {/* HERO HEADER */}
-      <AboutHero containerRef={containerRef} />
+    <>
+      <div ref={containerRef} className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+        {/* HERO HEADER */}
+        <AboutHero containerRef={containerRef} />
 
-      {/* MAIN CONTENT */}
-      <div className="max-w-5xl mx-auto px-6 pb-20">
-        <div className="space-y-24">
-          {/* MY STORY - CONDENSED */}
-          <StoryCards />
+        {/* MAIN CONTENT */}
+        <div className="max-w-5xl mx-auto px-6 pb-20">
+          <div className="space-y-24">
+            {/* MY STORY - CONDENSED */}
+            <StoryCards />
 
-          {/* TECHNICAL SKILLS */}
-          <SkillsSection />
+            {/* TECHNICAL SKILLS */}
+            <SkillsSection />
 
-          {/* EXPERIENCE TIMELINE - PREMIUM */}
-          <ExperienceTimeline />
+            {/* EXPERIENCE TIMELINE - PREMIUM */}
+            <ExperienceTimeline />
 
-          {/* EDUCATION */}
-          <EducationSection />
+            {/* EDUCATION */}
+            <EducationSection />
 
-          {/* LANGUAGES & INTERESTS */}
-          <InterestsLanguages />
+            {/* LANGUAGES & INTERESTS */}
+            <InterestsLanguages />
 
-          {/* CTA */}
-          <AboutCTA />
-
-          <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-            {/* Simple Footer Text */}
-            <footer className="py-8 text-center text-slate font-mono text-xs">
-              <p>Designed & Built by Muzamil Shiraz</p>
-            </footer>
+            {/* CTA */}
+            <AboutCTA />
           </div>
         </div>
       </div>
-    </div>
+
+      {/* PREMIUM FOOTER - Outside main container */}
+      <AboutFooter />
+    </>
   );
 };
 
