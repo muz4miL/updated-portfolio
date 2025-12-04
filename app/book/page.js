@@ -28,7 +28,7 @@ const ModelingPage = () => {
 
     // Placeholder Stats
     const stats = [
-        { label: "Height", value: "6'1\"" },
+        { label: "Height", value: "5'11\"" },
         { label: "Eyes", value: "Dark Brown" },
         { label: "Hair", value: "Black" },
         { label: "Location", value: "Peshawar" },
@@ -55,13 +55,23 @@ const ModelingPage = () => {
 
     return (
         <div className="min-h-screen bg-navy text-white selection:bg-teal selection:text-navy">
-            {/* Navigation Overlay */}
             <nav className="fixed top-0 w-full z-50 p-6 flex justify-between items-center mix-blend-difference">
                 <Link href="/" className="group flex items-center gap-2 text-white hover:text-teal transition-colors">
                     <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="font-mono text-sm tracking-widest uppercase">Back to Code</span>
                 </Link>
-                <div className="font-heading font-bold text-xl tracking-tighter">MUZAMIL.M</div>
+                <div className="flex items-center gap-3">
+                    <div className="font-heading font-bold text-xl tracking-tighter">muz4mil9</div>
+                    <a
+                        href={SOCIAL_LINKS.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative p-2 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 hover:scale-110 transition-transform duration-300"
+                        aria-label="Instagram"
+                    >
+                        <Instagram size={16} className="text-white" />
+                    </a>
+                </div>
             </nav>
 
             {/* HERO SECTION */}
@@ -136,12 +146,16 @@ const ModelingPage = () => {
                         into every shoot, ensuring the vision is executed flawlessly.
                     </p>
                     <div className="flex gap-4 pt-4">
-                        <MagneticButton href="/#contact" className="px-8 py-4 bg-white text-navy font-bold font-mono uppercase tracking-widest hover:bg-teal transition-colors inline-block">
+                        <MagneticButton href="/contact" className="px-8 py-4 bg-white text-navy font-bold font-mono uppercase tracking-widest hover:bg-teal transition-colors inline-block">
                             Book Now
                         </MagneticButton>
-                        <MagneticButton className="px-8 py-4 border border-white/20 text-white font-mono uppercase tracking-widest hover:bg-white/5 transition-colors flex items-center gap-2 cursor-pointer">
+                        <a
+                            href="/comp-card.pdf"
+                            download="Muzamil-Shiraz-Comp-Card.pdf"
+                            className="px-8 py-4 border border-white/20 text-white font-mono uppercase tracking-widest hover:bg-white/5 transition-colors flex items-center gap-2 cursor-pointer"
+                        >
                             <Download size={18} /> Comp Card
-                        </MagneticButton>
+                        </a>
                     </div>
                 </div>
 
@@ -254,7 +268,11 @@ const ModelingPage = () => {
                     {/* Social Icons */}
                     <div className="flex gap-6">
                         <SocialIcon href={SOCIAL_LINKS.instagram} label="Instagram" brandColor={SOCIAL_BRAND_COLORS.instagram}>
-                            <Instagram size={24} />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
                         </SocialIcon>
                         <SocialIcon href={SOCIAL_LINKS.twitter} label="X (Twitter)" brandColor={SOCIAL_BRAND_COLORS.twitter}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
