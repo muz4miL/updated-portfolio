@@ -5,19 +5,19 @@ import { Points, PointMaterial } from "@react-three/drei";
 import * as random from "maath/random";
 
 /**
- * Subtle 3D Particle Stars - Background Ambient Effect
- * Much lower opacity for readability
+ * Optimized 3D Particle Stars - Background Ambient Effect
+ * Reduced particle count for better performance
  */
 function StarField(props) {
     const ref = useRef();
 
-    // Reduced to 3000 particles for subtlety
-    const sphere = useMemo(() => random.inSphere(new Float32Array(3000 * 3), { radius: 1.5 }), []);
+    // Reduced to 2000 particles for better performance
+    const sphere = useMemo(() => random.inSphere(new Float32Array(2000 * 3), { radius: 1.5 }), []);
 
     useFrame((state, delta) => {
         if (ref.current) {
-            ref.current.rotation.x -= delta / 10;
-            ref.current.rotation.y -= delta / 15;
+            ref.current.rotation.x -= delta / 15;
+            ref.current.rotation.y -= delta / 20;
         }
     });
 
@@ -38,12 +38,12 @@ function StarField(props) {
 }
 
 /**
- * Subtle 3D Canvas Background
- * Low opacity for atmospheric effect only
+ * Optimized 3D Canvas Background
+ * Balanced opacity for visibility without overwhelming content
  */
 export const ThreeBackground = () => {
     return (
-        <div className="fixed inset-0 z-0 opacity-40">
+        <div className="fixed inset-0 z-0 opacity-60">
             <Canvas camera={{ position: [0, 0, 1] }}>
                 <StarField />
             </Canvas>

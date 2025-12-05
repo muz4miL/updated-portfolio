@@ -8,6 +8,13 @@ import ProjectCard from "@/components/projects/ProjectCard";
 import { allProjects, categories } from "@/lib/projects/projectsData";
 import { containerVariants, fadeInUp } from "@/lib/projects/animationVariants";
 import AboutFooter from "@/components/layout/AboutFooter";
+import dynamic from "next/dynamic";
+
+// Dynamic import for 3D background
+const ThreeBackground = dynamic(
+    () => import("@/components/ui/three-background"),
+    { ssr: false }
+);
 
 /**
  * Projects Page Component
@@ -34,12 +41,18 @@ const ProjectsPage = () => {
             : otherProjects.filter((p) => p.category === activeCategory);
 
     return (
-        <main className="relative min-h-screen">
-            {/* Aurora Background */}
-            <div className="aurora-bg">
-                <div className="blob blob-1"></div>
-                <div className="blob blob-2"></div>
-                <div className="blob blob-3"></div>
+        <main className="relative min-h-screen bg-navy overflow-hidden">
+            {/* BACKGROUND LAYERS */}
+            {/* 3D Particle Field - Subtle */}
+            <ThreeBackground />
+
+            {/* Dark vignette for text readability */}
+            <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-navy/80 via-transparent to-navy" />
+
+            {/* Subtle ambient glows */}
+            <div className="fixed inset-0 z-0 pointer-events-none opacity-20">
+                <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-teal-500/20 rounded-full blur-[140px]" />
+                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-violet-500/15 rounded-full blur-[140px]" />
             </div>
 
             {/* Content */}

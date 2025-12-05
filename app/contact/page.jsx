@@ -34,9 +34,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-navy relative overflow-hidden">
       {/* BACKGROUND LAYERS */}
       {/* 3D Particle Field */}
-      <div className="opacity-30">
-        <ThreeBackground />
-      </div>
+      <ThreeBackground />
 
       {/* Dark vignette for text readability */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-navy/80 via-transparent to-navy" />

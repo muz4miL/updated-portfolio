@@ -161,32 +161,13 @@ const categoryIcons = {
     teaching: Users,
 };
 
-// Premium Timeline Card - Single Column with 3D Tilt
+// Premium Timeline Card - Optimized for Performance
 const TimelineCard = ({ item, index }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-80px" });
-    const [rotateX, setRotateX] = useState(0);
-    const [rotateY, setRotateY] = useState(0);
 
     const colors = accentConfig[item.accentColor] || accentConfig.teal;
     const IconComponent = categoryIcons[item.category] || Briefcase;
-
-    // 3D Tilt calculation
-    const handleMouseMove = (e) => {
-        const card = e.currentTarget;
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        setRotateX(((y - centerY) / centerY) * -3);
-        setRotateY(((x - centerX) / centerX) * 3);
-    };
-
-    const handleMouseLeave = () => {
-        setRotateX(0);
-        setRotateY(0);
-    };
 
     return (
         <motion.div
@@ -196,19 +177,11 @@ const TimelineCard = ({ item, index }) => {
             transition={{ duration: 0.7, delay: index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative pl-10 md:pl-20 pb-10 md:pb-14 last:pb-0 group"
         >
-            {/* Kinetic Pulse Node - Company Logo */}
+            {/* Kinetic Pulse Node - Company Logo (Optimized) */}
             <div className="absolute left-0 top-1 z-20">
-                <motion.div
+                <div
                     className="relative w-8 h-8 md:w-11 md:h-11 rounded-full bg-slate-50 border-2 border-slate-700 ring-2 md:ring-4 ring-navy flex items-center justify-center overflow-hidden shadow-lg"
                     style={{ boxShadow: colors.shadowGlow }}
-                    animate={{
-                        boxShadow: [
-                            colors.shadowGlow,
-                            `0 0 20px ${colors.glowColor}80, 0 0 40px ${colors.glowColor}40`,
-                            colors.shadowGlow,
-                        ],
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                     {item.logoPath ? (
                         <Image
@@ -221,27 +194,22 @@ const TimelineCard = ({ item, index }) => {
                     ) : (
                         <IconComponent className={`w-4 h-4 md:w-5 md:h-5 ${colors.accent}`} />
                     )}
-                </motion.div>
+                </div>
 
                 {/* Horizontal Connector Line */}
                 <div className="absolute left-full top-1/2 -translate-y-1/2 h-[1px] w-4 md:w-8 bg-gradient-to-r from-slate-600 to-transparent group-hover:from-teal-500/50 transition-colors duration-300" />
             </div>
 
-            {/* Premium Card with 3D Tilt */}
-            <motion.div
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                animate={{ rotateX, rotateY }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            {/* Premium Card (Optimized) */}
+            <div
                 className={`
           relative overflow-hidden rounded-xl md:rounded-2xl p-5 md:p-8
           bg-white/[0.02] border ${colors.border} ${colors.hoverBorder}
           backdrop-blur-xl
           hover:bg-white/[0.06]
           hover:shadow-2xl hover:shadow-black/20
-          transition-all duration-400
+          transition-all duration-300
         `}
-                style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
             >
                 {/* Ambient Hover Glow */}
                 <div
@@ -334,31 +302,31 @@ const TimelineCard = ({ item, index }) => {
                         </span>
                     ))}
                 </div>
-            </motion.div>
+            </div>
         </motion.div>
     );
 };
 
-// Data Pulse Stream - Animated Timeline Line
+// Data Pulse Stream - Optimized with fewer particles
 const DataPulseStream = () => (
     <>
         {/* Base Glow Line */}
         <div className="absolute left-[15px] md:left-[21px] top-0 bottom-0 w-[3px] md:w-[4px] rounded-full bg-gradient-to-b from-teal-500/30 via-cyan-400/20 to-violet-500/30" />
 
-        {/* Animated Pulse Particles */}
-        {[...Array(5)].map((_, i) => (
+        {/* Animated Pulse Particles - Reduced to 2 for performance */}
+        {[...Array(2)].map((_, i) => (
             <motion.div
                 key={i}
-                className="absolute left-[14px] md:left-[20px] w-[5px] md:w-[6px] h-8 md:h-12 rounded-full bg-gradient-to-b from-teal-400 via-cyan-300 to-transparent blur-[1px]"
+                className="absolute left-[14px] md:left-[20px] w-[5px] md:w-[6px] h-10 md:h-14 rounded-full bg-gradient-to-b from-teal-400 via-cyan-300 to-transparent"
                 initial={{ top: "-5%", opacity: 0 }}
                 animate={{
                     top: ["0%", "100%"],
-                    opacity: [0, 1, 1, 0],
+                    opacity: [0, 0.8, 0.8, 0],
                 }}
                 transition={{
-                    duration: 4 + i * 0.5,
+                    duration: 5,
                     repeat: Infinity,
-                    delay: i * 1.2,
+                    delay: i * 2.5,
                     ease: "linear",
                 }}
             />
