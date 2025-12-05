@@ -21,7 +21,7 @@ const ProjectCard = ({ project }) => {
         >
             <div className="h-full flex flex-col rounded-xl glass-card border border-white/5 hover:border-teal/20 hover-lift transition-all duration-300 overflow-hidden">
                 {/* Image Section */}
-                <div className="relative h-48 bg-gradient-to-br from-lightNavy to-navy overflow-hidden">
+                <div className="relative h-40 sm:h-44 md:h-48 bg-gradient-to-br from-lightNavy to-navy overflow-hidden">
                     {project.image ? (
                         <>
                             <Image
@@ -50,9 +50,9 @@ const ProjectCard = ({ project }) => {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-grow p-5">
+                <div className="flex flex-col flex-grow p-4 sm:p-5">
                     {/* Title */}
-                    <h3 className="font-heading text-lg font-bold text-white group-hover:text-teal transition-colors mb-2">
+                    <h3 className="font-heading text-base sm:text-lg font-bold text-white group-hover:text-teal transition-colors mb-2">
                         {project.title}
                     </h3>
 

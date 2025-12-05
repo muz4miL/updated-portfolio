@@ -43,7 +43,7 @@ const Navbar = () => {
     <>
       <nav
         className={`relative md:fixed top-0 w-full z-[101] transition-all duration-300 
-          bg-navy/85 backdrop-blur-md shadow-lg border-b border-teal/10 h-20
+          ${isMenuOpen ? 'bg-transparent shadow-none border-none' : 'bg-navy/85 backdrop-blur-md shadow-lg border-b border-teal/10'} h-20
           ${scrolled
             ? "md:bg-navy/85 md:backdrop-blur-md md:shadow-lg md:border-b md:border-teal/10"
             : "md:bg-transparent md:shadow-none md:border-none md:h-24"
@@ -53,7 +53,7 @@ const Navbar = () => {
           {/* --- LOGO SECTION --- */}
           <Link
             href="/"
-            className="group flex items-center gap-3 relative z-50"
+            className={`group flex items-center gap-3 relative z-50 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
             onClick={() => setIsMenuOpen(false)}
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}

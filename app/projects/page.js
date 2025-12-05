@@ -7,6 +7,7 @@ import FeaturedProjectCard from "@/components/projects/FeaturedProjectCard";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { allProjects, categories } from "@/lib/projects/projectsData";
 import { containerVariants, fadeInUp } from "@/lib/projects/animationVariants";
+import AboutFooter from "@/components/layout/AboutFooter";
 
 /**
  * Projects Page Component
@@ -42,8 +43,8 @@ const ProjectsPage = () => {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 pt-32 pb-24">
-                <div className="max-w-6xl mx-auto px-6">
+            <div className="relative z-10 pt-24 md:pt-32 pb-8 md:pb-24">
+                <div className="max-w-6xl mx-auto px-4 md:px-6">
                     {/* Back Navigation */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -52,7 +53,7 @@ const ProjectsPage = () => {
                     >
                         <Link
                             href="/"
-                            className="group inline-flex items-center gap-3 text-slate hover:text-teal transition-colors mb-16"
+                            className="group inline-flex items-center gap-3 text-slate hover:text-teal transition-colors mb-8 md:mb-16"
                         >
                             <ArrowLeft
                                 size={18}
@@ -66,7 +67,7 @@ const ProjectsPage = () => {
 
                     {/* Page Header */}
                     <motion.div
-                        className="mb-16"
+                        className="mb-8 md:mb-16"
                         initial="hidden"
                         animate="visible"
                         variants={containerVariants}
@@ -94,7 +95,7 @@ const ProjectsPage = () => {
 
                     {/* Category Filter */}
                     <motion.div
-                        className="flex flex-wrap gap-3 mb-16"
+                        className="flex flex-wrap gap-3 mb-8 md:mb-16"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
@@ -114,7 +115,7 @@ const ProjectsPage = () => {
                     {filteredFeatured.length > 0 && (
                         <motion.section
                             key={`featured-${activeCategory}`}
-                            className="mb-24"
+                            className="mb-12 md:mb-24"
                             initial="hidden"
                             animate="visible"
                             variants={containerVariants}
@@ -176,30 +177,37 @@ const ProjectsPage = () => {
                     )}
 
                     {/* Footer CTA */}
-                    <motion.div
-                        className="text-center mt-24 pt-16 border-t border-slate/10"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
-                            Interested in working together?
-                        </h3>
-                        <p className="text-slate mb-8 max-w-md mx-auto">
-                            I&apos;m always open to discussing new projects, creative ideas, or
-                            opportunities to be part of your vision.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-teal/10 border-2 border-teal rounded-lg font-mono uppercase text-sm tracking-widest text-teal hover:bg-teal hover:text-navy transition-all duration-300"
+                    <div className="flex justify-center">
+                        <motion.div
+                            className="text-center mt-6 md:mt-24 pt-4 md:pt-16 border-t border-slate/10 w-full md:w-auto"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
                         >
-                            Get In Touch
-                            <ArrowUpRight size={18} />
-                        </Link>
-                    </motion.div>
+                            <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
+                                Interested in working together?
+                            </h3>
+                            <p className="text-slate mb-8 max-w-md mx-auto">
+                                I&apos;m always open to discussing new projects, creative ideas, or
+                                opportunities to be part of your vision.
+                            </p>
+                            <div className="flex justify-center">
+                                <Link
+                                    href="/contact"
+                                    className="inline-flex items-center gap-3 px-8 py-4 bg-teal/10 border-2 border-teal rounded-lg font-mono uppercase text-sm tracking-widest text-teal hover:bg-teal hover:text-navy transition-all duration-300"
+                                >
+                                    Get In Touch
+                                    <ArrowUpRight size={18} />
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
             </div>
+
+            {/* Mobile Footer with Social Icons */}
+            <AboutFooter />
         </main>
     );
 };

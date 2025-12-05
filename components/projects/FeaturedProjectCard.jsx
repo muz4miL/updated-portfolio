@@ -49,7 +49,7 @@ const FeaturedProjectCard = ({ project, index }) => {
             style={{ perspective: 1000 }}
         >
             <motion.div
-                className="relative grid grid-cols-1 lg:grid-cols-12 gap-4 items-center p-6 md:p-8 rounded-2xl glass-card-strong border border-white/5 hover:border-teal/30 transition-all duration-500"
+                className="relative grid grid-cols-1 lg:grid-cols-12 gap-4 items-center p-4 sm:p-6 md:p-8 rounded-2xl glass-card-strong border border-white/5 hover:border-teal/30 transition-all duration-500"
                 style={{
                     transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
                     transformStyle: "preserve-3d",
@@ -65,7 +65,7 @@ const FeaturedProjectCard = ({ project, index }) => {
 
                 {/* Image Section */}
                 <div
-                    className={`relative lg:col-span-7 ${isEven ? "" : "lg:order-2"} h-64 md:h-80 rounded-xl overflow-hidden`}
+                    className={`relative lg:col-span-7 ${isEven ? "" : "lg:order-2"} h-48 sm:h-56 md:h-80 rounded-xl overflow-hidden`}
                 >
                     {project.image ? (
                         <>
@@ -109,7 +109,7 @@ const FeaturedProjectCard = ({ project, index }) => {
                     </div>
 
                     {/* Title */}
-                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-teal transition-colors duration-300">
+                    <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-white group-hover:text-teal transition-colors duration-300">
                         {project.title}
                     </h3>
 

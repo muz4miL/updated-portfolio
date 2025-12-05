@@ -12,6 +12,7 @@ import {
   ExperienceTimeline,
   ExperienceCTA,
 } from "@/components/experience-components";
+import AboutFooter from "@/components/layout/AboutFooter";
 
 /**
  * ExperiencePage Container - Kinetic Data Monolith
@@ -47,6 +48,9 @@ const ExperiencePage = () => {
         <ExperienceTimeline />
         <ExperienceCTA />
       </div>
+
+      {/* Mobile Footer with Social Icons */}
+      <AboutFooter />
 
       {/* Note: Foreground streams (z-5) are in ExperienceBackground */}
     </div>
