@@ -35,6 +35,11 @@ body {
   color: var(--color-slate);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 /* ============================================

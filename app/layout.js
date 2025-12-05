@@ -20,7 +20,7 @@ const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-mono" });
 
 // Export metadata for SEO (Server Component only)
 export const metadata = {
-  title: "Muzamil Shiraz | Full-Stack Developer & Front-End Engineer",
+  title: "Muzamil Shiraz | Front-End Engineer",
   description: "High-end portfolio showcasing full-stack development expertise. Specialized in React, Next.js, Web Performance & Modern UI/UX design.",
   keywords: "Full-Stack Developer, Front-End Engineer, React, Next.js, Web Developer, Portfolio, Pakistan",
   authors: [{ name: "Muzamil Shiraz", url: "https://muzamilshiraz.com" }],
@@ -60,7 +60,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

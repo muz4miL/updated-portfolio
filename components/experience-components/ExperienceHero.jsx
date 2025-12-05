@@ -146,7 +146,7 @@ const statsData = [
    ===================================================== */
 const ExperienceHero = () => {
     return (
-        <section className="relative py-12 md:py-20 px-5 md:px-6">
+        <section className="relative py-12 md:py-20 px-5 md:px-6 overflow-x-hidden">
             <div className="max-w-6xl mx-auto relative z-10">
                 <div className="text-center mb-12 md:mb-16">
                     <motion.h1
@@ -170,8 +170,8 @@ const ExperienceHero = () => {
                 </div>
 
                 {/* Hexagon Cluster */}
-                <div className="relative">
-                    <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 max-w-4xl mx-auto">
+                <div className="relative overflow-x-hidden">
+                    <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 max-w-4xl mx-auto px-4">
                         <div className="flex gap-4 md:gap-6">
                             <FloatingHexagon {...statsData[0]} />
                             <FloatingHexagon {...statsData[1]} />

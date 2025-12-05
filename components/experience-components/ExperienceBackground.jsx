@@ -17,7 +17,7 @@ const ExperienceBackground = () => {
     return (
         <>
             {/* Dark base for contrast */}
-            <div className="fixed inset-0 z-0 bg-navy" />
+            <div className="fixed inset-0 z-0 bg-navy overflow-hidden" />
 
             {/* 3D Particle Field - Subtle */}
             <ThreeBackground />
@@ -26,7 +26,7 @@ const ExperienceBackground = () => {
             <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-navy/60 via-transparent to-navy/80" />
 
             {/* Subtle ambient glows - reduced opacity */}
-            <div className="fixed inset-0 z-0 pointer-events-none opacity-30">
+            <div className="fixed inset-0 z-0 pointer-events-none opacity-30 overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-teal-500/15 rounded-full blur-[140px] animate-pulse"
                     style={{ animationDuration: '8s' }} />
                 <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-[140px] animate-pulse"

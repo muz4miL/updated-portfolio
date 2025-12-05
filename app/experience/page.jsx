@@ -30,7 +30,7 @@ import {
  */
 const ExperiencePage = () => {
   return (
-    <div className="relative min-h-screen bg-navy pt-20 md:pt-24">
+    <div className="relative min-h-screen bg-navy pt-20 md:pt-24 overflow-x-hidden">
       {/* 
         LAYER 0-1: Background streams (z-0, z-1)
         Deep in space, slowest, most blurred
