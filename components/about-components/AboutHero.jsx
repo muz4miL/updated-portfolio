@@ -201,41 +201,46 @@ const AboutHero = ({ containerRef }) => {
 
                     {/* Right Column: Stats Grid */}
                     <div className="lg:col-span-5 w-full">
-                        <div className="grid grid-cols-2 gap-3">
-                            <GlassCard className="col-span-2 aspect-[2/1] from-violet-500/20 to-purple-500/5">
-                                <div className="flex flex-col justify-between h-full">
-                                    <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-violet-300">
-                                        <Users size={20} />
-                                    </div>
-                                    <div className="pb-2">
-                                        <div className="text-4xl sm:text-5xl font-bold text-white mb-2 tracking-tight flex items-center gap-1 leading-tight">
-                                            <Counter value={150} />+
+                        <div className="grid grid-cols-2 gap-3 md:gap-4">
+                            {/* Large Card - Students Mentored */}
+                            <GlassCard className="col-span-2 from-violet-500/20 to-purple-500/5">
+                                <div className="flex flex-col md:flex-row items-start md:items-center justify-between h-full gap-4 md:gap-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-3 md:p-3.5 w-14 h-14 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-violet-300 shrink-0">
+                                            <Users size={24} className="md:w-7 md:h-7" />
                                         </div>
-                                        <p className="text-xs sm:text-sm text-zinc-400 font-mono uppercase tracking-wider">Students Mentored</p>
+                                        <div>
+                                            <div className="text-3xl md:text-5xl font-bold text-white mb-1 tracking-tight flex items-center gap-1 leading-none">
+                                                <Counter value={150} />+
+                                            </div>
+                                            <p className="text-xs md:text-sm text-zinc-400 font-mono uppercase tracking-wider">Students Mentored</p>
+                                        </div>
                                     </div>
                                 </div>
                             </GlassCard>
 
-                            <GlassCard className="aspect-square from-blue-500/20 to-cyan-500/5 delay-100">
-                                <div className="flex flex-col justify-between h-full">
-                                    <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-blue-300">
-                                        <Code2 size={20} />
+                            {/* Small Card - Projects */}
+                            <GlassCard className="from-blue-500/20 to-cyan-500/5 delay-100">
+                                <div className="flex flex-col justify-between h-full min-h-[140px] md:min-h-[160px]">
+                                    <div className="p-2.5 md:p-3 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-300">
+                                        <Code2 size={20} className="md:w-6 md:h-6" />
                                     </div>
-                                    <div className="pb-2">
-                                        <div className="text-2xl sm:text-3xl font-bold text-white mb-1 leading-tight"><Counter value={20} />+</div>
-                                        <p className="text-xs text-zinc-500 font-mono uppercase">Projects</p>
+                                    <div className="mt-auto">
+                                        <div className="text-3xl md:text-4xl font-bold text-white mb-1.5 leading-none"><Counter value={20} />+</div>
+                                        <p className="text-xs text-zinc-500 font-mono uppercase leading-tight">Projects</p>
                                     </div>
                                 </div>
                             </GlassCard>
 
-                            <GlassCard className="aspect-square from-teal-500/20 to-emerald-500/5 delay-200">
-                                <div className="flex flex-col justify-between h-full">
-                                    <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-teal-300">
-                                        <Globe size={20} />
+                            {/* Small Card - YES Alumnus */}
+                            <GlassCard className="from-teal-500/20 to-emerald-500/5 delay-200">
+                                <div className="flex flex-col justify-between h-full min-h-[140px] md:min-h-[160px]">
+                                    <div className="p-2.5 md:p-3 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-300">
+                                        <Globe size={20} className="md:w-6 md:h-6" />
                                     </div>
-                                    <div className="pb-2">
-                                        <div className="text-2xl sm:text-3xl font-bold text-white mb-1 leading-tight">YES</div>
-                                        <p className="text-xs text-zinc-500 font-mono uppercase">Alumnus</p>
+                                    <div className="mt-auto">
+                                        <div className="text-3xl md:text-4xl font-bold text-white mb-1.5 leading-none">YES</div>
+                                        <p className="text-xs text-zinc-500 font-mono uppercase leading-tight">Alumnus</p>
                                     </div>
                                 </div>
                             </GlassCard>

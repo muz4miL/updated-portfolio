@@ -23,7 +23,6 @@ const storyData = [
     title: "Passionate Educator",
     description: "Mentored 1000+ students in programming and web development. My greatest strength lies at the intersection of technology and education.",
     gradient: "from-rose-500 to-rose-400",
-    iconClass: "[&>*]:fill-white",
     glowColor: "rgba(244, 63, 94, 0.4)", // rose glow
   },
   {
@@ -86,15 +85,15 @@ const StoryCard = ({ item, index }) => {
       {/* Card content - MOBILE OPTIMIZED */}
       <div className="relative z-10 p-5 md:p-6">
         <div
-          className={`w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-3 md:mb-4 p-2 transition-all duration-300 group-hover:scale-110`}
+          className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-4 p-2.5 transition-all duration-300 group-hover:scale-110`}
           style={{
             boxShadow: `0 0 20px 0 ${item.glowColor}, 0 0 40px 0 ${item.glowColor.replace('0.4', '0.2')}`
           }}
         >
-          <IconComponent className={`text-white ${item.iconClass || ''} w-6 h-6 md:w-8 md:h-8`} />
+          <IconComponent className="text-white w-7 h-7 md:w-9 md:h-9" style={{ fill: 'white', color: 'white' }} />
         </div>
-        <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">{item.title}</h3>
-        <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+        <h3 className="text-base md:text-xl font-bold text-white mb-2 md:mb-3 leading-tight">{item.title}</h3>
+        <p className="text-slate-400 text-sm md:text-base leading-relaxed">
           {item.description}
         </p>
       </div>
@@ -111,12 +110,12 @@ const StoryCards = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="font-heading text-2xl md:text-4xl font-bold text-white mb-6 md:mb-8 flex items-center gap-3">
+        <h2 className="font-heading text-2xl md:text-4xl font-bold text-white mb-5 md:mb-8 flex items-center gap-3">
           <span className="text-gradient">My Story</span>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent" />
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+        <div className="grid md:grid-cols-2 gap-5 md:gap-6">
           {storyData.map((item, index) => (
             <StoryCard key={index} item={item} index={index} />
           ))}
