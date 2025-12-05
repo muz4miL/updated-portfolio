@@ -207,11 +207,11 @@ const AboutHero = ({ containerRef }) => {
                                     <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-violet-300">
                                         <Users size={20} />
                                     </div>
-                                    <div>
-                                        <div className="text-5xl font-bold text-white mb-1 tracking-tight flex items-center gap-1">
+                                    <div className="pb-2">
+                                        <div className="text-4xl sm:text-5xl font-bold text-white mb-2 tracking-tight flex items-center gap-1 leading-tight">
                                             <Counter value={150} />+
                                         </div>
-                                        <p className="text-sm text-zinc-400 font-mono uppercase tracking-wider">Students Mentored</p>
+                                        <p className="text-xs sm:text-sm text-zinc-400 font-mono uppercase tracking-wider">Students Mentored</p>
                                     </div>
                                 </div>
                             </GlassCard>
@@ -221,8 +221,8 @@ const AboutHero = ({ containerRef }) => {
                                     <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-blue-300">
                                         <Code2 size={20} />
                                     </div>
-                                    <div>
-                                        <div className="text-3xl font-bold text-white mb-1"><Counter value={20} />+</div>
+                                    <div className="pb-2">
+                                        <div className="text-2xl sm:text-3xl font-bold text-white mb-1 leading-tight"><Counter value={20} />+</div>
                                         <p className="text-xs text-zinc-500 font-mono uppercase">Projects</p>
                                     </div>
                                 </div>
@@ -233,8 +233,8 @@ const AboutHero = ({ containerRef }) => {
                                     <div className="p-2 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-teal-300">
                                         <Globe size={20} />
                                     </div>
-                                    <div>
-                                        <div className="text-3xl font-bold text-white mb-1">YES</div>
+                                    <div className="pb-2">
+                                        <div className="text-2xl sm:text-3xl font-bold text-white mb-1 leading-tight">YES</div>
                                         <p className="text-xs text-zinc-500 font-mono uppercase">Alumnus</p>
                                     </div>
                                 </div>
