@@ -18,6 +18,15 @@ const spaceGrotesk = Space_Grotesk({
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-mono" });
 
+// Export viewport configuration (Next.js 14.2+)
+export const viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  maximumScale: 5.0,
+  themeColor: "#0f172a",
+  colorScheme: "dark",
+};
+
 // Export metadata for SEO (Server Component only)
 export const metadata = {
   title: "Muzamil Shiraz | Front-End Engineer",
@@ -53,8 +62,6 @@ export const metadata = {
     images: ["https://muzamilshiraz.com/twitter-image.png"],
     creator: "@muz4miL",
   },
-  viewport: "width=device-width, initial-scale=1.0, maximum-scale=5.0",
-  themeColor: "#0f172a",
   manifest: "/site.webmanifest",
 };
 
