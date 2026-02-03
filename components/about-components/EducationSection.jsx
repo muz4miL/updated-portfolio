@@ -300,7 +300,7 @@ const EducationSection = () => {
             >
               <Image
                 src="/logos/ims.png"
-                alt="IM|Sciences logo"
+                alt="IM|Sciences - BS Computer Science institution logo"
                 width={64}
                 height={64}
                 className="w-full h-full object-contain"
@@ -345,7 +345,7 @@ const EducationSection = () => {
                 <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                   <Image
                     src="/images/profile-portrait.jpg"
-                    alt="Profile"
+                    alt="Muzamil Shiraz - Full Stack Engineer profile photo"
                     width={96}
                     height={96}
                     className="w-full h-full object-cover"

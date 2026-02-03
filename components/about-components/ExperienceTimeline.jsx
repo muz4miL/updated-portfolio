@@ -189,7 +189,7 @@ const TimelineCard = ({ exp, index }) => {
           {/* Original Company Logo - No Filters */}
           <Image
             src={exp.logoPath}
-            alt={`${exp.company} logo`}
+            alt={`${exp.company} - ${exp.title} role logo`}
             width={36}
             height={36}
             className="w-6 h-6 md:w-8 md:h-8 object-contain"

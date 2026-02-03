@@ -43,7 +43,7 @@ const JourneyCard = ({ item }) => {
             <div className="relative z-10 group-hover:scale-110 transition-transform duration-500">
               <Image
                 src={item.logo}
-                alt={item.company}
+                alt={`${item.company} - ${item.title} experience logo`}
                 width={80}
                 height={80}
                 className="object-contain w-11 h-11 md:w-14 md:h-14 brightness-[1.3] contrast-[1.3] saturate-[1.2] drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)] group-hover:brightness-[1.4] group-hover:contrast-[1.4] group-hover:drop-shadow-[0_4px_12px_rgba(100,255,218,0.5)] transition-all duration-500"

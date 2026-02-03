@@ -4,15 +4,17 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Folder, Star, Github } from "lucide-react";
 import { itemVariants } from "@/lib/projects/animationVariants";
+import TechStackBadge from "./TechStackBadge";
 
 /**
  * FeaturedProjectCard Component
  * 
  * Large project card with 3D tilt effect and prominent display.
  * Typically used for featured/showcase projects.
+ * Displays full tech stack with category-based color coding.
  * 
  * Props:
- * - project: Project object with title, description, tech, links, etc.
+ * - project: Project object with title, description, tech, techStack, links, etc.
  * - index: Index for alternating layout
  */
 const FeaturedProjectCard = ({ project, index }) => {
@@ -71,7 +73,7 @@ const FeaturedProjectCard = ({ project, index }) => {
                         <>
                             <Image
                                 src={project.image}
-                                alt={project.title}
+                                alt={`${project.title} - Enterprise ${project.category} solution for ${project.description.substring(0, 40)}...`}
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
@@ -118,17 +120,28 @@ const FeaturedProjectCard = ({ project, index }) => {
                         {project.description}
                     </p>
 
-                    {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-2 pt-2">
-                        {project.tech.map((t, i) => (
-                            <span
-                                key={i}
-                                className="tech-chip text-xs font-mono px-3 py-1.5 rounded-full"
-                            >
-                                {t}
-                            </span>
-                        ))}
-                    </div>
+                    {/* Tech Stack - Category-Based Display */}
+                    {project.techStack && project.techStack.length > 0 ? (
+                        <div className="space-y-2 pt-2">
+                            <p className="text-xs font-mono text-slate/70 uppercase tracking-wider">Tech Stack</p>
+                            <div className="flex flex-wrap gap-2">
+                                {project.techStack.map((tech, i) => (
+                                    <TechStackBadge key={i} tech={tech} color={project.color} />
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex flex-wrap gap-2 pt-2">
+                            {project.tech.map((t, i) => (
+                                <span
+                                    key={i}
+                                    className="tech-chip text-xs font-mono px-3 py-1.5 rounded-full"
+                                >
+                                    {t}
+                                </span>
+                            ))}
+                        </div>
+                    )}
 
                     {/* Links */}
                     <div className="flex items-center gap-4 pt-4">

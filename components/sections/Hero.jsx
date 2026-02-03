@@ -16,10 +16,10 @@ const Hero = () => {
 
   // Rotating roles for typewriter effect
   const roles = [
-    "FRONTEND DEVELOPER",
-    "CS STUDENT",
-    "TECH EDUCATOR",
-    "YES ALUMNUS",
+    "FULL STACK ENGINEER",
+    "TEAM LEAD",
+    "MERN ARCHITECT",
+    "ERP SYSTEMS BUILDER",
   ];
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -247,11 +247,11 @@ const Hero = () => {
 
       {/* Core Stack with larger icons */}
       <div className="absolute bottom-24 flex flex-col items-center gap-6">
-        <span className="text-[10px] font-mono text-teal-400 tracking-widest uppercase">Core Stack</span>
+        <span className="text-[10px] font-mono text-teal-400 tracking-widest uppercase">Full Stack Arsenal</span>
         <div className="flex items-center justify-center -space-x-2">
           {[{ name: "React", Icon: SiReact, color: "#61DAFB" },
           { name: "Next.js", Icon: SiNextdotjs, color: "#FFFFFF" },
-          { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
+          { name: "Node.js", Icon: SiTailwindcss, color: "#68A063" },
           { name: "GitHub", Icon: SiGithub, color: "#FFFFFF" }].map((tech, i) => (
             <motion.div
               key={tech.name}

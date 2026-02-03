@@ -158,7 +158,7 @@ const About = () => {
               {/* 3. THE IMAGE ITSELF */}
               <img
                 src="me.jpeg"
-                alt="Muzamil Shiraz"
+                alt="Muzamil Shiraz - Full Stack Engineer & Team Lead from Pakistan"
                 className="
                   w-full h-full
                   object-cover

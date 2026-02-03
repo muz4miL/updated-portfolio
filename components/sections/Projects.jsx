@@ -153,7 +153,7 @@ const ProjectCard = ({ project, variants }) => {
           <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-colors z-10" />
           <Image
             src={project.image}
-            alt={project.title}
+            alt={`${project.title} - ${project.description.substring(0, 60)}...`}
             fill
             className="object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
           />

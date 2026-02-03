@@ -3,15 +3,17 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, Folder, Github } from "lucide-react";
 import { itemVariants } from "@/lib/projects/animationVariants";
+import TechStackBadge from "./TechStackBadge";
 
 /**
  * ProjectCard Component
  * 
  * Regular project card for grid display.
  * Used for non-featured projects with compact layout.
+ * Displays tech stack with category-based color coding.
  * 
  * Props:
- * - project: Project object with title, description, tech, links, etc.
+ * - project: Project object with title, description, tech, techStack, links, etc.
  */
 const ProjectCard = ({ project }) => {
     return (
@@ -26,7 +28,7 @@ const ProjectCard = ({ project }) => {
                         <>
                             <Image
                                 src={project.image}
-                                alt={project.title}
+                                alt={`${project.title} - ${project.description.substring(0, 50)}...`}
                                 fill
                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                             />
@@ -57,30 +59,41 @@ const ProjectCard = ({ project }) => {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-slate text-sm leading-relaxed flex-grow mb-4 line-clamp-4">
+                    <p className="text-slate text-sm leading-relaxed flex-grow mb-4 line-clamp-3">
                         {project.description}
                     </p>
 
-                    {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.tech.slice(0, 3).map((t, i) => (
-                            <span
-                                key={i}
-                                className="text-[10px] font-mono px-2 py-1 rounded-md"
-                                style={{
-                                    backgroundColor: `${project.color}15`,
-                                    color: project.color
-                                }}
-                            >
-                                {t}
-                            </span>
-                        ))}
-                        {project.tech.length > 3 && (
-                            <span className="text-[10px] font-mono px-2 py-1 rounded-md bg-slate/10 text-slate">
-                                +{project.tech.length - 3}
-                            </span>
-                        )}
-                    </div>
+                    {/* Tech Stack Badges - Full Stack Display */}
+                    {project.techStack && project.techStack.length > 0 ? (
+                        <div className="mb-4 pb-4 border-b border-white/5">
+                            <p className="text-xs font-mono text-slate/70 mb-2 uppercase tracking-wider">Tech Stack</p>
+                            <div className="flex flex-wrap gap-2">
+                                {project.techStack.map((tech, i) => (
+                                    <TechStackBadge key={i} tech={tech} color={project.color} />
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                            {project.tech.slice(0, 3).map((t, i) => (
+                                <span
+                                    key={i}
+                                    className="text-[10px] font-mono px-2 py-1 rounded-md"
+                                    style={{
+                                        backgroundColor: `${project.color}15`,
+                                        color: project.color
+                                    }}
+                                >
+                                    {t}
+                                </span>
+                            ))}
+                            {project.tech.length > 3 && (
+                                <span className="text-[10px] font-mono px-2 py-1 rounded-md bg-slate/10 text-slate">
+                                    +{project.tech.length - 3}
+                                </span>
+                            )}
+                        </div>
+                    )}
 
                     {/* Action Links */}
                     <div className="flex items-center gap-3 pt-3 border-t border-white/5">
